@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.ibn.xinte.dao.PrescriptionBaseDao">
+    <sql id="PrescriptionBaseDO_Columns">
+        <trim suffixOverrides=",">
+            <if test="id != null">id,</if>
+            <if test="adminId != null">admin_id,</if>
+            <if test="userId != null">user_id,</if>
+            <if test="medicationTimeStart != null">medication_time_start,</if>
+            <if test="medicationTimeEnd != null">medication_time_end,</if>
+            <if test="pathogeny != null">pathogeny,</if>
+            <if test="remark != null">remark,</if>
+            <if test="createTime != null">create_time,</if>
+        </trim>
+    </sql>
+
+    <sql id="PrescriptionBaseDO_Values">
+        <trim suffixOverrides=",">
+            <if test="id != null">#{ id },</if>
+            <if test="adminId != null">#{ adminId },</if>
+            <if test="userId != null">#{ userId },</if>
+            <if test="medicationTimeStart != null">#{ medicationTimeStart },</if>
+            <if test="medicationTimeEnd != null">#{ medicationTimeEnd },</if>
+            <if test="pathogeny != null">#{ pathogeny },</if>
+            <if test="remark != null">#{ remark },</if>
+            <if test="createTime != null">#{ createTime },</if>
+        </trim>
+    </sql>
+
+    <sql id="baseColumn">
+		`id`,
+		`admin_id`,
+		`user_id`,
+		`medication_time_start`,
+		`medication_time_end`,
+		`pathogeny`,
+		`remark`,
+		`create_time`
+	</sql>
+
+    <insert id="save" useGeneratedKeys="true" keyProperty="id">
+        insert into prescription_base (<include refid="PrescriptionBaseDO_Columns"/>)
+        values(<include refid="PrescriptionBaseDO_Values"/>)
+    </insert>
+
+    <insert id="saveBatch" parameterType="java.util.List">
+        insert into prescription_base (<include refid="baseColumn"/>)
+        values
+        <foreach collection="list" index="index" item="item" separator=",">
+            (
+            #{ item.id },
+            #{ item.adminId },
+            #{ item.userId },
+            #{ item.medicationTimeStart },
+            #{ item.medicationTimeEnd },
+            #{ item.pathogeny },
+            #{ item.remark },
+            #{ item.createTime }
+            )
+        </foreach>
+    </insert>
+    <update id="updateById">
+        update prescription_base
+        <set>
+            <if test="id != null">`id` = #{id},</if>
+            <if test="adminId != null">`admin_id` = #{adminId},</if>
+            <if test="userId != null">`user_id` = #{userId},</if>
+            <if test="medicationTimeStart != null">`medication_time_start` = #{medicationTimeStart},</if>
+            <if test="medicationTimeEnd != null">`medication_time_end` = #{medicationTimeEnd},</if>
+            <if test="pathogeny != null">`pathogeny` = #{pathogeny},</if>
+            <if test="remark != null">`remark` = #{remark},</if>
+            <if test="createTime != null">`create_time` = #{createTime},</if>
+        </set>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteById">
+		delete from prescription_base where id = #{id}
+	</delete>
+
+    <select id="queryById" resultType="com.ibn.xinte.entity.PrescriptionBaseDO">
+        select
+        <include refid="baseColumn"/>
+        from prescription_base where id = #{id}
+    </select>
+
+    <sql id="queryColumn">
+        <where>
+            <if test="id != null">
+                and id = #{id}
+            </if>
+            <if test="adminId != null">
+                and admin_id = #{adminId}
+            </if>
+            <if test="userId != null">
+                and user_id = #{userId}
+            </if>
+            <if test="medicationTimeStart != null">
+                and medication_time_start = #{medicationTimeStart}
+            </if>
+            <if test="medicationTimeEnd != null">
+                and medication_time_end = #{medicationTimeEnd}
+            </if>
+            <if test="pathogeny != null">
+                and pathogeny = #{pathogeny}
+            </if>
+            <if test="remark != null">
+                and remark = #{remark}
+            </if>
+            <if test="createTime != null">
+                and create_time = #{createTime}
+            </if>
+        </where>
+    </sql>
+
+    <select id="queryList" resultType="com.ibn.xinte.entity.PrescriptionBaseDO">
+        select
+        <include refid="baseColumn"/>
+        from prescription_base
+        <include refid="queryColumn"/>
+    </select>
+</mapper>

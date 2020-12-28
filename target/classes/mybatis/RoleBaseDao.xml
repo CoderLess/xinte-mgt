@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.ibn.xinte.dao.RoleBaseDao">
+    <sql id="RoleBaseDO_Columns">
+        <trim suffixOverrides=",">
+            <if test="id != null">id,</if>
+            <if test="name != null">name,</if>
+            <if test="authority != null">authority,</if>
+        </trim>
+    </sql>
+
+    <sql id="RoleBaseDO_Values">
+        <trim suffixOverrides=",">
+            <if test="id != null">#{ id },</if>
+            <if test="name != null">#{ name },</if>
+            <if test="authority != null">#{ authority },</if>
+        </trim>
+    </sql>
+
+    <sql id="baseColumn">
+		`id`,
+		`name`,
+		`authority`
+	</sql>
+
+    <insert id="save" useGeneratedKeys="true" keyProperty="id">
+        insert into role_base (<include refid="RoleBaseDO_Columns"/>)
+        values(<include refid="RoleBaseDO_Values"/>)
+    </insert>
+
+    <insert id="saveBatch" parameterType="java.util.List">
+        insert into role_base (<include refid="baseColumn"/>)
+        values
+        <foreach collection="list" index="index" item="item" separator=",">
+            (
+            #{ item.id },
+            #{ item.name },
+            #{ item.authority }
+            )
+        </foreach>
+    </insert>
+    <update id="updateById">
+        update role_base
+        <set>
+            <if test="id != null">`id` = #{id},</if>
+            <if test="name != null">`name` = #{name},</if>
+            <if test="authority != null">`authority` = #{authority},</if>
+        </set>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteById">
+		delete from role_base where id = #{id}
+	</delete>
+
+    <select id="queryById" resultType="com.ibn.xinte.entity.RoleBaseDO">
+        select
+        <include refid="baseColumn"/>
+        from role_base where id = #{id}
+    </select>
+
+    <sql id="queryColumn">
+        <where>
+            <if test="id != null">
+                and id = #{id}
+            </if>
+            <if test="name != null">
+                and name = #{name}
+            </if>
+            <if test="authority != null">
+                and authority = #{authority}
+            </if>
+        </where>
+    </sql>
+
+    <select id="queryList" resultType="com.ibn.xinte.entity.RoleBaseDO">
+        select
+        <include refid="baseColumn"/>
+        from role_base
+        <include refid="queryColumn"/>
+    </select>
+</mapper>

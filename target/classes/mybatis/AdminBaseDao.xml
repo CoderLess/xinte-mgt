@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.ibn.xinte.dao.AdminBaseDao">
+    <sql id="AdminBaseDO_Columns">
+        <trim suffixOverrides=",">
+            <if test="id != null">id,</if>
+            <if test="mobile != null">mobile,</if>
+            <if test="password != null">password,</if>
+            <if test="roleId != null">role_id,</if>
+            <if test="disable != null">disable,</if>
+            <if test="createTime != null">create_time,</if>
+            <if test="creatorId != null">creator_id,</if>
+            <if test="lastAccess != null">last_access,</if>
+            <if test="name != null">name,</if>
+        </trim>
+    </sql>
+
+    <sql id="AdminBaseDO_Values">
+        <trim suffixOverrides=",">
+            <if test="id != null">#{ id },</if>
+            <if test="mobile != null">#{ mobile },</if>
+            <if test="password != null">#{ password },</if>
+            <if test="roleId != null">#{ roleId },</if>
+            <if test="disable != null">#{ disable },</if>
+            <if test="createTime != null">#{ createTime },</if>
+            <if test="creatorId != null">#{ creatorId },</if>
+            <if test="lastAccess != null">#{ lastAccess },</if>
+            <if test="name != null">#{ name },</if>
+        </trim>
+    </sql>
+
+    <sql id="baseColumn">
+		`id`,
+		`mobile`,
+		`password`,
+		`role_id`,
+		`disable`,
+		`create_time`,
+		`creator_id`,
+		`last_access`,
+		`name`
+	</sql>
+
+    <insert id="save" useGeneratedKeys="true" keyProperty="id">
+        insert into admin_base (<include refid="AdminBaseDO_Columns"/>)
+        values(<include refid="AdminBaseDO_Values"/>)
+    </insert>
+
+    <insert id="saveBatch" parameterType="java.util.List">
+        insert into admin_base (<include refid="baseColumn"/>)
+        values
+        <foreach collection="list" index="index" item="item" separator=",">
+            (
+            #{ item.id },
+            #{ item.mobile },
+            #{ item.password },
+            #{ item.roleId },
+            #{ item.disable },
+            #{ item.createTime },
+            #{ item.creatorId },
+            #{ item.lastAccess },
+            #{ item.name }
+            )
+        </foreach>
+    </insert>
+    <update id="updateById">
+        update admin_base
+        <set>
+            <if test="id != null">`id` = #{id},</if>
+            <if test="mobile != null">`mobile` = #{mobile},</if>
+            <if test="password != null">`password` = #{password},</if>
+            <if test="roleId != null">`role_id` = #{roleId},</if>
+            <if test="disable != null">`disable` = #{disable},</if>
+            <if test="createTime != null">`create_time` = #{createTime},</if>
+            <if test="creatorId != null">`creator_id` = #{creatorId},</if>
+            <if test="lastAccess != null">`last_access` = #{lastAccess},</if>
+            <if test="name != null">`name` = #{name},</if>
+        </set>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteById">
+		delete from admin_base where id = #{id}
+	</delete>
+
+    <select id="queryById" resultType="com.ibn.xinte.entity.AdminBaseDO">
+        select
+        <include refid="baseColumn"/>
+        from admin_base where id = #{id}
+    </select>
+
+    <sql id="queryColumn">
+        <where>
+            <if test="id != null">
+                and id = #{id}
+            </if>
+            <if test="mobile != null">
+                and mobile = #{mobile}
+            </if>
+            <if test="password != null">
+                and password = #{password}
+            </if>
+            <if test="roleId != null">
+                and role_id = #{roleId}
+            </if>
+            <if test="disable != null">
+                and disable = #{disable}
+            </if>
+            <if test="createTime != null">
+                and create_time = #{createTime}
+            </if>
+            <if test="creatorId != null">
+                and creator_id = #{creatorId}
+            </if>
+            <if test="lastAccess != null">
+                and last_access = #{lastAccess}
+            </if>
+            <if test="name != null">
+                and name = #{name}
+            </if>
+        </where>
+    </sql>
+
+    <select id="queryList" resultType="com.ibn.xinte.entity.AdminBaseDO">
+        select
+        <include refid="baseColumn"/>
+        from admin_base
+        <include refid="queryColumn"/>
+    </select>
+</mapper>
