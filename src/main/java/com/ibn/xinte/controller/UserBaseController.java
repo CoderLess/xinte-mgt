@@ -3,6 +3,7 @@ package com.ibn.xinte.controller;
 import com.alibaba.fastjson.JSONObject;
 import com.ibn.xinte.common.ResultInfo;
 import com.ibn.xinte.domain.UserBaseDTO;
+import com.ibn.xinte.enumeration.UserBaseSexEnum;
 import com.ibn.xinte.service.UserBaseService;
 import com.ibn.xinte.util.BeanUtils;
 import com.ibn.xinte.vo.UserBaseVO;
@@ -96,6 +97,10 @@ public class UserBaseController {
         BeanUtils.copyProperties(userBaseVO, userBaseDTO);
         List<UserBaseDTO> userBaseDTOList = userBaseService.queryList(userBaseDTO);
         return new ResultInfo().success(userBaseDTOList);
+    }
+    @GetMapping("sexEnum")
+    public ResultInfo sexEnum() {
+        return new ResultInfo().success(UserBaseSexEnum.allEnum());
     }
 
 }

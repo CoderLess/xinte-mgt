@@ -8,6 +8,8 @@ druid:
 mybatis:
   enable: true
   mapper-locations: classpath*:mybatis/*Dao.xml
+  configuration:
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
 spring:
   datasource:
     type: com.alibaba.druid.pool.DruidDataSource

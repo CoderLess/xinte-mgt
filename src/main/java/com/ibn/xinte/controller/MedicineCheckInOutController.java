@@ -3,6 +3,7 @@ package com.ibn.xinte.controller;
 import com.alibaba.fastjson.JSONObject;
 import com.ibn.xinte.common.ResultInfo;
 import com.ibn.xinte.domain.MedicineCheckInOutDTO;
+import com.ibn.xinte.enumeration.MedicineCheckInOutTypeEnum;
 import com.ibn.xinte.service.MedicineCheckInOutService;
 import com.ibn.xinte.util.BeanUtils;
 import com.ibn.xinte.vo.MedicineCheckInOutVO;
@@ -96,6 +97,11 @@ public class MedicineCheckInOutController {
         BeanUtils.copyProperties(medicineCheckInOutVO, medicineCheckInOutDTO);
         List<MedicineCheckInOutDTO> medicineCheckInOutDTOList = medicineCheckInOutService.queryList(medicineCheckInOutDTO);
         return new ResultInfo().success(medicineCheckInOutDTOList);
+    }
+
+    @GetMapping("typeEnum")
+    public ResultInfo typeEnum() {
+        return new ResultInfo().success(MedicineCheckInOutTypeEnum.allEnum());
     }
 
 }
