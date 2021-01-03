@@ -4,8 +4,10 @@ import com.alibaba.fastjson.JSONObject;
 import com.google.common.collect.Lists;
 import com.ibn.xinte.dao.MedicineBaseDao;
 import com.ibn.xinte.domain.MedicineBaseDTO;
+import com.ibn.xinte.domain.MedicineModifyLogDTO;
 import com.ibn.xinte.entity.MedicineBaseDO;
 import com.ibn.xinte.service.MedicineBaseService;
+import com.ibn.xinte.service.MedicineModifyLogService;
 import com.ibn.xinte.util.BeanUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -30,6 +32,8 @@ public class MedicineBaseServiceImpl implements MedicineBaseService {
 
     @Autowired
     private MedicineBaseDao medicineBaseDao;
+    @Autowired
+    private MedicineModifyLogService medicineModifyLogService;
 
     @Override
     public Long save(MedicineBaseDTO medicineBaseDTO) {
@@ -66,6 +70,13 @@ public class MedicineBaseServiceImpl implements MedicineBaseService {
         }
         MedicineBaseDO medicineBaseDO = new MedicineBaseDO();
         BeanUtils.copyProperties(medicineBaseDTO, medicineBaseDO);
+        medicineBaseDO.setUpdateTime(System.currentTimeMillis());
+        MedicineModifyLogDTO medicineModifyLogDTO = new MedicineModifyLogDTO();
+        BeanUtils.copyProperties(medicineBaseDTO, medicineModifyLogDTO);
+        medicineModifyLogDTO.setId(null);
+        medicineModifyLogDTO.setMedicinalId(medicineBaseDTO.getId());
+        medicineModifyLogDTO.setRecordCreateTime(System.currentTimeMillis());
+        medicineModifyLogService.updateById(medicineModifyLogDTO);
         return medicineBaseDao.updateById(medicineBaseDO);
     }
 

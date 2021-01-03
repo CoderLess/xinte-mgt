@@ -88,7 +88,7 @@ public class LoginLogController {
     }
 
     @GetMapping("queryList")
-    public ResultInfo queryList(@RequestBody LoginLogVO loginLogVO) {
+    public ResultInfo queryList(@ModelAttribute LoginLogVO loginLogVO) {
         if (null == loginLogVO) {
             return new ResultInfo().error("参数不能为空");
         }

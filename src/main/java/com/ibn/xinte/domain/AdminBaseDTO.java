@@ -69,4 +69,16 @@ public class AdminBaseDTO {
      * @createTime：2020年12月28日
      */
     private String name;
-    }
+    /**
+     * @description: 页码
+     * @author：RenBin
+     * @createTime：2021/1/3 15:58
+     */
+    private Integer pageNum;
+    /**
+     * @description: 条数
+     * @author：RenBin
+     * @createTime：2021/1/3 15:58
+     */
+    private Integer pageSize;
+}

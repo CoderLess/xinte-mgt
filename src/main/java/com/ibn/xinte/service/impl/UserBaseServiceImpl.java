@@ -1,6 +1,7 @@
 package com.ibn.xinte.service.impl;
 
 import com.alibaba.fastjson.JSONObject;
+import com.github.pagehelper.PageHelper;
 import com.google.common.collect.Lists;
 import com.ibn.xinte.dao.UserBaseDao;
 import com.ibn.xinte.domain.UserBaseDTO;
@@ -93,12 +94,20 @@ public class UserBaseServiceImpl implements UserBaseService {
 
     @Override
     public List<UserBaseDTO> queryList(UserBaseDTO userBaseDTO) {
+        return this.queryList(userBaseDTO, null, null);
+    }
+
+    @Override
+    public List<UserBaseDTO> queryList(UserBaseDTO userBaseDTO, Integer pageNum, Integer pageSize) {
         if (null == userBaseDTO) {
             return null;
         }
         UserBaseDO userBaseDO = new UserBaseDO();
         BeanUtils.copyProperties(userBaseDTO, userBaseDO);
-        List<UserBaseDO> userBaseDOList = userBaseDao.queryList(userBaseDO);
+        if (null != pageNum && null != pageSize) {
+            PageHelper.startPage(pageNum, pageSize);
+        }
+        List<UserBaseDO> userBaseDOList = userBaseDao.queryListByDTO(userBaseDTO);
         if (CollectionUtils.isEmpty(userBaseDOList)) {
             return Lists.newArrayList();
         }

@@ -2,9 +2,13 @@ package com.ibn.xinte.service.impl;
 
 import com.alibaba.fastjson.JSONObject;
 import com.google.common.collect.Lists;
+import com.ibn.xinte.dao.MedicineBaseDao;
 import com.ibn.xinte.dao.MedicineCheckInOutDao;
 import com.ibn.xinte.domain.MedicineCheckInOutDTO;
+import com.ibn.xinte.entity.MedicineBaseDO;
 import com.ibn.xinte.entity.MedicineCheckInOutDO;
+import com.ibn.xinte.enumeration.MedicineCheckInOutTypeEnum;
+import com.ibn.xinte.service.MedicineBaseService;
 import com.ibn.xinte.service.MedicineCheckInOutService;
 import com.ibn.xinte.util.BeanUtils;
 import org.slf4j.Logger;
@@ -30,6 +34,8 @@ public class MedicineCheckInOutServiceImpl implements MedicineCheckInOutService 
 
     @Autowired
     private MedicineCheckInOutDao medicineCheckInOutDao;
+    @Autowired
+    private MedicineBaseDao medicineBaseDao;
 
     @Override
     public Long save(MedicineCheckInOutDTO medicineCheckInOutDTO) {
@@ -39,6 +45,15 @@ public class MedicineCheckInOutServiceImpl implements MedicineCheckInOutService 
         MedicineCheckInOutDO medicineCheckInOutDO = new MedicineCheckInOutDO();
         BeanUtils.copyProperties(medicineCheckInOutDTO, medicineCheckInOutDO);
         medicineCheckInOutDao.save(medicineCheckInOutDO);
+        MedicineBaseDO medicineBaseDO = medicineBaseDao.queryById(medicineCheckInOutDO.getMedicineId());
+        MedicineBaseDO medicineBaseUpdateDO = new MedicineBaseDO();
+        medicineBaseUpdateDO.setId(medicineBaseDO.getId());
+        if (MedicineCheckInOutTypeEnum.IN.getCode().equals(medicineCheckInOutDO.getType())) {
+            medicineBaseUpdateDO.setNumber(medicineBaseDO.getNumber().add(medicineCheckInOutDO.getNumber()));
+        } else {
+            medicineBaseUpdateDO.setNumber(medicineBaseDO.getNumber().subtract(medicineCheckInOutDO.getNumber()));
+        }
+        medicineBaseDao.updateById(medicineBaseUpdateDO);
         return medicineCheckInOutDO.getId();
     }
 

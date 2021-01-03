@@ -36,6 +36,12 @@ public class MedicineCheckInOutDO {
      */
     private BigDecimal number;
     /**
+     * @description: 出入库价格
+     * @author：RenBin
+     * @createTime：2020年12月28日
+     */
+    private BigDecimal price;
+    /**
      * @description: 药方id
      * @author：RenBin
      * @createTime：2020年12月28日

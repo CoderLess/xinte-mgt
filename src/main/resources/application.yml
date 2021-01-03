@@ -10,6 +10,7 @@ mybatis:
   mapper-locations: classpath*:mybatis/*Dao.xml
   configuration:
     log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+    map-underscore-to-camel-case: true
 spring:
   datasource:
     type: com.alibaba.druid.pool.DruidDataSource
@@ -17,3 +18,8 @@ spring:
     username: root
     password: 123456
     driver-class-name: com.mysql.cj.jdbc.Driver
+pagehelper:
+  helperDialect: MYSQL
+  reasonable: true
+  supportMethodsArguments: true
+  params: count=countSql

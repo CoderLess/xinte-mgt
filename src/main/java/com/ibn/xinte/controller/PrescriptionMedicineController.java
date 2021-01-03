@@ -88,7 +88,7 @@ public class PrescriptionMedicineController {
     }
 
     @GetMapping("queryList")
-    public ResultInfo queryList(@RequestBody PrescriptionMedicineVO prescriptionMedicineVO) {
+    public ResultInfo queryList(@ModelAttribute PrescriptionMedicineVO prescriptionMedicineVO) {
         if (null == prescriptionMedicineVO) {
             return new ResultInfo().error("参数不能为空");
         }

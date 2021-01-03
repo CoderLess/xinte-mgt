@@ -7,7 +7,10 @@ import com.ibn.xinte.service.AdminBaseService;
 import com.ibn.xinte.util.BeanUtils;
 import com.ibn.xinte.util.JWTUtils;
 import com.ibn.xinte.util.MD5Utils;
+import com.ibn.xinte.util.RequestUtils;
 import com.ibn.xinte.vo.AdminBaseVO;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,6 +18,7 @@ import org.springframework.util.CollectionUtils;
 import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
 /**
@@ -27,6 +31,7 @@ import java.util.List;
  */
 @RestController
 @RequestMapping("adminBase")
+@Api("后台管理员相关信息")
 public class AdminBaseController {
 
     private static final Logger logger = LoggerFactory.getLogger(AdminBaseController.class);
@@ -101,6 +106,17 @@ public class AdminBaseController {
         return new ResultInfo().success();
     }
 
+    @ApiOperation("根据token获取用户id")
+    @GetMapping("queryByToken")
+    public ResultInfo queryById(HttpServletRequest request) {
+        Long userId = RequestUtils.getUserId(request);
+        if (null == userId) {
+            return new ResultInfo().error("请先登入");
+        }
+        AdminBaseDTO adminBaseDTO = adminBaseService.queryById(userId);
+        return new ResultInfo().success(adminBaseDTO);
+    }
+
     @GetMapping("queryById")
     public ResultInfo queryById(Long id) {
         if (null == id) {
@@ -111,13 +127,13 @@ public class AdminBaseController {
     }
 
     @GetMapping("queryList")
-    public ResultInfo queryList(@RequestBody AdminBaseVO adminBaseVO) {
+    public ResultInfo queryList(@ModelAttribute AdminBaseVO adminBaseVO) {
         if (null == adminBaseVO) {
             return new ResultInfo().error("参数不能为空");
         }
         AdminBaseDTO adminBaseDTO = new AdminBaseDTO();
         BeanUtils.copyProperties(adminBaseVO, adminBaseDTO);
-        List<AdminBaseDTO> adminBaseDTOList = adminBaseService.queryList(adminBaseDTO);
+        List<AdminBaseDTO> adminBaseDTOList = adminBaseService.queryList(adminBaseDTO, adminBaseVO.getPageNum(), adminBaseVO.getPageSize());
         return new ResultInfo().success(adminBaseDTOList);
     }
 

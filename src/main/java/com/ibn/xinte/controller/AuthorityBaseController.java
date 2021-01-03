@@ -88,7 +88,7 @@ public class AuthorityBaseController {
     }
 
     @GetMapping("queryList")
-    public ResultInfo queryList(@RequestBody AuthorityBaseVO authorityBaseVO) {
+    public ResultInfo queryList(@ModelAttribute AuthorityBaseVO authorityBaseVO) {
         if (null == authorityBaseVO) {
             return new ResultInfo().error("参数不能为空");
         }

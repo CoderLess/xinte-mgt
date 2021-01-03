@@ -13,7 +13,7 @@ import lombok.Data;
  * @createTime：2020年12月28日
  */
 @Data
-@ApiModel(value = "登录日志信息",description = "登录日志信息")
+@ApiModel(value = "登录日志信息", description = "登录日志信息")
 public class LoginLogVO {
 
     private static final long serialVersionUID = 1L;
@@ -23,27 +23,41 @@ public class LoginLogVO {
      * @author：RenBin
      * @createTime：2020年12月28日
      */
-    @ApiModelProperty(value="主键", name = "主键")
+    @ApiModelProperty(value = "主键", name = "id")
     private Long id;
     /**
      * @description: 管理员id
      * @author：RenBin
      * @createTime：2020年12月28日
      */
-    @ApiModelProperty(value="管理员id", name = "管理员id")
+    @ApiModelProperty(value = "管理员id", name = "adminId")
     private Long adminId;
     /**
      * @description: 登录时间
      * @author：RenBin
      * @createTime：2020年12月28日
      */
-    @ApiModelProperty(value="登录时间", name = "登录时间")
+    @ApiModelProperty(value = "登录时间", name = "loginTime")
     private Long loginTime;
     /**
      * @description: 登入终端ip
      * @author：RenBin
      * @createTime：2020年12月28日
      */
-    @ApiModelProperty(value="登入终端ip", name = "登入终端ip")
+    @ApiModelProperty(value = "登入终端ip", name = "ip")
     private String ip;
-    }
+    /**
+     * @description: 页码
+     * @author：RenBin
+     * @createTime：2021/1/3 15:58
+     */
+    @ApiModelProperty(value = "页码", name = "pageNum")
+    private Integer pageNum;
+    /**
+     * @description: 条数
+     * @author：RenBin
+     * @createTime：2021/1/3 15:58
+     */
+    @ApiModelProperty(value = "条数", name = "pageSize")
+    private Integer pageSize;
+}

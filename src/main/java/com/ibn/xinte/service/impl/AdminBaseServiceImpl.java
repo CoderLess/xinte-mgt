@@ -1,6 +1,7 @@
 package com.ibn.xinte.service.impl;
 
 import com.alibaba.fastjson.JSONObject;
+import com.github.pagehelper.PageHelper;
 import com.google.common.collect.Lists;
 import com.ibn.xinte.dao.AdminBaseDao;
 import com.ibn.xinte.domain.AdminBaseDTO;
@@ -92,12 +93,15 @@ public class AdminBaseServiceImpl implements AdminBaseService {
     }
 
     @Override
-    public List<AdminBaseDTO> queryList(AdminBaseDTO adminBaseDTO) {
+    public List<AdminBaseDTO> queryList(AdminBaseDTO adminBaseDTO, Integer pageNum, Integer pageSize) {
         if (null == adminBaseDTO) {
             return null;
         }
         AdminBaseDO adminBaseDO = new AdminBaseDO();
         BeanUtils.copyProperties(adminBaseDTO, adminBaseDO);
+        if (null != pageNum && null != pageSize) {
+            PageHelper.startPage(adminBaseDTO.getPageNum(), adminBaseDTO.getPageSize());
+        }
         List<AdminBaseDO> adminBaseDOList = adminBaseDao.queryList(adminBaseDO);
         if (CollectionUtils.isEmpty(adminBaseDOList)) {
             return Lists.newArrayList();
@@ -112,5 +116,10 @@ public class AdminBaseServiceImpl implements AdminBaseService {
             return Lists.newArrayList();
         }
         return adminBaseDTOList;
+    }
+
+    @Override
+    public List<AdminBaseDTO> queryList(AdminBaseDTO adminBaseDTO) {
+        return this.queryList(adminBaseDTO, null, null);
     }
 }

@@ -58,9 +58,21 @@ public class UserBaseDTO {
      */
     private Long createTime;
     /**
+     * @description: 创建时间开始
+     * @author：RenBin
+     * @createTime：2020年12月28日
+     */
+    private Long createTimeStart;
+    /**
+     * @description: 创建时间结束
+     * @author：RenBin
+     * @createTime：2020年12月28日
+     */
+    private Long createTimeEnd;
+    /**
      * @description: 用户创建人
      * @author：RenBin
      * @createTime：2020年12月28日
      */
     private Long adminId;
-    }
+}

@@ -88,7 +88,7 @@ public class MedicineModifyLogController {
     }
 
     @GetMapping("queryList")
-    public ResultInfo queryList(@RequestBody MedicineModifyLogVO medicineModifyLogVO) {
+    public ResultInfo queryList(@ModelAttribute MedicineModifyLogVO medicineModifyLogVO) {
         if (null == medicineModifyLogVO) {
             return new ResultInfo().error("参数不能为空");
         }

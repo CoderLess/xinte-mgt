@@ -117,7 +117,7 @@
                 and last_access = #{lastAccess}
             </if>
             <if test="name != null">
-                and name = #{name}
+                and name like concat('%',#{name},'%')
             </if>
         </where>
     </sql>

@@ -11,4 +11,7 @@ package com.ibn.xinte.constant;
 public class TokenConstants {
     // 签名秘钥
     public static final String KEY = "xinte";
+    // token名
+    public static final String TOKEN = "token";
+
 }

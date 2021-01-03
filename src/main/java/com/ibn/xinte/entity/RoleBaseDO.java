@@ -2,6 +2,8 @@ package com.ibn.xinte.entity;
 
 import lombok.Data;
 
+import java.math.BigDecimal;
+
 /**
  * @version 1.0
  * @description:
@@ -33,4 +35,11 @@ public class RoleBaseDO {
      * @createTime：2020年12月28日
      */
     private String authority;
-    }
+    /**
+     * @description: 提成比例
+     * @author：RenBin
+     * @createTime：2020年12月28日
+     */
+    private BigDecimal commission;
+
+}

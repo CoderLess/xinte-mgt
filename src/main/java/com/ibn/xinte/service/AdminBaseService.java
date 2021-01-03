@@ -55,4 +55,11 @@ public interface AdminBaseService {
      * @createTime：2020年12月28日
      */
     List<AdminBaseDTO> queryList(AdminBaseDTO adminBaseDTO);
+
+    /**
+     * @description: 通过条件查询用户信息
+     * @author：RenBin
+     * @createTime：2020年12月28日
+     */
+    List<AdminBaseDTO> queryList(AdminBaseDTO adminBaseDTO, Integer pageNum, Integer pageSize);
 }

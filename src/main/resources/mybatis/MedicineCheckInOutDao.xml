@@ -7,6 +7,7 @@
             <if test="id != null">id,</if>
             <if test="medicineId != null">medicine_id,</if>
             <if test="number != null">number,</if>
+            <if test="price != null">price,</if>
             <if test="prescriptionId != null">prescription_id,</if>
             <if test="type != null">type,</if>
             <if test="adminId != null">admin_id,</if>
@@ -20,6 +21,7 @@
             <if test="id != null">#{ id },</if>
             <if test="medicineId != null">#{ medicineId },</if>
             <if test="number != null">#{ number },</if>
+            <if test="price != null">#{ price },</if>
             <if test="prescriptionId != null">#{ prescriptionId },</if>
             <if test="type != null">#{ type },</if>
             <if test="adminId != null">#{ adminId },</if>
@@ -32,6 +34,7 @@
 		`id`,
 		`medicine_id`,
 		`number`,
+		`price`,
 		`prescription_id`,
 		`type`,
 		`admin_id`,
@@ -52,6 +55,7 @@
             #{ item.id },
             #{ item.medicineId },
             #{ item.number },
+            #{ item.price },
             #{ item.prescriptionId },
             #{ item.type },
             #{ item.adminId },
@@ -66,6 +70,7 @@
             <if test="id != null">`id` = #{id},</if>
             <if test="medicineId != null">`medicine_id` = #{medicineId},</if>
             <if test="number != null">`number` = #{number},</if>
+            <if test="price != null">`price` = #{price},</if>
             <if test="prescriptionId != null">`prescription_id` = #{prescriptionId},</if>
             <if test="type != null">`type` = #{type},</if>
             <if test="adminId != null">`admin_id` = #{adminId},</if>
@@ -95,6 +100,9 @@
             </if>
             <if test="number != null">
                 and number = #{number}
+            </if>
+            <if test="price != null">
+                and price = #{price}
             </if>
             <if test="prescriptionId != null">
                 and prescription_id = #{prescriptionId}

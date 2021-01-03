@@ -5,6 +5,8 @@
     <sql id="MedicineBaseDO_Columns">
         <trim suffixOverrides=",">
             <if test="id != null">id,</if>
+            <if test="name != null">name,</if>
+            <if test="shortName != null">short_name,</if>
             <if test="code != null">code,</if>
             <if test="factoryId != null">factory_id,</if>
             <if test="spec != null">spec,</if>
@@ -21,6 +23,8 @@
     <sql id="MedicineBaseDO_Values">
         <trim suffixOverrides=",">
             <if test="id != null">#{ id },</if>
+            <if test="name != null">#{name},</if>
+            <if test="shortName != null">#{shortName},</if>
             <if test="code != null">#{ code },</if>
             <if test="factoryId != null">#{ factoryId },</if>
             <if test="spec != null">#{ spec },</if>
@@ -36,6 +40,8 @@
 
     <sql id="baseColumn">
 		`id`,
+		`name`,
+		`short_name`,
 		`code`,
 		`factory_id`,
 		`spec`,
@@ -59,6 +65,8 @@
         <foreach collection="list" index="index" item="item" separator=",">
             (
             #{ item.id },
+            #{ item.name },
+            #{ item.shortName },
             #{ item.code },
             #{ item.factoryId },
             #{ item.spec },
@@ -76,6 +84,8 @@
         update medicine_base
         <set>
             <if test="id != null">`id` = #{id},</if>
+            <if test="name != null">`name` = #{name},</if>
+            <if test="shortName != null">`short_name` = #{shortName},</if>
             <if test="code != null">`code` = #{code},</if>
             <if test="factoryId != null">`factory_id` = #{factoryId},</if>
             <if test="spec != null">`spec` = #{spec},</if>
@@ -104,6 +114,12 @@
         <where>
             <if test="id != null">
                 and id = #{id}
+            </if>
+            <if test="name != null">
+                and name like concat('%', #{name}, '%')
+            </if>
+            <if test="shortName != null">
+                and short_name like concat('%', #{shortName}, '%')
             </if>
             <if test="code != null">
                 and code = #{code}

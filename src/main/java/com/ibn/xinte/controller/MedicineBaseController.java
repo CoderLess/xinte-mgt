@@ -5,7 +5,9 @@ import com.ibn.xinte.common.ResultInfo;
 import com.ibn.xinte.domain.MedicineBaseDTO;
 import com.ibn.xinte.service.MedicineBaseService;
 import com.ibn.xinte.util.BeanUtils;
+import com.ibn.xinte.util.PinYinUtils;
 import com.ibn.xinte.vo.MedicineBaseVO;
+import net.sourceforge.pinyin4j.format.HanyuPinyinOutputFormat;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -38,6 +40,9 @@ public class MedicineBaseController {
         }
         MedicineBaseDTO medicineBaseDTO = new MedicineBaseDTO();
         BeanUtils.copyProperties(medicineBaseVO, medicineBaseDTO);
+        if (null == medicineBaseDTO.getShortName()) {
+            medicineBaseDTO.setShortName(PinYinUtils.getFirstSpell(medicineBaseDTO.getName()));
+        }
         Long id = medicineBaseService.save(medicineBaseDTO);
         return new ResultInfo().success(id);
     }
@@ -88,7 +93,7 @@ public class MedicineBaseController {
     }
 
     @GetMapping("queryList")
-    public ResultInfo queryList(@RequestBody MedicineBaseVO medicineBaseVO) {
+    public ResultInfo queryList(@ModelAttribute MedicineBaseVO medicineBaseVO) {
         if (null == medicineBaseVO) {
             return new ResultInfo().error("参数不能为空");
         }

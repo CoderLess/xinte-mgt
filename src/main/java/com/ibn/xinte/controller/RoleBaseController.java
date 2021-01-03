@@ -88,7 +88,7 @@ public class RoleBaseController {
     }
 
     @GetMapping("queryList")
-    public ResultInfo queryList(@RequestBody RoleBaseVO roleBaseVO) {
+    public ResultInfo queryList(@ModelAttribute RoleBaseVO roleBaseVO) {
         if (null == roleBaseVO) {
             return new ResultInfo().error("参数不能为空");
         }

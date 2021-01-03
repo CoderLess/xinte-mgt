@@ -70,15 +70,6 @@ public class UserBaseController {
         return new ResultInfo().success();
     }
 
-    @PostMapping("deleteById")
-    public ResultInfo deleteById(Long id) {
-        if (null == id) {
-            return new ResultInfo().error("参数不能为空");
-        }
-        userBaseService.deleteById(id);
-        return new ResultInfo().success();
-    }
-
     @GetMapping("queryById")
     public ResultInfo queryById(Long id) {
         if (null == id) {
@@ -89,13 +80,13 @@ public class UserBaseController {
     }
 
     @GetMapping("queryList")
-    public ResultInfo queryList(@RequestBody UserBaseVO userBaseVO) {
+    public ResultInfo queryList(@ModelAttribute UserBaseVO userBaseVO) {
         if (null == userBaseVO) {
             return new ResultInfo().error("参数不能为空");
         }
         UserBaseDTO userBaseDTO = new UserBaseDTO();
         BeanUtils.copyProperties(userBaseVO, userBaseDTO);
-        List<UserBaseDTO> userBaseDTOList = userBaseService.queryList(userBaseDTO);
+        List<UserBaseDTO> userBaseDTOList = userBaseService.queryList(userBaseDTO, userBaseVO.getPageNum(), userBaseVO.getPageSize());
         return new ResultInfo().success(userBaseDTOList);
     }
     @GetMapping("sexEnum")

@@ -91,7 +91,7 @@
                 and id = #{id}
             </if>
             <if test="username != null">
-                and username = #{username}
+                and username like concat('%', #{username}, '%')
             </if>
             <if test="mobile != null">
                 and mobile = #{mobile}
@@ -119,5 +119,39 @@
         <include refid="baseColumn"/>
         from user_base
         <include refid="queryColumn"/>
+    </select>
+    <select id="queryListByDTO" resultType="com.ibn.xinte.entity.UserBaseDO" parameterType="com.ibn.xinte.domain.UserBaseDTO">
+        select
+        <include refid="baseColumn"/>
+        from user_base
+        <where>
+            <if test="id != null">
+                and id = #{id}
+            </if>
+            <if test="username != null">
+                and username like concat('%', #{username}, '%')
+            </if>
+            <if test="mobile != null">
+                and mobile = #{mobile}
+            </if>
+            <if test="sex != null">
+                and sex = #{sex}
+            </if>
+            <if test="birthday != null">
+                and birthday = #{birthday}
+            </if>
+            <if test="disable != null">
+                and disable = #{disable}
+            </if>
+            <if test="createTimeStart != null">
+                and create_time &gt;= #{createTimeStart}
+            </if>
+            <if test="createTimeEnd != null">
+                and create_time &lt;= #{createTimeEnd}
+            </if>
+            <if test="adminId != null">
+                and admin_id = #{adminId}
+            </if>
+        </where>
     </select>
 </mapper>

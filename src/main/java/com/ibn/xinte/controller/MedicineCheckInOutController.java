@@ -43,22 +43,6 @@ public class MedicineCheckInOutController {
         return new ResultInfo().success(id);
     }
 
-    @PostMapping("saveBatch")
-    public ResultInfo save(@RequestBody List<MedicineCheckInOutVO> medicineCheckInOutVOList) {
-        if (CollectionUtils.isEmpty(medicineCheckInOutVOList)) {
-            return new ResultInfo().error("参数不能为空");
-        }
-        List<MedicineCheckInOutDTO> medicineCheckInOutDTOList = null;
-        try {
-            medicineCheckInOutDTOList = BeanUtils.convertList(medicineCheckInOutVOList, MedicineCheckInOutDTO.class);
-        } catch (Exception e) {
-            String msg = String.format("MedicineCheckInOutController.save中list转换失败：%s", JSONObject.toJSONString(medicineCheckInOutDTOList));
-            logger.error(msg, e);
-        }
-        medicineCheckInOutService.saveBatch(medicineCheckInOutDTOList);
-        return new ResultInfo().success();
-    }
-
     @PostMapping("updateById")
     public ResultInfo updateById(@RequestBody MedicineCheckInOutVO medicineCheckInOutVO) {
         if (null == medicineCheckInOutVO) {
@@ -89,7 +73,7 @@ public class MedicineCheckInOutController {
     }
 
     @GetMapping("queryList")
-    public ResultInfo queryList(@RequestBody MedicineCheckInOutVO medicineCheckInOutVO) {
+    public ResultInfo queryList(@ModelAttribute MedicineCheckInOutVO medicineCheckInOutVO) {
         if (null == medicineCheckInOutVO) {
             return new ResultInfo().error("参数不能为空");
         }

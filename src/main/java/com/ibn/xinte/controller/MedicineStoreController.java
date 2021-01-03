@@ -88,7 +88,7 @@ public class MedicineStoreController {
     }
 
     @GetMapping("queryList")
-    public ResultInfo queryList(@RequestBody MedicineStoreVO medicineStoreVO) {
+    public ResultInfo queryList(@ModelAttribute MedicineStoreVO medicineStoreVO) {
         if (null == medicineStoreVO) {
             return new ResultInfo().error("参数不能为空");
         }

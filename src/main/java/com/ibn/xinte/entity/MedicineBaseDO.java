@@ -24,6 +24,18 @@ public class MedicineBaseDO {
      */
     private Long id;
     /**
+     * @description: 药品名称
+     * @author：RenBin
+     * @createTime：2020年12月28日
+     */
+    private String name;
+    /**
+     * @description: 药品名简称
+     * @author：RenBin
+     * @createTime：2020年12月28日
+     */
+    private String shortName;
+    /**
      * @description: 编号
      * @author：RenBin
      * @createTime：2020年12月28日
@@ -83,4 +95,4 @@ public class MedicineBaseDO {
      * @createTime：2020年12月28日
      */
     private Long updateTime;
-    }
+}

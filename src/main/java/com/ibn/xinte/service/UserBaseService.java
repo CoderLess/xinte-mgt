@@ -55,4 +55,10 @@ public interface UserBaseService {
      * @createTime：2020年12月28日
      */
     List<UserBaseDTO> queryList(UserBaseDTO userBaseDTO);
+    /**
+     * @description: 分页查询用户信息
+     * @author：RenBin
+     * @createTime：2020年12月28日
+     */
+    List<UserBaseDTO> queryList(UserBaseDTO userBaseDTO, Integer pageNum, Integer pageSize);
 }
