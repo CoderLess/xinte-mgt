@@ -87,6 +87,7 @@ public class AdminBaseServiceImpl implements AdminBaseService {
         if (null == adminBaseDO) {
             return null;
         }
+        adminBaseDO.setPassword(null);
         AdminBaseDTO adminBaseDTO = new AdminBaseDTO();
         BeanUtils.copyProperties(adminBaseDO, adminBaseDTO);
         return adminBaseDTO;
@@ -114,6 +115,9 @@ public class AdminBaseServiceImpl implements AdminBaseService {
                     JSONObject.toJSONString(adminBaseDOList));
             logger.error(msg, e);
             return Lists.newArrayList();
+        }
+        for (AdminBaseDO curAdminBaseDO : adminBaseDOList) {
+            curAdminBaseDO.setPassword("");
         }
         return adminBaseDTOList;
     }

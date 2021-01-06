@@ -6,7 +6,7 @@ import java.util.Map;
 
 /**
  * @version 1.0
- * @description:
+ * @description: 用户性别枚举
  * @projectName：xinte-mgt
  * @see: com.ibn.xinte.enumeration
  * @author： RenBin

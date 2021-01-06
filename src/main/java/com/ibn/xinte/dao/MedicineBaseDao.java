@@ -11,4 +11,10 @@ import com.ibn.xinte.entity.MedicineBaseDO;
  * @createTime：2020年12月28日
  */
 public interface MedicineBaseDao extends BaseDao<MedicineBaseDO> {
+    /**
+     * @description: 药品卖出减少库存
+     * @author：RenBin
+     * @createTime：2021/1/6 22:16
+     */
+    void drugSales(Long id);
 }

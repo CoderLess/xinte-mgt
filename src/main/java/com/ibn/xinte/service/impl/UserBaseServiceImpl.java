@@ -122,4 +122,9 @@ public class UserBaseServiceImpl implements UserBaseService {
         }
         return userBaseDTOList;
     }
+
+    @Override
+    public Integer total(UserBaseDTO userBaseDTO) {
+        return userBaseDao.total(userBaseDTO);
+    }
 }

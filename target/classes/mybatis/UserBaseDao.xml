@@ -114,16 +114,7 @@
         </where>
     </sql>
 
-    <select id="queryList" resultType="com.ibn.xinte.entity.UserBaseDO">
-        select
-        <include refid="baseColumn"/>
-        from user_base
-        <include refid="queryColumn"/>
-    </select>
-    <select id="queryListByDTO" resultType="com.ibn.xinte.entity.UserBaseDO" parameterType="com.ibn.xinte.domain.UserBaseDTO">
-        select
-        <include refid="baseColumn"/>
-        from user_base
+    <sql id="queryColumnDTO">
         <where>
             <if test="id != null">
                 and id = #{id}
@@ -133,6 +124,9 @@
             </if>
             <if test="mobile != null">
                 and mobile = #{mobile}
+            </if>
+            <if test="mobileLike != null">
+                and mobile like concat('%', #{mobileLike}, '%')
             </if>
             <if test="sex != null">
                 and sex = #{sex}
@@ -153,5 +147,24 @@
                 and admin_id = #{adminId}
             </if>
         </where>
+    </sql>
+
+    <select id="queryList" resultType="com.ibn.xinte.entity.UserBaseDO">
+        select
+        <include refid="baseColumn"/>
+        from user_base
+        <include refid="queryColumn"/>
+    </select>
+    <select id="queryListByDTO" resultType="com.ibn.xinte.entity.UserBaseDO" parameterType="com.ibn.xinte.domain.UserBaseDTO">
+        select
+        <include refid="baseColumn"/>
+        from user_base
+        <include refid="queryColumnDTO"/>
+    </select>
+    <select id="total" resultType="java.lang.Integer">
+        select
+        count(*)
+        from user_base
+        <include refid="queryColumnDTO"/>
     </select>
 </mapper>

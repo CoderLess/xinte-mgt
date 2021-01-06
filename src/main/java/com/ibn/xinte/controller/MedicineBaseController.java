@@ -6,7 +6,9 @@ import com.ibn.xinte.domain.MedicineBaseDTO;
 import com.ibn.xinte.service.MedicineBaseService;
 import com.ibn.xinte.util.BeanUtils;
 import com.ibn.xinte.util.PinYinUtils;
+import com.ibn.xinte.util.RequestUtils;
 import com.ibn.xinte.vo.MedicineBaseVO;
+import io.swagger.annotations.ApiOperation;
 import net.sourceforge.pinyin4j.format.HanyuPinyinOutputFormat;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -14,6 +16,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.util.CollectionUtils;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
 /**
@@ -33,56 +36,42 @@ public class MedicineBaseController {
     @Autowired
     private MedicineBaseService medicineBaseService;
 
+    @ApiOperation("保存药品基本信息")
     @PostMapping("save")
-    public ResultInfo save(@RequestBody MedicineBaseVO medicineBaseVO) {
+    public ResultInfo save(@RequestBody MedicineBaseVO medicineBaseVO, HttpServletRequest request) {
         if (null == medicineBaseVO) {
             return new ResultInfo().error("参数不能为空");
         }
+        Long adminId = RequestUtils.getUserId(request);
         MedicineBaseDTO medicineBaseDTO = new MedicineBaseDTO();
         BeanUtils.copyProperties(medicineBaseVO, medicineBaseDTO);
+        // 获取药品简称
         if (null == medicineBaseDTO.getShortName()) {
             medicineBaseDTO.setShortName(PinYinUtils.getFirstSpell(medicineBaseDTO.getName()));
         }
+        medicineBaseDTO.setCreatorId(adminId);
+        medicineBaseDTO.setCreateTime(System.currentTimeMillis());
+        // 保存记录
         Long id = medicineBaseService.save(medicineBaseDTO);
         return new ResultInfo().success(id);
     }
 
-    @PostMapping("saveBatch")
-    public ResultInfo save(@RequestBody List<MedicineBaseVO> medicineBaseVOList) {
-        if (CollectionUtils.isEmpty(medicineBaseVOList)) {
-            return new ResultInfo().error("参数不能为空");
-        }
-        List<MedicineBaseDTO> medicineBaseDTOList = null;
-        try {
-            medicineBaseDTOList = BeanUtils.convertList(medicineBaseVOList, MedicineBaseDTO.class);
-        } catch (Exception e) {
-            String msg = String.format("MedicineBaseController.save中list转换失败：%s", JSONObject.toJSONString(medicineBaseDTOList));
-            logger.error(msg, e);
-        }
-        medicineBaseService.saveBatch(medicineBaseDTOList);
-        return new ResultInfo().success();
-    }
-
+    @ApiOperation("根据id更新药品基本信息")
     @PostMapping("updateById")
-    public ResultInfo updateById(@RequestBody MedicineBaseVO medicineBaseVO) {
+    public ResultInfo updateById(@RequestBody MedicineBaseVO medicineBaseVO, HttpServletRequest request) {
         if (null == medicineBaseVO) {
             return new ResultInfo().error("参数不能为空");
         }
+        Long adminId = RequestUtils.getUserId(request);
         MedicineBaseDTO medicineBaseDTO = new MedicineBaseDTO();
         BeanUtils.copyProperties(medicineBaseVO, medicineBaseDTO);
+        medicineBaseDTO.setUpdateId(adminId);
+        medicineBaseDTO.setUpdateTime(System.currentTimeMillis());
         medicineBaseService.updateById(medicineBaseDTO);
         return new ResultInfo().success();
     }
 
-    @PostMapping("deleteById")
-    public ResultInfo deleteById(Long id) {
-        if (null == id) {
-            return new ResultInfo().error("参数不能为空");
-        }
-        medicineBaseService.deleteById(id);
-        return new ResultInfo().success();
-    }
-
+    @ApiOperation("根据ID查询药品基本信息")
     @GetMapping("queryById")
     public ResultInfo queryById(Long id) {
         if (null == id) {
@@ -92,6 +81,7 @@ public class MedicineBaseController {
         return new ResultInfo().success(medicineBaseDTO);
     }
 
+    @ApiOperation("根据条件查询药品基本信息")
     @GetMapping("queryList")
     public ResultInfo queryList(@ModelAttribute MedicineBaseVO medicineBaseVO) {
         if (null == medicineBaseVO) {
@@ -99,7 +89,7 @@ public class MedicineBaseController {
         }
         MedicineBaseDTO medicineBaseDTO = new MedicineBaseDTO();
         BeanUtils.copyProperties(medicineBaseVO, medicineBaseDTO);
-        List<MedicineBaseDTO> medicineBaseDTOList = medicineBaseService.queryList(medicineBaseDTO);
+        List<MedicineBaseDTO> medicineBaseDTOList = medicineBaseService.queryList(medicineBaseDTO, medicineBaseVO.getPageNum(), medicineBaseVO.getPageSize());
         return new ResultInfo().success(medicineBaseDTOList);
     }
 

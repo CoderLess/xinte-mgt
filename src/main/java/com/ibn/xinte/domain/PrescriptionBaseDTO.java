@@ -1,5 +1,6 @@
 package com.ibn.xinte.domain;
 
+import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 
 /**
@@ -63,4 +64,24 @@ public class PrescriptionBaseDTO {
      * @createTime：2020年12月28日
      */
     private Long createTime;
-    }
+    /**
+     * @description: 类型 0：诊断药单 1：临时药单
+     * @author：RenBin
+     * @createTime：2021/1/6 21:19
+     */
+    private Integer type;
+    /**
+     * @description: 创建时间开始
+     * @author：RenBin
+     * @createTime：2020年12月28日
+     */
+    @ApiModelProperty(value = "创建时间", name = "createTimeStart")
+    private Long createTimeStart;
+    /**
+     * @description: 创建时间结束
+     * @author：RenBin
+     * @createTime：2020年12月28日
+     */
+    @ApiModelProperty(value = "创建时间", name = "createTimeEnd")
+    private Long createTimeEnd;
+}

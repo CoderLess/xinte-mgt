@@ -75,4 +75,10 @@ public class UserBaseDTO {
      * @createTime：2020年12月28日
      */
     private Long adminId;
+    /**
+     * @description: 手机号模糊匹配
+     * @author：RenBin
+     * @createTime：2021/1/6 20:57
+     */
+    private String mobileLike;
 }

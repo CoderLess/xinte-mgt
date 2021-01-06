@@ -160,4 +160,11 @@
         from medicine_base
         <include refid="queryColumn"/>
     </select>
+    
+    <update id="drugSales" parameterType="java.lang.Long">
+        update medicine_base mb
+        left join prescription_medicine pm on mb.id=pm.prescription_id
+        set mb.number=(mb.number-pm.number)
+        where pm.prescription_id=1 and sold=1
+    </update>
 </mapper>

@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.ibn.xinte.dao.PaymentBaseDao">
+    <sql id="PaymentBaseDO_Columns">
+        <trim suffixOverrides=",">
+            <if test="amount != null">amount,</if>
+            <if test="createTime != null">create_time,</if>
+            <if test="creator != null">creator,</if>
+            <if test="id != null">id,</if>
+            <if test="prescriptionId != null">prescription_id,</if>
+        </trim>
+    </sql>
+
+    <sql id="PaymentBaseDO_Values">
+        <trim suffixOverrides=",">
+            <if test="amount != null">#{ amount },</if>
+            <if test="createTime != null">#{ createTime },</if>
+            <if test="creator != null">#{ creator },</if>
+            <if test="id != null">#{ id },</if>
+            <if test="prescriptionId != null">#{ prescriptionId },</if>
+        </trim>
+    </sql>
+
+    <sql id="baseColumn">
+        `amount`,
+		`create_time`,
+		`creator`,
+		`id`,
+		`prescription_id`
+    </sql>
+
+    <insert id="save" useGeneratedKeys="true" keyProperty="id">
+        insert into payment_base (<include refid="PaymentBaseDO_Columns"/>)
+        values(<include refid="PaymentBaseDO_Values"/>)
+    </insert>
+
+    <insert id="saveBatch" parameterType="java.util.List">
+        insert into payment_base (<include refid="baseColumn"/>)
+        values
+        <foreach collection="list" index="index" item="item" separator=",">
+            (
+            #{ item.amount },
+            #{ item.createTime },
+            #{ item.creator },
+            #{ item.id },
+            #{ item.prescriptionId }
+            )
+        </foreach>
+    </insert>
+    <update id="updateById">
+        update payment_base
+        <set>
+            <if test="amount != null">`amount` = #{amount},</if>
+            <if test="createTime != null">`create_time` = #{createTime},</if>
+            <if test="creator != null">`creator` = #{creator},</if>
+            <if test="id != null">`id` = #{id},</if>
+            <if test="prescriptionId != null">`prescription_id` = #{prescriptionId},</if>
+        </set>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteById">
+        delete
+        from payment_base
+        where id = #{id}
+    </delete>
+
+    <select id="queryById" resultType="com.ibn.xinte.entity.PaymentBaseDO">
+        select
+        <include refid="baseColumn"/>
+        from payment_base where id = #{id}
+    </select>
+
+    <sql id="queryColumn">
+        <where>
+            <if test="amount != null">
+                and amount = #{amount}
+            </if>
+            <if test="createTime != null">
+                and create_time = #{createTime}
+            </if>
+            <if test="creator != null">
+                and creator = #{creator}
+            </if>
+            <if test="id != null">
+                and id = #{id}
+            </if>
+            <if test="prescriptionId != null">
+                and prescription_id = #{prescriptionId}
+            </if>
+        </where>
+    </sql>
+
+    <select id="queryList" resultType="com.ibn.xinte.entity.PaymentBaseDO">
+        select
+        <include refid="baseColumn"/>
+        from payment_base
+        <include refid="queryColumn"/>
+    </select>
+
+    <sql id="queryColumnDTO">
+        <where>
+            <if test="amount != null">
+                and amount = #{amount}
+            </if>
+            <if test="createTimeStart != null">
+                and create_time &gt;= #{createTimeStart}
+            </if>
+            <if test="createTimeEnd != null">
+                and create_time &lt;= #{createTimeEnd}
+            </if>
+            <if test="creator != null">
+                and creator = #{creator}
+            </if>
+            <if test="id != null">
+                and id = #{id}
+            </if>
+            <if test="prescriptionId != null">
+                and prescription_id = #{prescriptionId}
+            </if>
+        </where>
+    </sql>
+    <select id="queryPayStatistic" resultType="com.ibn.xinte.domain.PayStatisticDTO">
+        select
+        count(*) totalNumber,
+        sum(amount) totalAmount
+        from payment_base
+        <include refid="queryColumnDTO"/>
+    </select>
+</mapper>

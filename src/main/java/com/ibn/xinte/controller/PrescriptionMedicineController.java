@@ -6,6 +6,7 @@ import com.ibn.xinte.domain.PrescriptionMedicineDTO;
 import com.ibn.xinte.service.PrescriptionMedicineService;
 import com.ibn.xinte.util.BeanUtils;
 import com.ibn.xinte.vo.PrescriptionMedicineVO;
+import io.swagger.annotations.ApiOperation;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,6 +32,7 @@ public class PrescriptionMedicineController {
     @Autowired
     private PrescriptionMedicineService prescriptionMedicineService;
 
+    @ApiOperation("保存药方-药品信息")
     @PostMapping("save")
     public ResultInfo save(@RequestBody PrescriptionMedicineVO prescriptionMedicineVO) {
         if (null == prescriptionMedicineVO) {
@@ -42,6 +44,7 @@ public class PrescriptionMedicineController {
         return new ResultInfo().success(id);
     }
 
+    @ApiOperation("批量保存药方药品信息")
     @PostMapping("saveBatch")
     public ResultInfo save(@RequestBody List<PrescriptionMedicineVO> prescriptionMedicineVOList) {
         if (CollectionUtils.isEmpty(prescriptionMedicineVOList)) {
@@ -58,6 +61,7 @@ public class PrescriptionMedicineController {
         return new ResultInfo().success();
     }
 
+    @ApiOperation("根据id更新药方药品信息")
     @PostMapping("updateById")
     public ResultInfo updateById(@RequestBody PrescriptionMedicineVO prescriptionMedicineVO) {
         if (null == prescriptionMedicineVO) {
@@ -69,6 +73,7 @@ public class PrescriptionMedicineController {
         return new ResultInfo().success();
     }
 
+    @ApiOperation("根据id删除药品药品信息")
     @PostMapping("deleteById")
     public ResultInfo deleteById(Long id) {
         if (null == id) {
@@ -78,6 +83,7 @@ public class PrescriptionMedicineController {
         return new ResultInfo().success();
     }
 
+    @ApiOperation("根据id查询药方药品信息")
     @GetMapping("queryById")
     public ResultInfo queryById(Long id) {
         if (null == id) {
@@ -87,6 +93,7 @@ public class PrescriptionMedicineController {
         return new ResultInfo().success(prescriptionMedicineDTO);
     }
 
+    @ApiOperation("根据条件查询药方药品信息")
     @GetMapping("queryList")
     public ResultInfo queryList(@ModelAttribute PrescriptionMedicineVO prescriptionMedicineVO) {
         if (null == prescriptionMedicineVO) {

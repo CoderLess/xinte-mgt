@@ -15,42 +15,42 @@ import java.util.List;
 public interface AuthorityBaseService {
 
     /**
-     * @description: 保存用户信息
+     * @description: 保存权限信息
      * @author：RenBin
      * @createTime：2020年12月28日
      */
     Long save(AuthorityBaseDTO authorityBaseDTO);
 
     /**
-     * @description: 批量保存用户信息
+     * @description: 批量保存权限信息
      * @author：RenBin
      * @createTime：2020年12月28日
      */
     Long saveBatch(List<AuthorityBaseDTO> authorityBaseDTOList);
 
     /**
-     * @description: 更新用户信息
+     * @description: 更新权限信息
      * @author：RenBin
      * @createTime：2020年12月28日
      */
     Integer updateById(AuthorityBaseDTO authorityBaseDTO);
 
     /**
-     * @description: 根据Id删除用户信息
+     * @description: 根据Id删除权限信息
      * @author：RenBin
      * @createTime：2020年12月28日
      */
     Integer deleteById(Long id);
 
     /**
-     * @description: 通过id查询用户信息
+     * @description: 通过id查询权限信息
      * @author：RenBin
      * @createTime：2020年12月28日
      */
     AuthorityBaseDTO queryById(Long id);
 
     /**
-     * @description: 通过条件查询用户信息
+     * @description: 通过条件查询权限信息
      * @author：RenBin
      * @createTime：2020年12月28日
      */

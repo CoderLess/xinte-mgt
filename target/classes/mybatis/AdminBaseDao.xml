@@ -92,6 +92,7 @@
 
     <sql id="queryColumn">
         <where>
+            disable = 0
             <if test="id != null">
                 and id = #{id}
             </if>
@@ -103,9 +104,6 @@
             </if>
             <if test="roleId != null">
                 and role_id = #{roleId}
-            </if>
-            <if test="disable != null">
-                and disable = #{disable}
             </if>
             <if test="createTime != null">
                 and create_time = #{createTime}

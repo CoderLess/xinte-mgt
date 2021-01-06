@@ -113,4 +113,25 @@ public class PrescriptionBaseServiceImpl implements PrescriptionBaseService {
         }
         return prescriptionBaseDTOList;
     }
+
+    @Override
+    public List<PrescriptionBaseDTO> queryListByDTO(PrescriptionBaseDTO prescriptionBaseDTO) {
+        if (null == prescriptionBaseDTO) {
+            return Lists.newArrayList();
+        }
+        List<PrescriptionBaseDO> prescriptionBaseDOList = prescriptionBaseDao.queryListByDTO(prescriptionBaseDTO);
+        if (CollectionUtils.isEmpty(prescriptionBaseDOList)) {
+            return Lists.newArrayList();
+        }
+        List<PrescriptionBaseDTO> prescriptionBaseDTOList;
+        try {
+            prescriptionBaseDTOList=BeanUtils.convertList(prescriptionBaseDOList, PrescriptionBaseDTO.class);
+        } catch (Exception e) {
+            String msg = String.format("PrescriptionBaseServiceImpl.queryListByDTO方法list转换失败：%s",
+                    JSONObject.toJSONString(prescriptionBaseDOList));
+            logger.error(msg, e);
+            return Lists.newArrayList();
+        }
+        return prescriptionBaseDTOList;
+    }
 }

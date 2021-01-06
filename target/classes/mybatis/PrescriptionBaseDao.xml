@@ -12,6 +12,7 @@
             <if test="pathogeny != null">pathogeny,</if>
             <if test="remark != null">remark,</if>
             <if test="createTime != null">create_time,</if>
+            <if test="type != null">type,</if>
         </trim>
     </sql>
 
@@ -25,6 +26,7 @@
             <if test="pathogeny != null">#{ pathogeny },</if>
             <if test="remark != null">#{ remark },</if>
             <if test="createTime != null">#{ createTime },</if>
+            <if test="type != null">#{type},</if>
         </trim>
     </sql>
 
@@ -36,7 +38,8 @@
 		`medication_time_end`,
 		`pathogeny`,
 		`remark`,
-		`create_time`
+		`create_time`,
+		`type`
 	</sql>
 
     <insert id="save" useGeneratedKeys="true" keyProperty="id">
@@ -56,7 +59,8 @@
             #{ item.medicationTimeEnd },
             #{ item.pathogeny },
             #{ item.remark },
-            #{ item.createTime }
+            #{ item.createTime },
+            #{ item.type },
             )
         </foreach>
     </insert>
@@ -71,6 +75,7 @@
             <if test="pathogeny != null">`pathogeny` = #{pathogeny},</if>
             <if test="remark != null">`remark` = #{remark},</if>
             <if test="createTime != null">`create_time` = #{createTime},</if>
+            <if test="type != null">`type` = #{type},</if>
         </set>
         where id = #{id}
     </update>
@@ -111,6 +116,9 @@
             <if test="createTime != null">
                 and create_time = #{createTime}
             </if>
+            <if test="type != null">
+                and type = #{type}
+            </if>
         </where>
     </sql>
 
@@ -119,5 +127,43 @@
         <include refid="baseColumn"/>
         from prescription_base
         <include refid="queryColumn"/>
+    </select>
+
+    <select id="queryListByDTO" resultType="com.ibn.xinte.domain.PrescriptionBaseDTO">
+        select
+        <include refid="baseColumn"/>
+        from prescription_base
+        <where>
+            <if test="id != null">
+                and id = #{id}
+            </if>
+            <if test="adminId != null">
+                and admin_id = #{adminId}
+            </if>
+            <if test="userId != null">
+                and user_id = #{userId}
+            </if>
+            <if test="medicationTimeStart != null">
+                and medication_time_start = #{medicationTimeStart}
+            </if>
+            <if test="medicationTimeEnd != null">
+                and medication_time_end = #{medicationTimeEnd}
+            </if>
+            <if test="pathogeny != null">
+                and pathogeny = #{pathogeny}
+            </if>
+            <if test="remark != null">
+                and remark = #{remark}
+            </if>
+            <if test="createTimeStart != null">
+                and create_time &gt;= #{createTimeStart}
+            </if>
+            <if test="createTimeEnd != null">
+                and create_time &lt;= #{createTimeEnd}
+            </if>
+            <if test="type != null">
+                and type = #{type}
+            </if>
+        </where>
     </select>
 </mapper>

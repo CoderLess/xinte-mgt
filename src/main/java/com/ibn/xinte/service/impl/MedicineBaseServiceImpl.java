@@ -1,6 +1,7 @@
 package com.ibn.xinte.service.impl;
 
 import com.alibaba.fastjson.JSONObject;
+import com.github.pagehelper.PageHelper;
 import com.google.common.collect.Lists;
 import com.ibn.xinte.dao.MedicineBaseDao;
 import com.ibn.xinte.domain.MedicineBaseDTO;
@@ -68,6 +69,8 @@ public class MedicineBaseServiceImpl implements MedicineBaseService {
         if (null == medicineBaseDTO) {
             return null;
         }
+        medicineBaseDTO.setCreateTime(null);
+        medicineBaseDTO.setCreatorId(null);
         MedicineBaseDO medicineBaseDO = new MedicineBaseDO();
         BeanUtils.copyProperties(medicineBaseDTO, medicineBaseDO);
         medicineBaseDO.setUpdateTime(System.currentTimeMillis());
@@ -76,7 +79,7 @@ public class MedicineBaseServiceImpl implements MedicineBaseService {
         medicineModifyLogDTO.setId(null);
         medicineModifyLogDTO.setMedicinalId(medicineBaseDTO.getId());
         medicineModifyLogDTO.setRecordCreateTime(System.currentTimeMillis());
-        medicineModifyLogService.updateById(medicineModifyLogDTO);
+        medicineModifyLogService.save(medicineModifyLogDTO);
         return medicineBaseDao.updateById(medicineBaseDO);
     }
 
@@ -103,9 +106,12 @@ public class MedicineBaseServiceImpl implements MedicineBaseService {
     }
 
     @Override
-    public List<MedicineBaseDTO> queryList(MedicineBaseDTO medicineBaseDTO) {
+    public List<MedicineBaseDTO> queryList(MedicineBaseDTO medicineBaseDTO, Integer pageNum, Integer pageSize) {
         if (null == medicineBaseDTO) {
             return null;
+        }
+        if (null != pageNum && null != pageSize) {
+            PageHelper.startPage(pageNum, pageSize);
         }
         MedicineBaseDO medicineBaseDO = new MedicineBaseDO();
         BeanUtils.copyProperties(medicineBaseDTO, medicineBaseDO);

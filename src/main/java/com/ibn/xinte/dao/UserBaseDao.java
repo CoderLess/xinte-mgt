@@ -20,4 +20,11 @@ public interface UserBaseDao extends BaseDao<UserBaseDO> {
      * @createTime：2021/1/3 17:46
      */
     List<UserBaseDO> queryListByDTO(UserBaseDTO userBaseDTO);
+
+    /**
+     * @description: 根据条件查询总数
+     * @author：RenBin
+     * @createTime：2021/1/5 19:11
+     */
+    Integer total(UserBaseDTO userBaseDTO);
 }

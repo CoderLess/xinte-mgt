@@ -15,42 +15,42 @@ import java.util.List;
 public interface PrescriptionMedicineService {
 
     /**
-     * @description: 保存用户信息
+     * @description: 保存药方-药品信息
      * @author：RenBin
      * @createTime：2020年12月28日
      */
     Long save(PrescriptionMedicineDTO prescriptionMedicineDTO);
 
     /**
-     * @description: 批量保存用户信息
+     * @description: 批量保存药方-药品信息
      * @author：RenBin
      * @createTime：2020年12月28日
      */
     Long saveBatch(List<PrescriptionMedicineDTO> prescriptionMedicineDTOList);
 
     /**
-     * @description: 更新用户信息
+     * @description: 更新药方-药品信息
      * @author：RenBin
      * @createTime：2020年12月28日
      */
     Integer updateById(PrescriptionMedicineDTO prescriptionMedicineDTO);
 
     /**
-     * @description: 根据Id删除用户信息
+     * @description: 根据Id删除药方-药品信息
      * @author：RenBin
      * @createTime：2020年12月28日
      */
     Integer deleteById(Long id);
 
     /**
-     * @description: 通过id查询用户信息
+     * @description: 通过id查询药方-药品信息
      * @author：RenBin
      * @createTime：2020年12月28日
      */
     PrescriptionMedicineDTO queryById(Long id);
 
     /**
-     * @description: 通过条件查询用户信息
+     * @description: 通过条件查询药方-药品信息
      * @author：RenBin
      * @createTime：2020年12月28日
      */

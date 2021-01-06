@@ -15,42 +15,42 @@ import java.util.List;
 public interface RoleBaseService {
 
     /**
-     * @description: 保存用户信息
+     * @description: 保存角色信息
      * @author：RenBin
      * @createTime：2020年12月28日
      */
     Long save(RoleBaseDTO roleBaseDTO);
 
     /**
-     * @description: 批量保存用户信息
+     * @description: 批量保存角色信息
      * @author：RenBin
      * @createTime：2020年12月28日
      */
     Long saveBatch(List<RoleBaseDTO> roleBaseDTOList);
 
     /**
-     * @description: 更新用户信息
+     * @description: 更新角色信息
      * @author：RenBin
      * @createTime：2020年12月28日
      */
     Integer updateById(RoleBaseDTO roleBaseDTO);
 
     /**
-     * @description: 根据Id删除用户信息
+     * @description: 根据Id删除角色信息
      * @author：RenBin
      * @createTime：2020年12月28日
      */
     Integer deleteById(Long id);
 
     /**
-     * @description: 通过id查询用户信息
+     * @description: 通过id查询角色信息
      * @author：RenBin
      * @createTime：2020年12月28日
      */
     RoleBaseDTO queryById(Long id);
 
     /**
-     * @description: 通过条件查询用户信息
+     * @description: 通过条件查询角色信息
      * @author：RenBin
      * @createTime：2020年12月28日
      */

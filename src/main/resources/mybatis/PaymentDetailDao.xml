@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.ibn.xinte.dao.PaymentDetailDao">
+    <sql id="PaymentDetailDO_Columns">
+        <trim suffixOverrides=",">
+            <if test="amount != null">amount,</if>
+            <if test="id != null">id,</if>
+            <if test="method != null">method,</if>
+            <if test="paymentId != null">payment_id,</if>
+        </trim>
+    </sql>
+
+    <sql id="PaymentDetailDO_Values">
+        <trim suffixOverrides=",">
+            <if test="amount != null">#{ amount },</if>
+            <if test="id != null">#{ id },</if>
+            <if test="method != null">#{ method },</if>
+            <if test="paymentId != null">#{ paymentId },</if>
+        </trim>
+    </sql>
+
+    <sql id="baseColumn">
+        `amount`
+        ,
+												`id`,
+												`method`,
+												`payment_id`
+    </sql>
+
+    <insert id="save" useGeneratedKeys="true" keyProperty="id">
+        insert into payment_detail (<include refid="PaymentDetailDO_Columns"/>)
+        values(<include refid="PaymentDetailDO_Values"/>)
+    </insert>
+
+    <insert id="saveBatch" parameterType="java.util.List">
+        insert into payment_detail (<include refid="baseColumn"/>)
+        values
+        <foreach collection="list" index="index" item="item" separator=",">
+            (
+            #{ item.amount },
+            #{ item.id },
+            #{ item.method },
+            #{ item.paymentId }
+            )
+        </foreach>
+    </insert>
+    <update id="updateById">
+        update payment_detail
+        <set>
+            <if test="amount != null">`amount` = #{amount},</if>
+            <if test="id != null">`id` = #{id},</if>
+            <if test="method != null">`method` = #{method},</if>
+            <if test="paymentId != null">`payment_id` = #{paymentId},</if>
+        </set>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteById">
+        delete
+        from payment_detail
+        where id = #{id}
+    </delete>
+
+    <select id="queryById" resultType="com.ibn.xinte.entity.PaymentDetailDO">
+        select
+        <include refid="baseColumn"/>
+        from payment_detail where id = #{id}
+    </select>
+
+    <sql id="queryColumn">
+        <where>
+            <if test="amount != null">
+                and amount = #{amount}
+            </if>
+            <if test="id != null">
+                and id = #{id}
+            </if>
+            <if test="method != null">
+                and method = #{method}
+            </if>
+            <if test="paymentId != null">
+                and payment_id = #{paymentId}
+            </if>
+        </where>
+    </sql>
+
+    <select id="queryList" resultType="com.ibn.xinte.entity.PaymentDetailDO">
+        select
+        <include refid="baseColumn"/>
+        from payment_detail
+        <include refid="queryColumn"/>
+    </select>
+</mapper>

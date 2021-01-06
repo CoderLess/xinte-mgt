@@ -63,4 +63,10 @@ public class PrescriptionBaseDO {
      * @createTime：2020年12月28日
      */
     private Long createTime;
-    }
+    /**
+     * @description: 类型 0：诊断药单 1：临时药单
+     * @author：RenBin
+     * @createTime：2021/1/6 21:19
+     */
+    private Integer type;
+}

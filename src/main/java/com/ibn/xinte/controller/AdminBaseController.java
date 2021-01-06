@@ -1,14 +1,20 @@
 package com.ibn.xinte.controller;
 
+import com.alibaba.fastjson.JSONObject;
+import com.google.common.collect.Lists;
 import com.ibn.xinte.common.ResultInfo;
 import com.ibn.xinte.domain.AdminBaseDTO;
+import com.ibn.xinte.domain.LoginLogDTO;
 import com.ibn.xinte.exception.IbnException;
 import com.ibn.xinte.service.AdminBaseService;
+import com.ibn.xinte.service.LoginLogService;
 import com.ibn.xinte.util.BeanUtils;
 import com.ibn.xinte.util.JWTUtils;
 import com.ibn.xinte.util.MD5Utils;
 import com.ibn.xinte.util.RequestUtils;
 import com.ibn.xinte.vo.AdminBaseVO;
+import com.ibn.xinte.vo.AdminNameQueryVO;
+import com.ibn.xinte.vo.AdminNameVO;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.slf4j.Logger;
@@ -38,9 +44,13 @@ public class AdminBaseController {
 
     @Autowired
     private AdminBaseService adminBaseService;
+    @Autowired
+    private LoginLogService logService;
 
+    @ApiOperation("管理员注册")
     @PostMapping("register")
-    public ResultInfo register(@RequestBody AdminBaseVO adminBaseVO) {
+    public ResultInfo register(@RequestBody AdminBaseVO adminBaseVO,HttpServletRequest request) {
+        Long userId = RequestUtils.getUserId(request);
         if (null == adminBaseVO) {
             return new ResultInfo().error("参数不能为空");
         }
@@ -58,11 +68,13 @@ public class AdminBaseController {
         adminBaseDTO.setId(null);
         adminBaseDTO.setCreateTime(System.currentTimeMillis());
         adminBaseDTO.setLastAccess(System.currentTimeMillis());
+        adminBaseDTO.setCreatorId(userId);
         Long id = adminBaseService.save(adminBaseDTO);
         return new ResultInfo().success(id);
     }
+    @ApiOperation("管理员登录")
     @PostMapping("login")
-    public ResultInfo login(@RequestBody AdminBaseVO adminBaseVO) {
+    public ResultInfo login(@RequestBody AdminBaseVO adminBaseVO,HttpServletRequest request) {
         if (null == adminBaseVO) {
             return new ResultInfo().error("参数不能为空");
         }
@@ -82,10 +94,18 @@ public class AdminBaseController {
         if (CollectionUtils.isEmpty(adminBaseDTOList)) {
             return new ResultInfo().error("手机号或密码错误");
         }
+        // 获取用户id
         Long id = adminBaseDTOList.get(0).getId();
+        // 记录登录日志
+        LoginLogDTO loginLogDTO = new LoginLogDTO();
+        loginLogDTO.setAdminId(id);
+        loginLogDTO.setLoginTime(System.currentTimeMillis());
+        loginLogDTO.setIp(RequestUtils.getIPAddress(request));
+        logService.save(loginLogDTO);
         return new ResultInfo().success(JWTUtils.generateToken(id));
     }
 
+    @ApiOperation("根据id更新管理员信息")
     @PostMapping("updateById")
     public ResultInfo updateById(@RequestBody AdminBaseVO adminBaseVO) {
         if (null == adminBaseVO) {
@@ -117,6 +137,7 @@ public class AdminBaseController {
         return new ResultInfo().success(adminBaseDTO);
     }
 
+    @ApiOperation("根据id查询管理员信息")
     @GetMapping("queryById")
     public ResultInfo queryById(Long id) {
         if (null == id) {
@@ -126,6 +147,7 @@ public class AdminBaseController {
         return new ResultInfo().success(adminBaseDTO);
     }
 
+    @ApiOperation("根据条件查询管理员信息")
     @GetMapping("queryList")
     public ResultInfo queryList(@ModelAttribute AdminBaseVO adminBaseVO) {
         if (null == adminBaseVO) {
@@ -135,6 +157,30 @@ public class AdminBaseController {
         BeanUtils.copyProperties(adminBaseVO, adminBaseDTO);
         List<AdminBaseDTO> adminBaseDTOList = adminBaseService.queryList(adminBaseDTO, adminBaseVO.getPageNum(), adminBaseVO.getPageSize());
         return new ResultInfo().success(adminBaseDTOList);
+    }
+
+    @ApiOperation("根据名字模糊查询管理员信息")
+    @GetMapping("queryByName")
+    public ResultInfo queryByName(@ModelAttribute AdminNameQueryVO adminNameQueryVO) {
+        if (null == adminNameQueryVO) {
+            return new ResultInfo().error("参数不能为空");
+        }
+        AdminBaseDTO adminBaseDTO = new AdminBaseDTO();
+        BeanUtils.copyProperties(adminNameQueryVO, adminBaseDTO);
+        List<AdminBaseDTO> adminBaseDTOList = adminBaseService.queryList(adminBaseDTO, adminNameQueryVO.getPageNum(), adminNameQueryVO.getPageSize());
+        if (CollectionUtils.isEmpty(adminBaseDTOList)) {
+            return new ResultInfo().success(Lists.newArrayList());
+        }
+        List<AdminNameVO> adminNameVOList;
+        try {
+            adminNameVOList = BeanUtils.convertList(adminBaseDTOList, AdminNameVO.class);
+        } catch (Exception e) {
+            String msg = String.format("AdminBaseController.queryByName方法list转换失败：%s",
+                    JSONObject.toJSONString(adminBaseDTOList));
+            logger.error(msg, e);
+            return new ResultInfo().error("查询医师信息异常");
+        }
+        return new ResultInfo().success(adminNameVOList);
     }
 
 }
