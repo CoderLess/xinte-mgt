@@ -1,5 +1,6 @@
 package com.ibn.xinte.service;
 
+import com.github.pagehelper.PageInfo;
 import com.ibn.xinte.domain.RoleBaseDTO;
 
 import java.util.List;
@@ -55,4 +56,10 @@ public interface RoleBaseService {
      * @createTime：2020年12月28日
      */
     List<RoleBaseDTO> queryList(RoleBaseDTO roleBaseDTO);
+    /**
+     * @description: 通过条件查询管理员信息
+     * @author：RenBin
+     * @createTime：2020年12月28日
+     */
+    PageInfo<RoleBaseDTO> queryPageInfo(RoleBaseDTO roleBaseDTO, Integer pageNum, Integer pageSize);
 }

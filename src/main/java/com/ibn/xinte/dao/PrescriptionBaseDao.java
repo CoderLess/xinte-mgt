@@ -1,5 +1,6 @@
 package com.ibn.xinte.dao;
 
+import com.github.pagehelper.Page;
 import com.ibn.xinte.domain.PrescriptionBaseDTO;
 import com.ibn.xinte.entity.PrescriptionBaseDO;
 
@@ -21,4 +22,10 @@ public interface PrescriptionBaseDao extends BaseDao<PrescriptionBaseDO> {
      * @createTime：2021/1/4 20:21
      */
     List<PrescriptionBaseDO> queryListByDTO(PrescriptionBaseDTO prescriptionBaseDTO);
+    /**
+     * @description: 根据条件查询dto
+     * @author：RenBin
+     * @createTime：2021/1/9 12:38
+     */
+    Page<PrescriptionBaseDTO> queryListInfo(PrescriptionBaseDTO prescriptionBaseDTO);
 }

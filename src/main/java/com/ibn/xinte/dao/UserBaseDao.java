@@ -1,5 +1,6 @@
 package com.ibn.xinte.dao;
 
+import com.github.pagehelper.Page;
 import com.ibn.xinte.domain.UserBaseDTO;
 import com.ibn.xinte.entity.UserBaseDO;
 
@@ -19,7 +20,7 @@ public interface UserBaseDao extends BaseDao<UserBaseDO> {
      * @author：RenBin
      * @createTime：2021/1/3 17:46
      */
-    List<UserBaseDO> queryListByDTO(UserBaseDTO userBaseDTO);
+    Page<UserBaseDO> queryListByDTO(UserBaseDTO userBaseDTO);
 
     /**
      * @description: 根据条件查询总数

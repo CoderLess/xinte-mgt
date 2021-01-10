@@ -1,5 +1,7 @@
 package com.ibn.xinte.service;
 
+import com.github.pagehelper.Page;
+import com.github.pagehelper.PageInfo;
 import com.ibn.xinte.domain.AdminBaseDTO;
 
 import java.util.List;
@@ -57,9 +59,9 @@ public interface AdminBaseService {
     List<AdminBaseDTO> queryList(AdminBaseDTO adminBaseDTO);
 
     /**
-     * @description: 通过条件查询管理员信息
+     * @description: 通过条件分页查询管理员信息
      * @author：RenBin
      * @createTime：2020年12月28日
      */
-    List<AdminBaseDTO> queryList(AdminBaseDTO adminBaseDTO, Integer pageNum, Integer pageSize);
+    PageInfo<AdminBaseDTO> queryPageInfo(AdminBaseDTO adminBaseDTO, Integer pageNum, Integer pageSize);
 }

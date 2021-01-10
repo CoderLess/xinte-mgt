@@ -12,6 +12,7 @@
             <if test="disable != null">disable,</if>
             <if test="createTime != null">create_time,</if>
             <if test="adminId != null">admin_id,</if>
+            <if test="level != null">level,</if>
         </trim>
     </sql>
 
@@ -25,6 +26,7 @@
             <if test="disable != null">#{ disable },</if>
             <if test="createTime != null">#{ createTime },</if>
             <if test="adminId != null">#{ adminId },</if>
+            <if test="level != null">#{level},</if>
         </trim>
     </sql>
 
@@ -36,7 +38,8 @@
 		`birthday`,
 		`disable`,
 		`create_time`,
-		`admin_id`
+		`admin_id`,
+		`level`
 	</sql>
 
     <insert id="save" useGeneratedKeys="true" keyProperty="id">
@@ -57,6 +60,7 @@
             #{ item.disable },
             #{ item.createTime },
             #{ item.adminId }
+            #{ item.level }
             )
         </foreach>
     </insert>
@@ -71,6 +75,7 @@
             <if test="disable != null">`disable` = #{disable},</if>
             <if test="createTime != null">`create_time` = #{createTime},</if>
             <if test="adminId != null">`admin_id` = #{adminId},</if>
+            <if test="level != null">`level` = #{level},</if>
         </set>
         where id = #{id}
     </update>
@@ -111,6 +116,9 @@
             <if test="adminId != null">
                 and admin_id = #{adminId}
             </if>
+            <if test="level != null">
+                and level = #{level}
+            </if>
         </where>
     </sql>
 
@@ -146,6 +154,9 @@
             <if test="adminId != null">
                 and admin_id = #{adminId}
             </if>
+            <if test="level != null">
+                and level = #{level}
+            </if>
         </where>
     </sql>
 
@@ -154,12 +165,14 @@
         <include refid="baseColumn"/>
         from user_base
         <include refid="queryColumn"/>
+        order by id desc
     </select>
     <select id="queryListByDTO" resultType="com.ibn.xinte.entity.UserBaseDO" parameterType="com.ibn.xinte.domain.UserBaseDTO">
         select
         <include refid="baseColumn"/>
         from user_base
         <include refid="queryColumnDTO"/>
+        order by id desc
     </select>
     <select id="total" resultType="java.lang.Integer">
         select

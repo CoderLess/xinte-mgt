@@ -97,6 +97,7 @@
         <include refid="baseColumn"/>
         from payment_base
         <include refid="queryColumn"/>
+        order by id desc
     </select>
 
     <sql id="queryColumnDTO">

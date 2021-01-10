@@ -1,11 +1,11 @@
 package com.ibn.xinte;
 
-import com.ibn.xinte.util.JWTUtils;
+import com.ibn.xinte.config.security.util.JWTUtils;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class DemoApplicationTests {
+class XinteApplicationTests {
 
     @Test
     void contextLoads() {

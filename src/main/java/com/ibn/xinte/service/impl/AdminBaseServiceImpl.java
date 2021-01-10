@@ -1,7 +1,9 @@
 package com.ibn.xinte.service.impl;
 
 import com.alibaba.fastjson.JSONObject;
+import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import com.google.common.collect.Lists;
 import com.ibn.xinte.dao.AdminBaseDao;
 import com.ibn.xinte.domain.AdminBaseDTO;
@@ -94,36 +96,42 @@ public class AdminBaseServiceImpl implements AdminBaseService {
     }
 
     @Override
-    public List<AdminBaseDTO> queryList(AdminBaseDTO adminBaseDTO, Integer pageNum, Integer pageSize) {
+    public PageInfo<AdminBaseDTO> queryPageInfo(AdminBaseDTO adminBaseDTO, Integer pageNum, Integer pageSize) {
         if (null == adminBaseDTO) {
             return null;
         }
         AdminBaseDO adminBaseDO = new AdminBaseDO();
         BeanUtils.copyProperties(adminBaseDTO, adminBaseDO);
         if (null != pageNum && null != pageSize) {
-            PageHelper.startPage(adminBaseDTO.getPageNum(), adminBaseDTO.getPageSize());
+            PageHelper.startPage(pageNum, pageSize);
         }
-        List<AdminBaseDO> adminBaseDOList = adminBaseDao.queryList(adminBaseDO);
-        if (CollectionUtils.isEmpty(adminBaseDOList)) {
-            return Lists.newArrayList();
+        Page<AdminBaseDO> adminBaseDOPage = adminBaseDao.queryList(adminBaseDO);
+        PageInfo<AdminBaseDTO> adminBaseDTOPageInfo=new PageInfo<>();
+        if (CollectionUtils.isEmpty(adminBaseDOPage)) {
+            adminBaseDTOPageInfo.setTotal(0);
+            return adminBaseDTOPageInfo;
         }
         List<AdminBaseDTO> adminBaseDTOList;
         try {
-            adminBaseDTOList=BeanUtils.convertList(adminBaseDOList, AdminBaseDTO.class);
+            adminBaseDTOList=BeanUtils.convertList(adminBaseDOPage, AdminBaseDTO.class);
         } catch (Exception e) {
-            String msg = String.format("AdminBaseServiceImpl.queryList方法list转换失败：%s",
-                    JSONObject.toJSONString(adminBaseDOList));
+            String msg = String.format("AdminBaseServiceImpl.queryPageInfo方法list转换失败：%s",
+                    JSONObject.toJSONString(adminBaseDOPage));
             logger.error(msg, e);
-            return Lists.newArrayList();
+            adminBaseDTOPageInfo.setTotal(0);
+            return adminBaseDTOPageInfo;
         }
-        for (AdminBaseDO curAdminBaseDO : adminBaseDOList) {
-            curAdminBaseDO.setPassword("");
-        }
-        return adminBaseDTOList;
+        adminBaseDTOPageInfo.setList(adminBaseDTOList);
+        adminBaseDTOPageInfo.setTotal(adminBaseDOPage.getTotal());
+        return adminBaseDTOPageInfo;
     }
 
     @Override
     public List<AdminBaseDTO> queryList(AdminBaseDTO adminBaseDTO) {
-        return this.queryList(adminBaseDTO, null, null);
+        PageInfo<AdminBaseDTO> adminBaseDTOPageInfo = this.queryPageInfo(adminBaseDTO, null, null);
+        if (null == adminBaseDTOPageInfo) {
+            return Lists.newArrayList();
+        }
+        return adminBaseDTOPageInfo.getList();
     }
 }

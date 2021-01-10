@@ -1,5 +1,6 @@
 package com.ibn.xinte.service;
 
+import com.github.pagehelper.PageInfo;
 import com.ibn.xinte.domain.PayStatisticDTO;
 import com.ibn.xinte.domain.PaymentBaseDTO;
 
@@ -8,8 +9,8 @@ import java.util.List;
 /**
  * @version 1.0
  * @description:
- * @projectName：demo
- * @see: com.ibn.demo.service
+ * @projectName：xinte
+ * @see: com.ibn.xinte.service
  * @author： RenBin
  * @createTime：2021年1月5日
  */
@@ -63,4 +64,11 @@ public interface PaymentBaseService {
      * @createTime：2021/1/5 19:53
      */
     PayStatisticDTO queryPayStatistic(PaymentBaseDTO paymentBaseDTO);
+    /**
+     * @description: 通过条件查询管理员信息
+     * @author：RenBin
+     * @createTime：2020年12月28日
+     * @return
+     */
+    PageInfo<PaymentBaseDTO> queryPageInfo(PaymentBaseDTO paymentBaseDTO, Integer pageNum, Integer pageSize);
 }

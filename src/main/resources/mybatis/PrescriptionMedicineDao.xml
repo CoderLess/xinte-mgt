@@ -119,5 +119,6 @@
         <include refid="baseColumn"/>
         from prescription_medicine
         <include refid="queryColumn"/>
+        order by id desc
     </select>
 </mapper>

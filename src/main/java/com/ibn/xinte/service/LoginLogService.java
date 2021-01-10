@@ -1,5 +1,6 @@
 package com.ibn.xinte.service;
 
+import com.github.pagehelper.PageInfo;
 import com.ibn.xinte.domain.LoginLogDTO;
 
 import java.util.List;
@@ -55,4 +56,10 @@ public interface LoginLogService {
      * @createTime：2020年12月28日
      */
     List<LoginLogDTO> queryList(LoginLogDTO loginLogDTO);
+    /**
+     * @description: 通过条件分页查询管理员信息
+     * @author：RenBin
+     * @createTime：2020年12月28日
+     */
+    PageInfo<LoginLogDTO> queryPageInfo(LoginLogDTO loginLogDTO, Integer pageNum, Integer pageSize);
 }

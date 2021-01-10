@@ -1,5 +1,6 @@
 package com.ibn.xinte.controller;
 
+import com.github.pagehelper.PageInfo;
 import com.ibn.xinte.common.ResultInfo;
 import com.ibn.xinte.domain.PaymentBaseDTO;
 import com.ibn.xinte.enumeration.PrescriptionBaseTypeEnum;
@@ -20,8 +21,8 @@ import java.util.List;
 /**
  * @version 1.0
  * @description:
- * @projectName：demo
- * @see: com.ibn.demo.controller
+ * @projectName：xinte
+ * @see: com.ibn.xinte.controller
  * @author： RenBin
  * @createTime：2021年1月5日
  */
@@ -92,8 +93,8 @@ public class PaymentBaseController {
         }
         PaymentBaseDTO paymentBaseDTO = new PaymentBaseDTO();
         BeanUtils.copyProperties(paymentBaseVO, paymentBaseDTO);
-        List<PaymentBaseDTO> paymentBaseDTOList = paymentBaseService.queryList(paymentBaseDTO);
-        return new ResultInfo().success(paymentBaseDTOList);
+        PageInfo<PaymentBaseDTO> paymentBaseDTOPageInfo = paymentBaseService.queryPageInfo(paymentBaseDTO, paymentBaseVO.getPageNum(), paymentBaseVO.getPageSize());
+        return new ResultInfo().success(paymentBaseDTOPageInfo);
     }
 
     @ApiOperation("药方类型枚举")

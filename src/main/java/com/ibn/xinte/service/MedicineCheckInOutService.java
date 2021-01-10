@@ -1,5 +1,7 @@
 package com.ibn.xinte.service;
 
+import com.github.pagehelper.PageInfo;
+import com.ibn.xinte.domain.AdminBaseDTO;
 import com.ibn.xinte.domain.MedicineCheckInOutDTO;
 
 import java.util.List;
@@ -55,4 +57,10 @@ public interface MedicineCheckInOutService {
      * @createTime：2020年12月28日
      */
     List<MedicineCheckInOutDTO> queryList(MedicineCheckInOutDTO medicineCheckInOutDTO);
+    /**
+     * @description: 通过条件查询管理员信息
+     * @author：RenBin
+     * @createTime：2020年12月28日
+     */
+    PageInfo<MedicineCheckInOutDTO> queryPageInfo(MedicineCheckInOutDTO medicineCheckInOutDTO, Integer pageNum, Integer pageSize);
 }

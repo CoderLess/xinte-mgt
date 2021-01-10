@@ -8,10 +8,10 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
 @SpringBootApplication
 @MapperScan({"com.ibn.xinte.dao"})
 @EnableSwagger2
-public class DemoApplication {
+public class XinteApplication {
 
     public static void main(String[] args) {
-        SpringApplication.run(DemoApplication.class, args);
+        SpringApplication.run(XinteApplication.class, args);
         System.out.println("http://localhost:8080/swagger-ui.html");
         System.out.println("http://localhost:8080/doc.html");
     }

@@ -1,6 +1,7 @@
 package com.ibn.xinte.controller;
 
 import com.alibaba.fastjson.JSONObject;
+import com.github.pagehelper.PageInfo;
 import com.ibn.xinte.common.ResultInfo;
 import com.ibn.xinte.domain.AuthorityBaseDTO;
 import com.ibn.xinte.service.AuthorityBaseService;
@@ -94,8 +95,8 @@ public class AuthorityBaseController {
         }
         AuthorityBaseDTO authorityBaseDTO = new AuthorityBaseDTO();
         BeanUtils.copyProperties(authorityBaseVO, authorityBaseDTO);
-        List<AuthorityBaseDTO> authorityBaseDTOList = authorityBaseService.queryList(authorityBaseDTO);
-        return new ResultInfo().success(authorityBaseDTOList);
+        PageInfo<AuthorityBaseDTO> authorityBaseDTOPageInfo = authorityBaseService.queryPageInfo(authorityBaseDTO, authorityBaseVO.getPageNum(), authorityBaseVO.getPageSize());
+        return new ResultInfo().success(authorityBaseDTOPageInfo);
     }
 
 }

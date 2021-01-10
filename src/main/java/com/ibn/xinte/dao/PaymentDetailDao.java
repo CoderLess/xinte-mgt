@@ -5,8 +5,8 @@ import com.ibn.xinte.entity.PaymentDetailDO;
 /**
  * @version 1.0
  * @description:
- * @projectName：demo
- * @see: com.ibn.demo.dao
+ * @projectName：xinte
+ * @see: com.ibn.xinte.dao
  * @author： RenBin
  * @createTime：2021年1月5日
  */

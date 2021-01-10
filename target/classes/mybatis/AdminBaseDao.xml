@@ -13,6 +13,7 @@
             <if test="creatorId != null">creator_id,</if>
             <if test="lastAccess != null">last_access,</if>
             <if test="name != null">name,</if>
+            <if test="name != null">commission,</if>
         </trim>
     </sql>
 
@@ -27,11 +28,13 @@
             <if test="creatorId != null">#{ creatorId },</if>
             <if test="lastAccess != null">#{ lastAccess },</if>
             <if test="name != null">#{ name },</if>
+            <if test="commission != null">#{commission},</if>
         </trim>
     </sql>
 
     <sql id="baseColumn">
-		`id`,
+        `id`
+        ,
 		`mobile`,
 		`password`,
 		`role_id`,
@@ -39,8 +42,9 @@
 		`create_time`,
 		`creator_id`,
 		`last_access`,
-		`name`
-	</sql>
+		`name`,
+		`commission`
+    </sql>
 
     <insert id="save" useGeneratedKeys="true" keyProperty="id">
         insert into admin_base (<include refid="AdminBaseDO_Columns"/>)
@@ -60,7 +64,8 @@
             #{ item.createTime },
             #{ item.creatorId },
             #{ item.lastAccess },
-            #{ item.name }
+            #{ item.name },
+            #{ item.commission },
             )
         </foreach>
     </insert>
@@ -76,13 +81,16 @@
             <if test="creatorId != null">`creator_id` = #{creatorId},</if>
             <if test="lastAccess != null">`last_access` = #{lastAccess},</if>
             <if test="name != null">`name` = #{name},</if>
+            <if test="commission != null">`commission` = #{commission},</if>
         </set>
         where id = #{id}
     </update>
 
     <delete id="deleteById">
-		delete from admin_base where id = #{id}
-	</delete>
+        delete
+        from admin_base
+        where id = #{id}
+    </delete>
 
     <select id="queryById" resultType="com.ibn.xinte.entity.AdminBaseDO">
         select
@@ -117,13 +125,17 @@
             <if test="name != null">
                 and name like concat('%',#{name},'%')
             </if>
+            <if test="commission != null">
+                and commission = #{commission}
+            </if>
         </where>
     </sql>
 
     <select id="queryList" resultType="com.ibn.xinte.entity.AdminBaseDO">
         select
-        <include refid="baseColumn"/>
+        `id`,`name`,`mobile`,`role_id`,`disable`,`create_time`,`creator_id`,`last_access`,`commission`
         from admin_base
         <include refid="queryColumn"/>
+        order by id desc
     </select>
 </mapper>

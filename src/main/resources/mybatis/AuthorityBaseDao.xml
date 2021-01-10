@@ -6,7 +6,7 @@
         <trim suffixOverrides=",">
             <if test="id != null">id,</if>
             <if test="name != null">name,</if>
-            <if test="interface != null">interface,</if>
+            <if test="url != null">url,</if>
         </trim>
     </sql>
 
@@ -14,14 +14,14 @@
         <trim suffixOverrides=",">
             <if test="id != null">#{ id },</if>
             <if test="name != null">#{ name },</if>
-            <if test="interface != null">#{ interface },</if>
+            <if test="url != null">#{ url },</if>
         </trim>
     </sql>
 
     <sql id="baseColumn">
 		`id`,
 		`name`,
-		`interface`
+		`url`
 	</sql>
 
     <insert id="save" useGeneratedKeys="true" keyProperty="id">
@@ -36,7 +36,7 @@
             (
             #{ item.id },
             #{ item.name },
-            #{ item.interface }
+            #{ item.url }
             )
         </foreach>
     </insert>
@@ -45,7 +45,7 @@
         <set>
             <if test="id != null">`id` = #{id},</if>
             <if test="name != null">`name` = #{name},</if>
-            <if test="interface != null">`interface` = #{interface},</if>
+            <if test="url != null">`url` = #{url},</if>
         </set>
         where id = #{id}
     </update>
@@ -68,8 +68,8 @@
             <if test="name != null">
                 and name = #{name}
             </if>
-            <if test="interface != null">
-                and interface = #{interface}
+            <if test="url != null">
+                and url = #{url}
             </if>
         </where>
     </sql>
@@ -79,5 +79,6 @@
         <include refid="baseColumn"/>
         from authority_base
         <include refid="queryColumn"/>
+        order by id desc
     </select>
 </mapper>

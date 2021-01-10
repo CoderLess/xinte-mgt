@@ -1,4 +1,4 @@
-package com.ibn.xinte.util;
+package com.ibn.xinte.config.security.util;
 
 import com.ibn.xinte.constant.TokenConstants;
 import io.jsonwebtoken.Claims;

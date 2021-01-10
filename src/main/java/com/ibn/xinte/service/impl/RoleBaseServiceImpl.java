@@ -1,6 +1,8 @@
 package com.ibn.xinte.service.impl;
 
 import com.alibaba.fastjson.JSONObject;
+import com.github.pagehelper.Page;
+import com.github.pagehelper.PageInfo;
 import com.google.common.collect.Lists;
 import com.ibn.xinte.dao.RoleBaseDao;
 import com.ibn.xinte.domain.RoleBaseDTO;
@@ -112,5 +114,33 @@ public class RoleBaseServiceImpl implements RoleBaseService {
             return Lists.newArrayList();
         }
         return roleBaseDTOList;
+    }
+
+    @Override
+    public PageInfo<RoleBaseDTO> queryPageInfo(RoleBaseDTO roleBaseDTO, Integer pageNum, Integer pageSize) {
+        if (null == roleBaseDTO) {
+            return null;
+        }
+        RoleBaseDO roleBaseDO = new RoleBaseDO();
+        BeanUtils.copyProperties(roleBaseDTO, roleBaseDO);
+        Page<RoleBaseDO> roleBaseDOPage = roleBaseDao.queryList(roleBaseDO);
+        PageInfo<RoleBaseDTO> roleBaseDTOPageInfo = new PageInfo<>();
+        if (CollectionUtils.isEmpty(roleBaseDOPage)) {
+            roleBaseDTOPageInfo.setTotal(0);
+            return roleBaseDTOPageInfo;
+        }
+        List<RoleBaseDTO> roleBaseDTOList;
+        try {
+            roleBaseDTOList=BeanUtils.convertList(roleBaseDOPage, RoleBaseDTO.class);
+        } catch (Exception e) {
+            String msg = String.format("RoleBaseServiceImpl.queryPageInfo方法list转换失败：%s",
+                    JSONObject.toJSONString(roleBaseDOPage));
+            logger.error(msg, e);
+            roleBaseDTOPageInfo.setTotal(0);
+            return roleBaseDTOPageInfo;
+        }
+        roleBaseDTOPageInfo.setList(roleBaseDTOList);
+        roleBaseDTOPageInfo.setTotal(roleBaseDOPage.getTotal());
+        return roleBaseDTOPageInfo;
     }
 }

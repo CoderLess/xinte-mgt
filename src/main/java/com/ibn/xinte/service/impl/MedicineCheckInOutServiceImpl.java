@@ -1,6 +1,9 @@
 package com.ibn.xinte.service.impl;
 
 import com.alibaba.fastjson.JSONObject;
+import com.github.pagehelper.Page;
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import com.google.common.collect.Lists;
 import com.ibn.xinte.dao.MedicineBaseDao;
 import com.ibn.xinte.dao.MedicineCheckInOutDao;
@@ -127,5 +130,36 @@ public class MedicineCheckInOutServiceImpl implements MedicineCheckInOutService 
             return Lists.newArrayList();
         }
         return medicineCheckInOutDTOList;
+    }
+
+    @Override
+    public PageInfo<MedicineCheckInOutDTO> queryPageInfo(MedicineCheckInOutDTO medicineCheckInOutDTO, Integer pageNum, Integer pageSize) {
+        if (null == medicineCheckInOutDTO) {
+            return null;
+        }
+        MedicineCheckInOutDO medicineCheckInOutDO = new MedicineCheckInOutDO();
+        BeanUtils.copyProperties(medicineCheckInOutDTO, medicineCheckInOutDO);
+        if (null != pageNum && null != pageSize) {
+            PageHelper.startPage(pageNum, pageSize);
+        }
+        Page<MedicineCheckInOutDO> medicineCheckInOutDOPage = medicineCheckInOutDao.queryList(medicineCheckInOutDO);
+        PageInfo<MedicineCheckInOutDTO> medicineCheckInOutDTOPageInfo = new PageInfo<>();
+        if (CollectionUtils.isEmpty(medicineCheckInOutDOPage)) {
+            medicineCheckInOutDTOPageInfo.setTotal(0);
+            return medicineCheckInOutDTOPageInfo;
+        }
+        List<MedicineCheckInOutDTO> medicineCheckInOutDTOList;
+        try {
+            medicineCheckInOutDTOList=BeanUtils.convertList(medicineCheckInOutDOPage, MedicineCheckInOutDTO.class);
+        } catch (Exception e) {
+            String msg = String.format("MedicineCheckInOutServiceImpl.queryPageInfo方法list转换失败：%s",
+                    JSONObject.toJSONString(medicineCheckInOutDOPage));
+            logger.error(msg, e);
+            medicineCheckInOutDTOPageInfo.setTotal(0);
+            return medicineCheckInOutDTOPageInfo;
+        }
+        medicineCheckInOutDTOPageInfo.setList(medicineCheckInOutDTOList);
+        medicineCheckInOutDTOPageInfo.setTotal(medicineCheckInOutDOPage.getTotal());
+        return medicineCheckInOutDTOPageInfo;
     }
 }

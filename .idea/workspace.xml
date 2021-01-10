@@ -5,120 +5,156 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="16057d14-c2eb-4d28-9957-2f2d6c4fc48d" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/ibn/xinte/controller/PaymentBaseController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/ibn/xinte/controller/PaymentDetailController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/ibn/xinte/dao/PaymentBaseDao.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/ibn/xinte/dao/PaymentDetailDao.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/ibn/xinte/domain/PayStatisticDTO.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/ibn/xinte/domain/PaymentBaseDTO.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/ibn/xinte/domain/PaymentDetailDTO.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/ibn/xinte/entity/PaymentBaseDO.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/ibn/xinte/entity/PaymentDetailDO.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/ibn/xinte/enumeration/PaymentDetailMethodEnum.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/ibn/xinte/enumeration/PrescriptionBaseTypeEnum.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/ibn/xinte/service/PaymentBaseService.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/ibn/xinte/service/PaymentDetailService.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/ibn/xinte/service/impl/PaymentBaseServiceImpl.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/ibn/xinte/service/impl/PaymentDetailServiceImpl.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/ibn/xinte/vo/AdminNameQueryVO.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/ibn/xinte/vo/PaymentBaseVO.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/ibn/xinte/vo/PaymentDetailVO.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/ibn/xinte/vo/StatisticsVO.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/ibn/xinte/vo/UserMobileQueryVO.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/ibn/xinte/vo/UserMobileVO.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/ibn/xinte/vo/UserNameQueryVO.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/ibn/xinte/vo/UserNameVO.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/mybatis/PaymentBaseDao.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/mybatis/PaymentDetailDao.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/ibn/xinte/config/security/SecurityConfig.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/ibn/xinte/config/security/filter/JWTAuthenticationTokenFilter.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/ibn/xinte/config/security/handler/UserAuthAccessDeniedHandler.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/ibn/xinte/config/security/handler/UserAuthenticationEntryPointHandler.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/ibn/xinte/config/security/handler/UserLoginFailureHandler.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/ibn/xinte/config/security/handler/UserLoginSuccessHandler.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/ibn/xinte/config/security/handler/UserLogoutSuccessHandler.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/ibn/xinte/config/security/provider/UserAuthenticationProvider.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/ibn/xinte/config/security/provider/UserPermissionEvaluator.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/ibn/xinte/config/security/util/ResultUtils.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/ibn/xinte/controller/FactoryBaseController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/ibn/xinte/dao/FactoryBaseDao.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/ibn/xinte/domain/FactoryBaseDTO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/ibn/xinte/entity/FactoryBaseDO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/ibn/xinte/enumeration/UserBaseLevelEnum.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/ibn/xinte/service/FactoryBaseService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/ibn/xinte/service/impl/FactoryBaseServiceImpl.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/ibn/xinte/vo/FactoryBaseVO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/mybatis/FactoryBaseDao.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/static/index.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/ibn/xinte/DemoApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/ibn/xinte/DemoApplication.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/xinte-mgt.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/xinte-mgt.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Dockerfile" beforeDir="false" afterPath="$PROJECT_DIR$/Dockerfile" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/ibn/xinte/DemoApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/ibn/xinte/XinteApplication.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/ibn/xinte/config/InterceptorCofig.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/ibn/xinte/config/InterceptorCofig.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/ibn/xinte/controller/AdminBaseController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/ibn/xinte/controller/AdminBaseController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/ibn/xinte/controller/AuthorityBaseController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/ibn/xinte/controller/AuthorityBaseController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/ibn/xinte/controller/CommonController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/ibn/xinte/controller/CommonController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/ibn/xinte/controller/LoginLogController.java" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/ibn/xinte/controller/MedicineBaseController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/ibn/xinte/controller/MedicineBaseController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/ibn/xinte/controller/MedicineCheckInOutController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/ibn/xinte/controller/MedicineCheckInOutController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/ibn/xinte/controller/MedicineModifyLogController.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/ibn/xinte/controller/MedicineStoreController.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/ibn/xinte/controller/PaymentBaseController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/ibn/xinte/controller/PaymentBaseController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/ibn/xinte/controller/PaymentDetailController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/ibn/xinte/controller/PaymentDetailController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/ibn/xinte/controller/PrescriptionBaseController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/ibn/xinte/controller/PrescriptionBaseController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/ibn/xinte/controller/PrescriptionMedicineController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/ibn/xinte/controller/PrescriptionMedicineController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/ibn/xinte/controller/RoleBaseController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/ibn/xinte/controller/RoleBaseController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/ibn/xinte/controller/UserBaseController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/ibn/xinte/controller/UserBaseController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/ibn/xinte/dao/MedicineBaseDao.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/ibn/xinte/dao/MedicineBaseDao.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/ibn/xinte/dao/MedicineStoreDao.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/ibn/xinte/dao/BaseDao.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/ibn/xinte/dao/BaseDao.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/ibn/xinte/dao/PaymentBaseDao.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/ibn/xinte/dao/PaymentBaseDao.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/ibn/xinte/dao/PaymentDetailDao.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/ibn/xinte/dao/PaymentDetailDao.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/ibn/xinte/dao/PrescriptionBaseDao.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/ibn/xinte/dao/PrescriptionBaseDao.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/ibn/xinte/dao/UserBaseDao.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/ibn/xinte/dao/UserBaseDao.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/ibn/xinte/domain/MedicineStoreDTO.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/ibn/xinte/domain/AdminBaseDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/ibn/xinte/domain/AdminBaseDTO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/ibn/xinte/domain/PaymentBaseDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/ibn/xinte/domain/PaymentBaseDTO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/ibn/xinte/domain/PaymentDetailDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/ibn/xinte/domain/PaymentDetailDTO.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/ibn/xinte/domain/PrescriptionBaseDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/ibn/xinte/domain/PrescriptionBaseDTO.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/ibn/xinte/domain/UserBaseDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/ibn/xinte/domain/UserBaseDTO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/ibn/xinte/entity/MedicineStoreDO.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/ibn/xinte/entity/PrescriptionBaseDO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/ibn/xinte/entity/PrescriptionBaseDO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/ibn/xinte/entity/AdminBaseDO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/ibn/xinte/entity/AdminBaseDO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/ibn/xinte/entity/PaymentBaseDO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/ibn/xinte/entity/PaymentBaseDO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/ibn/xinte/entity/PaymentDetailDO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/ibn/xinte/entity/PaymentDetailDO.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/ibn/xinte/entity/UserBaseDO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/ibn/xinte/entity/UserBaseDO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/ibn/xinte/enumeration/MedicineCheckInOutTypeEnum.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/ibn/xinte/enumeration/MedicineCheckInOutTypeEnum.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/ibn/xinte/enumeration/UserBaseSexEnum.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/ibn/xinte/enumeration/UserBaseSexEnum.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/ibn/xinte/enumeration/YesOrNoEnum.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/ibn/xinte/enumeration/YesOrNoEnum.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/ibn/xinte/service/AdminBaseService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/ibn/xinte/service/AdminBaseService.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/ibn/xinte/service/AuthorityBaseService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/ibn/xinte/service/AuthorityBaseService.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/ibn/xinte/service/LoginLogService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/ibn/xinte/service/LoginLogService.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/ibn/xinte/service/MedicineBaseService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/ibn/xinte/service/MedicineBaseService.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/ibn/xinte/service/MedicineCheckInOutService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/ibn/xinte/service/MedicineCheckInOutService.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/ibn/xinte/service/MedicineModifyLogService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/ibn/xinte/service/MedicineModifyLogService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/ibn/xinte/service/MedicineStoreService.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/ibn/xinte/service/PaymentBaseService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/ibn/xinte/service/PaymentBaseService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/ibn/xinte/service/PaymentDetailService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/ibn/xinte/service/PaymentDetailService.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/ibn/xinte/service/PrescriptionBaseService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/ibn/xinte/service/PrescriptionBaseService.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/ibn/xinte/service/PrescriptionMedicineService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/ibn/xinte/service/PrescriptionMedicineService.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/ibn/xinte/service/RoleBaseService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/ibn/xinte/service/RoleBaseService.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/ibn/xinte/service/UserBaseService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/ibn/xinte/service/UserBaseService.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/ibn/xinte/service/impl/AdminBaseServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/ibn/xinte/service/impl/AdminBaseServiceImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/ibn/xinte/service/impl/AuthorityBaseServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/ibn/xinte/service/impl/AuthorityBaseServiceImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/ibn/xinte/service/impl/LoginLogServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/ibn/xinte/service/impl/LoginLogServiceImpl.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/ibn/xinte/service/impl/MedicineBaseServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/ibn/xinte/service/impl/MedicineBaseServiceImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/ibn/xinte/service/impl/MedicineStoreServiceImpl.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/ibn/xinte/service/impl/MedicineCheckInOutServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/ibn/xinte/service/impl/MedicineCheckInOutServiceImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/ibn/xinte/service/impl/MedicineModifyLogServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/ibn/xinte/service/impl/MedicineModifyLogServiceImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/ibn/xinte/service/impl/PaymentBaseServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/ibn/xinte/service/impl/PaymentBaseServiceImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/ibn/xinte/service/impl/PaymentDetailServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/ibn/xinte/service/impl/PaymentDetailServiceImpl.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/ibn/xinte/service/impl/PrescriptionBaseServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/ibn/xinte/service/impl/PrescriptionBaseServiceImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/ibn/xinte/service/impl/PrescriptionMedicineServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/ibn/xinte/service/impl/PrescriptionMedicineServiceImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/ibn/xinte/service/impl/RoleBaseServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/ibn/xinte/service/impl/RoleBaseServiceImpl.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/ibn/xinte/service/impl/UserBaseServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/ibn/xinte/service/impl/UserBaseServiceImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/ibn/xinte/util/JWTUtils.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/ibn/xinte/config/security/util/JWTUtils.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/ibn/xinte/util/PinYinUtils.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/ibn/xinte/util/PinYinUtils.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/ibn/xinte/util/RequestUtils.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/ibn/xinte/util/RequestUtils.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/ibn/xinte/vo/MedicineStoreVO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/ibn/xinte/vo/AdminNameVO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/ibn/xinte/vo/AdminBaseVO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/ibn/xinte/vo/AdminBaseVO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/ibn/xinte/vo/PaymentBaseVO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/ibn/xinte/vo/PaymentBaseVO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/ibn/xinte/vo/PaymentDetailVO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/ibn/xinte/vo/PaymentDetailVO.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/ibn/xinte/vo/PrescriptionBaseVO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/ibn/xinte/vo/PrescriptionBaseVO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/ibn/xinte/vo/UserBaseVO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/ibn/xinte/vo/UserBaseVO.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/mybatis/AdminBaseDao.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/mybatis/AdminBaseDao.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/mybatis/AuthorityBaseDao.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/mybatis/AuthorityBaseDao.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/mybatis/LoginLogDao.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/mybatis/LoginLogDao.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/mybatis/MedicineBaseDao.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/mybatis/MedicineBaseDao.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/mybatis/MedicineStoreDao.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/mybatis/MedicineCheckInOutDao.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/mybatis/MedicineCheckInOutDao.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/mybatis/MedicineModifyLogDao.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/mybatis/MedicineModifyLogDao.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/mybatis/PaymentBaseDao.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/mybatis/PaymentBaseDao.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/mybatis/PaymentDetailDao.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/mybatis/PaymentDetailDao.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/mybatis/PrescriptionBaseDao.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/mybatis/PrescriptionBaseDao.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/mybatis/PrescriptionMedicineDao.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/mybatis/PrescriptionMedicineDao.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/mybatis/RoleBaseDao.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/mybatis/RoleBaseDao.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/mybatis/UserBaseDao.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/mybatis/UserBaseDao.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/ibn/xinte/DemoApplication.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/ibn/xinte/DemoApplication.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/com/ibn/xinte/DemoApplicationTests.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/com/ibn/xinte/XinteApplicationTests.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/ibn/xinte/DemoApplication.class" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/com/ibn/xinte/controller/AdminBaseController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/ibn/xinte/controller/AdminBaseController.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/ibn/xinte/controller/LoginLogController.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/ibn/xinte/controller/AuthorityBaseController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/ibn/xinte/controller/AuthorityBaseController.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/com/ibn/xinte/controller/MedicineBaseController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/ibn/xinte/controller/MedicineBaseController.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/com/ibn/xinte/controller/MedicineCheckInOutController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/ibn/xinte/controller/MedicineCheckInOutController.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/ibn/xinte/controller/MedicineModifyLogController.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/ibn/xinte/controller/MedicineStoreController.class" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/com/ibn/xinte/controller/PrescriptionBaseController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/ibn/xinte/controller/PrescriptionBaseController.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/com/ibn/xinte/controller/PrescriptionMedicineController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/ibn/xinte/controller/PrescriptionMedicineController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/ibn/xinte/controller/RoleBaseController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/ibn/xinte/controller/RoleBaseController.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/com/ibn/xinte/controller/UserBaseController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/ibn/xinte/controller/UserBaseController.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/ibn/xinte/dao/MedicineBaseDao.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/ibn/xinte/dao/MedicineBaseDao.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/ibn/xinte/dao/MedicineStoreDao.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/ibn/xinte/dao/BaseDao.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/ibn/xinte/dao/BaseDao.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/com/ibn/xinte/dao/PrescriptionBaseDao.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/ibn/xinte/dao/PrescriptionBaseDao.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/com/ibn/xinte/dao/UserBaseDao.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/ibn/xinte/dao/UserBaseDao.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/ibn/xinte/domain/MedicineStoreDTO.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/ibn/xinte/domain/AdminBaseDTO.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/ibn/xinte/domain/AdminBaseDTO.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/com/ibn/xinte/domain/PrescriptionBaseDTO.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/ibn/xinte/domain/PrescriptionBaseDTO.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/com/ibn/xinte/domain/UserBaseDTO.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/ibn/xinte/domain/UserBaseDTO.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/ibn/xinte/entity/MedicineStoreDO.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/ibn/xinte/entity/PrescriptionBaseDO.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/ibn/xinte/entity/PrescriptionBaseDO.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/ibn/xinte/entity/AdminBaseDO.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/ibn/xinte/entity/AdminBaseDO.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/ibn/xinte/entity/UserBaseDO.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/ibn/xinte/entity/UserBaseDO.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/ibn/xinte/service/AdminBaseService.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/ibn/xinte/service/AdminBaseService.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/ibn/xinte/service/AuthorityBaseService.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/ibn/xinte/service/AuthorityBaseService.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/ibn/xinte/service/LoginLogService.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/ibn/xinte/service/LoginLogService.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/com/ibn/xinte/service/MedicineBaseService.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/ibn/xinte/service/MedicineBaseService.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/ibn/xinte/service/MedicineStoreService.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/ibn/xinte/service/MedicineCheckInOutService.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/ibn/xinte/service/MedicineCheckInOutService.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/ibn/xinte/service/MedicineModifyLogService.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/ibn/xinte/service/MedicineModifyLogService.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/com/ibn/xinte/service/PrescriptionBaseService.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/ibn/xinte/service/PrescriptionBaseService.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/ibn/xinte/service/PrescriptionMedicineService.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/ibn/xinte/service/PrescriptionMedicineService.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/ibn/xinte/service/RoleBaseService.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/ibn/xinte/service/RoleBaseService.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/com/ibn/xinte/service/UserBaseService.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/ibn/xinte/service/UserBaseService.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/com/ibn/xinte/service/impl/AdminBaseServiceImpl.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/ibn/xinte/service/impl/AdminBaseServiceImpl.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/ibn/xinte/service/impl/AuthorityBaseServiceImpl.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/ibn/xinte/service/impl/AuthorityBaseServiceImpl.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/ibn/xinte/service/impl/LoginLogServiceImpl.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/ibn/xinte/service/impl/LoginLogServiceImpl.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/com/ibn/xinte/service/impl/MedicineBaseServiceImpl.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/ibn/xinte/service/impl/MedicineBaseServiceImpl.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/ibn/xinte/service/impl/MedicineStoreServiceImpl.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/ibn/xinte/service/impl/MedicineCheckInOutServiceImpl.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/ibn/xinte/service/impl/MedicineCheckInOutServiceImpl.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/ibn/xinte/service/impl/MedicineModifyLogServiceImpl.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/ibn/xinte/service/impl/MedicineModifyLogServiceImpl.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/com/ibn/xinte/service/impl/PrescriptionBaseServiceImpl.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/ibn/xinte/service/impl/PrescriptionBaseServiceImpl.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/ibn/xinte/service/impl/PrescriptionMedicineServiceImpl.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/ibn/xinte/service/impl/PrescriptionMedicineServiceImpl.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/ibn/xinte/service/impl/RoleBaseServiceImpl.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/ibn/xinte/service/impl/RoleBaseServiceImpl.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/com/ibn/xinte/service/impl/UserBaseServiceImpl.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/ibn/xinte/service/impl/UserBaseServiceImpl.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/ibn/xinte/vo/MedicineStoreVO.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/ibn/xinte/vo/AdminBaseVO.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/ibn/xinte/vo/AdminBaseVO.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/com/ibn/xinte/vo/PrescriptionBaseVO.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/ibn/xinte/vo/PrescriptionBaseVO.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/ibn/xinte/vo/UserBaseVO.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/ibn/xinte/vo/UserBaseVO.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/mybatis/AdminBaseDao.xml" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/mybatis/AdminBaseDao.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/mybatis/AuthorityBaseDao.xml" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/mybatis/AuthorityBaseDao.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/mybatis/LoginLogDao.xml" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/mybatis/LoginLogDao.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/mybatis/MedicineBaseDao.xml" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/mybatis/MedicineBaseDao.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/mybatis/MedicineStoreDao.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/mybatis/MedicineCheckInOutDao.xml" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/mybatis/MedicineCheckInOutDao.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/mybatis/MedicineModifyLogDao.xml" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/mybatis/MedicineModifyLogDao.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/mybatis/PrescriptionBaseDao.xml" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/mybatis/PrescriptionBaseDao.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/mybatis/PrescriptionMedicineDao.xml" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/mybatis/PrescriptionMedicineDao.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/mybatis/RoleBaseDao.xml" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/mybatis/RoleBaseDao.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/mybatis/UserBaseDao.xml" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/mybatis/UserBaseDao.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/compile/default-compile/inputFiles.lst" beforeDir="false" afterPath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/compile/default-compile/inputFiles.lst" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/surefire-reports/TEST-com.ibn.xinte.DemoApplicationTests.xml" beforeDir="false" afterPath="$PROJECT_DIR$/target/surefire-reports/TEST-com.ibn.xinte.DemoApplicationTests.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/surefire-reports/com.ibn.xinte.DemoApplicationTests.txt" beforeDir="false" afterPath="$PROJECT_DIR$/target/surefire-reports/com.ibn.xinte.DemoApplicationTests.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/xinte-0.0.1-SNAPSHOT.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/test-classes/com/ibn/xinte/DemoApplicationTests.class" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/target/xinte-0.0.1-SNAPSHOT.jar.original" beforeDir="false" afterPath="$PROJECT_DIR$/target/xinte-0.0.1-SNAPSHOT.jar.original" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -170,18 +206,19 @@
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="E:\mycode\java\xinte-mgt\src\main\java\com\ibn\xinte\controller" />
+      <recent name="E:\mycode\java\xinte-mgt\src\main\java\com\ibn\xinte\dao" />
       <recent name="E:\mycode\java\xinte-mgt\src\main\java\com\ibn\xinte\service\impl" />
       <recent name="E:\mycode\java\xinte-mgt\src\main\java\com\ibn\xinte\service" />
-      <recent name="E:\mycode\java\xinte-mgt\src\main\java\com\ibn\xinte\vo" />
       <recent name="E:\mycode\java\xinte-mgt\src\main\java\com\ibn\xinte\domain" />
     </key>
     <key name="CopyClassDialog.RECENTS_KEY">
       <recent name="com.ibn.xinte.enumeration" />
+      <recent name="com.ibn.xinte.util" />
       <recent name="com.ibn.xinte.vo" />
       <recent name="com.ibn.xinte.domain" />
     </key>
   </component>
-  <component name="RunManager" selected="Spring Boot.DemoApplication (1)">
+  <component name="RunManager" selected="Spring Boot.XinteApplication">
     <configuration default="true" type="ArquillianJUnit" factoryName="" nameIsGenerated="true">
       <option name="arquillianRunConfiguration">
         <value>
@@ -193,7 +230,7 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="DemoApplicationTests.contextLoads" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="XinteApplicationTests.contextLoads" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="xinte-mgt" />
       <extension name="coverage">
         <pattern>
@@ -202,22 +239,9 @@
         </pattern>
       </extension>
       <option name="PACKAGE_NAME" value="com.ibn.xinte" />
-      <option name="MAIN_CLASS_NAME" value="com.ibn.xinte.DemoApplicationTests" />
+      <option name="MAIN_CLASS_NAME" value="com.ibn.xinte.XinteApplicationTests" />
       <option name="METHOD_NAME" value="contextLoads" />
       <option name="TEST_OBJECT" value="method" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="DemoApplication (1)" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" temporary="true" nameIsGenerated="true">
-      <module name="xinte-mgt" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="com.ibn.xinte.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="SPRING_BOOT_MAIN_CLASS" value="com.ibn.xinte.DemoApplication" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -225,6 +249,19 @@
     <configuration name="DemoApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot">
       <module name="demo" />
       <option name="SPRING_BOOT_MAIN_CLASS" value="com.ibn.demo.DemoApplication" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="XinteApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" temporary="true" nameIsGenerated="true">
+      <module name="xinte-mgt" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.ibn.xinte.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="SPRING_BOOT_MAIN_CLASS" value="com.ibn.xinte.XinteApplication" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -253,14 +290,14 @@
     </configuration>
     <list>
       <item itemvalue="Docker.xinte" />
-      <item itemvalue="JUnit.DemoApplicationTests.contextLoads" />
       <item itemvalue="Spring Boot.DemoApplication" />
-      <item itemvalue="Spring Boot.DemoApplication (1)" />
+      <item itemvalue="Spring Boot.XinteApplication" />
+      <item itemvalue="JUnit.XinteApplicationTests.contextLoads" />
     </list>
     <recent_temporary>
       <list>
-        <item itemvalue="Spring Boot.DemoApplication (1)" />
-        <item itemvalue="JUnit.DemoApplicationTests.contextLoads" />
+        <item itemvalue="Spring Boot.XinteApplication" />
+        <item itemvalue="JUnit.XinteApplicationTests.contextLoads" />
       </list>
     </recent_temporary>
   </component>
@@ -284,7 +321,11 @@
       <workItem from="1609659649974" duration="20286000" />
       <workItem from="1609756842869" duration="4260000" />
       <workItem from="1609843644544" duration="11023000" />
-      <workItem from="1609935424960" duration="7708000" />
+      <workItem from="1609935424960" duration="8190000" />
+      <workItem from="1610014914525" duration="9000" />
+      <workItem from="1610104995700" duration="14771000" />
+      <workItem from="1610159665669" duration="10788000" />
+      <workItem from="1610238373335" duration="7282000" />
     </task>
     <servers />
   </component>
@@ -302,6 +343,17 @@
       </map>
     </option>
     <option name="oldMeFiltersMigrated" value="true" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/com/ibn/xinte/controller/AdminBaseController.java</url>
+          <line>97</line>
+          <option name="timeStamp" value="8" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />

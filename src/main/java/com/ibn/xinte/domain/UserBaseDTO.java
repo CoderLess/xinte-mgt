@@ -81,4 +81,10 @@ public class UserBaseDTO {
      * @createTime：2021/1/6 20:57
      */
     private String mobileLike;
+    /**
+     * @description: 会员等级
+     * @author：RenBin
+     * @createTime：2021/1/10 9:08
+     */
+    private Integer level;
 }

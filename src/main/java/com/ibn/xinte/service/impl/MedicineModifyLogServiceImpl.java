@@ -1,6 +1,9 @@
 package com.ibn.xinte.service.impl;
 
 import com.alibaba.fastjson.JSONObject;
+import com.github.pagehelper.Page;
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import com.google.common.collect.Lists;
 import com.ibn.xinte.dao.MedicineModifyLogDao;
 import com.ibn.xinte.domain.MedicineModifyLogDTO;
@@ -112,5 +115,36 @@ public class MedicineModifyLogServiceImpl implements MedicineModifyLogService {
             return Lists.newArrayList();
         }
         return medicineModifyLogDTOList;
+    }
+
+    @Override
+    public PageInfo<MedicineModifyLogDTO> queryPageInfo(MedicineModifyLogDTO medicineModifyLogDTO, Integer pageNum, Integer pageSize) {
+        if (null == medicineModifyLogDTO) {
+            return null;
+        }
+        MedicineModifyLogDO medicineModifyLogDO = new MedicineModifyLogDO();
+        BeanUtils.copyProperties(medicineModifyLogDTO, medicineModifyLogDO);
+        if (null != pageNum && null != pageSize) {
+            PageHelper.startPage(pageNum, pageSize);
+        }
+        Page<MedicineModifyLogDO> medicineModifyLogDOPage = medicineModifyLogDao.queryList(medicineModifyLogDO);
+        PageInfo<MedicineModifyLogDTO> medicineModifyLogDTOPageInfo = new PageInfo<>();
+        if (CollectionUtils.isEmpty(medicineModifyLogDOPage)) {
+            medicineModifyLogDTOPageInfo.setTotal(0);
+            return medicineModifyLogDTOPageInfo;
+        }
+        List<MedicineModifyLogDTO> medicineModifyLogDTOList;
+        try {
+            medicineModifyLogDTOList=BeanUtils.convertList(medicineModifyLogDOPage, MedicineModifyLogDTO.class);
+        } catch (Exception e) {
+            String msg = String.format("MedicineModifyLogServiceImpl.queryPageInfo方法list转换失败：%s",
+                    JSONObject.toJSONString(medicineModifyLogDOPage));
+            logger.error(msg, e);
+            medicineModifyLogDTOPageInfo.setTotal(0);
+            return medicineModifyLogDTOPageInfo;
+        }
+        medicineModifyLogDTOPageInfo.setList(medicineModifyLogDTOList);
+        medicineModifyLogDTOPageInfo.setTotal(medicineModifyLogDOPage.getTotal());
+        return medicineModifyLogDTOPageInfo;
     }
 }

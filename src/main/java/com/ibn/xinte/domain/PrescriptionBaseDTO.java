@@ -75,13 +75,23 @@ public class PrescriptionBaseDTO {
      * @author：RenBin
      * @createTime：2020年12月28日
      */
-    @ApiModelProperty(value = "创建时间", name = "createTimeStart")
     private Long createTimeStart;
     /**
      * @description: 创建时间结束
      * @author：RenBin
      * @createTime：2020年12月28日
      */
-    @ApiModelProperty(value = "创建时间", name = "createTimeEnd")
     private Long createTimeEnd;
+    /**
+     * @description: 后台人员姓名
+     * @author：RenBin
+     * @createTime：2021/1/9 12:43
+     */
+    private String adminName;
+    /**
+     * @description: 会员姓名
+     * @author：RenBin
+     * @createTime：2021/1/9 12:43
+     */
+    private String username;
 }

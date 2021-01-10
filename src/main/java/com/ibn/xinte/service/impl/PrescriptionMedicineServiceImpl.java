@@ -1,6 +1,8 @@
 package com.ibn.xinte.service.impl;
 
 import com.alibaba.fastjson.JSONObject;
+import com.github.pagehelper.Page;
+import com.github.pagehelper.PageInfo;
 import com.google.common.collect.Lists;
 import com.ibn.xinte.dao.PrescriptionMedicineDao;
 import com.ibn.xinte.domain.PrescriptionMedicineDTO;
@@ -112,5 +114,33 @@ public class PrescriptionMedicineServiceImpl implements PrescriptionMedicineServ
             return Lists.newArrayList();
         }
         return prescriptionMedicineDTOList;
+    }
+
+    @Override
+    public PageInfo<PrescriptionMedicineDTO> queryPageInfo(PrescriptionMedicineDTO prescriptionMedicineDTO, Integer pageNum, Integer pageSize) {
+        if (null == prescriptionMedicineDTO) {
+            return null;
+        }
+        PrescriptionMedicineDO prescriptionMedicineDO = new PrescriptionMedicineDO();
+        BeanUtils.copyProperties(prescriptionMedicineDTO, prescriptionMedicineDO);
+        Page<PrescriptionMedicineDO> prescriptionMedicineDOPage = prescriptionMedicineDao.queryList(prescriptionMedicineDO);
+        PageInfo<PrescriptionMedicineDTO> prescriptionMedicineDTOPageInfo = new PageInfo<>();
+        if (CollectionUtils.isEmpty(prescriptionMedicineDOPage)) {
+            prescriptionMedicineDTOPageInfo.setTotal(0);
+            return prescriptionMedicineDTOPageInfo;
+        }
+        List<PrescriptionMedicineDTO> prescriptionMedicineDTOList;
+        try {
+            prescriptionMedicineDTOList=BeanUtils.convertList(prescriptionMedicineDOPage, PrescriptionMedicineDTO.class);
+        } catch (Exception e) {
+            String msg = String.format("PrescriptionMedicineServiceImpl.queryPageInfo方法list转换失败：%s",
+                    JSONObject.toJSONString(prescriptionMedicineDOPage));
+            logger.error(msg, e);
+            prescriptionMedicineDTOPageInfo.setTotal(0);
+            return prescriptionMedicineDTOPageInfo;
+        }
+        prescriptionMedicineDTOPageInfo.setList(prescriptionMedicineDTOList);
+        prescriptionMedicineDTOPageInfo.setTotal(prescriptionMedicineDOPage.getTotal());
+        return prescriptionMedicineDTOPageInfo;
     }
 }

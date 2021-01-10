@@ -1,6 +1,7 @@
 package com.ibn.xinte.controller;
 
 import com.alibaba.fastjson.JSONObject;
+import com.github.pagehelper.PageInfo;
 import com.ibn.xinte.common.ResultInfo;
 import com.ibn.xinte.domain.MedicineCheckInOutDTO;
 import com.ibn.xinte.enumeration.MedicineCheckInOutTypeEnum;
@@ -90,8 +91,8 @@ public class MedicineCheckInOutController {
         }
         MedicineCheckInOutDTO medicineCheckInOutDTO = new MedicineCheckInOutDTO();
         BeanUtils.copyProperties(medicineCheckInOutVO, medicineCheckInOutDTO);
-        List<MedicineCheckInOutDTO> medicineCheckInOutDTOList = medicineCheckInOutService.queryList(medicineCheckInOutDTO);
-        return new ResultInfo().success(medicineCheckInOutDTOList);
+        PageInfo<MedicineCheckInOutDTO> medicineCheckInOutDTOPageInfo = medicineCheckInOutService.queryPageInfo(medicineCheckInOutDTO, medicineCheckInOutVO.getPageNum(), medicineCheckInOutVO.getPageSize());
+        return new ResultInfo().success(medicineCheckInOutDTOPageInfo);
     }
 
     @ApiOperation("出库、入库枚举")

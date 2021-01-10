@@ -2,6 +2,8 @@ package com.ibn.xinte.domain;
 
 import lombok.Data;
 
+import java.math.BigDecimal;
+
 /**
  * @version 1.0
  * @description:
@@ -52,6 +54,12 @@ public class AdminBaseDTO {
      */
     private Long createTime;
     /**
+     * @description: 提成比例
+     * @author：RenBin
+     * @createTime：2021/1/10 9:01
+     */
+    private BigDecimal commission;
+    /**
      * @description: 创建人
      * @author：RenBin
      * @createTime：2020年12月28日
@@ -69,16 +77,4 @@ public class AdminBaseDTO {
      * @createTime：2020年12月28日
      */
     private String name;
-    /**
-     * @description: 页码
-     * @author：RenBin
-     * @createTime：2021/1/3 15:58
-     */
-    private Integer pageNum;
-    /**
-     * @description: 条数
-     * @author：RenBin
-     * @createTime：2021/1/3 15:58
-     */
-    private Integer pageSize;
 }

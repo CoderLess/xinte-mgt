@@ -1,5 +1,8 @@
 package com.ibn.xinte.dao;
 
+import com.github.pagehelper.Page;
+import com.github.pagehelper.PageInfo;
+
 import java.util.List;
 
 /**
@@ -46,6 +49,6 @@ public interface BaseDao<T> {
      * @author：RenBin
      * @createTime：2020年12月28日
      */
-    List<T> queryList(T t);
+    Page<T> queryList(T t);
 
 }

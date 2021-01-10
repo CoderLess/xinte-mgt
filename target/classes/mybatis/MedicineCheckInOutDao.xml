@@ -127,5 +127,6 @@
         <include refid="baseColumn"/>
         from medicine_check_in_out
         <include refid="queryColumn"/>
+        order by id desc
     </select>
 </mapper>

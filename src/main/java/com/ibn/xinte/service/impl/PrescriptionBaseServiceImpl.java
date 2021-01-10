@@ -1,6 +1,9 @@
 package com.ibn.xinte.service.impl;
 
 import com.alibaba.fastjson.JSONObject;
+import com.github.pagehelper.Page;
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import com.google.common.collect.Lists;
 import com.ibn.xinte.dao.PrescriptionBaseDao;
 import com.ibn.xinte.domain.PrescriptionBaseDTO;
@@ -133,5 +136,23 @@ public class PrescriptionBaseServiceImpl implements PrescriptionBaseService {
             return Lists.newArrayList();
         }
         return prescriptionBaseDTOList;
+    }
+
+    @Override
+    public PageInfo<PrescriptionBaseDTO> queryPageInfo(PrescriptionBaseDTO prescriptionBaseDTO, Integer pageNum, Integer pageSize) {
+        if (null == prescriptionBaseDTO) {
+            return null;
+        }
+        if (null != pageNum && null != pageSize) {
+            PageHelper.startPage(pageNum, pageSize);
+        }
+        Page<PrescriptionBaseDTO> prescriptionBaseDTOPage = prescriptionBaseDao.queryListInfo(prescriptionBaseDTO);
+        PageInfo<PrescriptionBaseDTO> prescriptionBaseDTOPageInfo = new PageInfo<>();
+        if (CollectionUtils.isEmpty(prescriptionBaseDTOPage)) {
+            return prescriptionBaseDTOPageInfo;
+        }
+        prescriptionBaseDTOPageInfo.setList(prescriptionBaseDTOPage);
+        prescriptionBaseDTOPageInfo.setTotal(prescriptionBaseDTOPage.getTotal());
+        return prescriptionBaseDTOPageInfo;
     }
 }

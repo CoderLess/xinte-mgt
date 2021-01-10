@@ -1,7 +1,9 @@
 package com.ibn.xinte.service.impl;
 
 import com.alibaba.fastjson.JSONObject;
+import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import com.google.common.collect.Lists;
 import com.ibn.xinte.dao.MedicineBaseDao;
 import com.ibn.xinte.domain.MedicineBaseDTO;
@@ -10,6 +12,7 @@ import com.ibn.xinte.entity.MedicineBaseDO;
 import com.ibn.xinte.service.MedicineBaseService;
 import com.ibn.xinte.service.MedicineModifyLogService;
 import com.ibn.xinte.util.BeanUtils;
+import com.ibn.xinte.util.PinYinUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -43,6 +46,10 @@ public class MedicineBaseServiceImpl implements MedicineBaseService {
         }
         MedicineBaseDO medicineBaseDO = new MedicineBaseDO();
         BeanUtils.copyProperties(medicineBaseDTO, medicineBaseDO);
+        // 获取药品简称
+        if (null == medicineBaseDO.getShortName()) {
+            medicineBaseDO.setShortName(PinYinUtils.getFirstSpell(medicineBaseDTO.getName()));
+        }
         medicineBaseDao.save(medicineBaseDO);
         return medicineBaseDO.getId();
     }
@@ -129,5 +136,36 @@ public class MedicineBaseServiceImpl implements MedicineBaseService {
             return Lists.newArrayList();
         }
         return medicineBaseDTOList;
+    }
+
+    @Override
+    public PageInfo<MedicineBaseDTO> queryPageInfo(MedicineBaseDTO medicineBaseDTO, Integer pageNum, Integer pageSize) {
+        if (null == medicineBaseDTO) {
+            return null;
+        }
+        if (null != pageNum && null != pageSize) {
+            PageHelper.startPage(pageNum, pageSize);
+        }
+        MedicineBaseDO medicineBaseDO = new MedicineBaseDO();
+        BeanUtils.copyProperties(medicineBaseDTO, medicineBaseDO);
+        Page<MedicineBaseDO> medicineBaseDOPage = medicineBaseDao.queryList(medicineBaseDO);
+        PageInfo<MedicineBaseDTO> medicineBaseDTOPageInfo = new PageInfo<>();
+        if (CollectionUtils.isEmpty(medicineBaseDOPage)) {
+            medicineBaseDTOPageInfo.setTotal(0);
+            return medicineBaseDTOPageInfo;
+        }
+        List<MedicineBaseDTO> medicineBaseDTOList;
+        try {
+            medicineBaseDTOList=BeanUtils.convertList(medicineBaseDOPage, MedicineBaseDTO.class);
+        } catch (Exception e) {
+            String msg = String.format("MedicineBaseServiceImpl.queryPageInfo方法list转换失败：%s",
+                    JSONObject.toJSONString(medicineBaseDOPage));
+            logger.error(msg, e);
+            medicineBaseDTOPageInfo.setTotal(0);
+            return medicineBaseDTOPageInfo;
+        }
+        medicineBaseDTOPageInfo.setList(medicineBaseDTOList);
+        medicineBaseDTOPageInfo.setTotal(medicineBaseDOPage.getTotal());
+        return medicineBaseDTOPageInfo;
     }
 }

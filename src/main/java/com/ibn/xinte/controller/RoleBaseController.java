@@ -1,6 +1,7 @@
 package com.ibn.xinte.controller;
 
 import com.alibaba.fastjson.JSONObject;
+import com.github.pagehelper.PageInfo;
 import com.ibn.xinte.common.ResultInfo;
 import com.ibn.xinte.domain.RoleBaseDTO;
 import com.ibn.xinte.service.RoleBaseService;
@@ -94,8 +95,8 @@ public class RoleBaseController {
         }
         RoleBaseDTO roleBaseDTO = new RoleBaseDTO();
         BeanUtils.copyProperties(roleBaseVO, roleBaseDTO);
-        List<RoleBaseDTO> roleBaseDTOList = roleBaseService.queryList(roleBaseDTO);
-        return new ResultInfo().success(roleBaseDTOList);
+        PageInfo<RoleBaseDTO> roleBaseDTOPageInfo = roleBaseService.queryPageInfo(roleBaseDTO, roleBaseVO.getPageNum(), roleBaseVO.getPageSize());
+        return new ResultInfo().success(roleBaseDTOPageInfo);
     }
 
 }

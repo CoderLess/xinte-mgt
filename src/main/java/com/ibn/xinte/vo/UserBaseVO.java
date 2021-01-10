@@ -89,6 +89,12 @@ public class UserBaseVO {
     @ApiModelProperty(value = "创建时间结束", name = "createTimeEnd")
     private Long createTimeEnd;
     /**
+     * @description: 会员等级
+     * @author：RenBin
+     * @createTime：2021/1/10 9:08
+     */
+    private Integer level;
+    /**
      * @description: 页码
      * @author：RenBin
      * @createTime：2021/1/3 15:58

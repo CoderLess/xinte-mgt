@@ -1,19 +1,15 @@
 package com.ibn.xinte.service.impl;
 
 import com.alibaba.fastjson.JSONObject;
+import com.github.pagehelper.Page;
+import com.github.pagehelper.PageInfo;
 import com.google.common.collect.Lists;
 import com.ibn.xinte.dao.MedicineBaseDao;
 import com.ibn.xinte.dao.PaymentBaseDao;
-import com.ibn.xinte.dao.PaymentDetailDao;
-import com.ibn.xinte.dao.PrescriptionMedicineDao;
 import com.ibn.xinte.domain.PayStatisticDTO;
 import com.ibn.xinte.domain.PaymentBaseDTO;
 import com.ibn.xinte.entity.PaymentBaseDO;
-import com.ibn.xinte.entity.PaymentDetailDO;
-import com.ibn.xinte.entity.PrescriptionMedicineDO;
-import com.ibn.xinte.enumeration.YesOrNoEnum;
 import com.ibn.xinte.service.PaymentBaseService;
-import com.ibn.xinte.service.PaymentDetailService;
 import com.ibn.xinte.util.BeanUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -27,8 +23,8 @@ import java.util.List;
 /**
  * @version 1.0
  * @description:
- * @projectName：demo
- * @see: com.ibn.demo.service.impl
+ * @projectName：xinte
+ * @see: com.ibn.xinte.service.impl
  * @author： RenBin
  * @createTime：2021年1月5日
  */
@@ -132,5 +128,33 @@ public class PaymentBaseServiceImpl implements PaymentBaseService {
     @Override
     public PayStatisticDTO queryPayStatistic(PaymentBaseDTO paymentBaseDTO) {
         return paymentBaseDao.queryPayStatistic(paymentBaseDTO);
+    }
+
+    @Override
+    public PageInfo<PaymentBaseDTO> queryPageInfo(PaymentBaseDTO paymentBaseDTO, Integer pageNum, Integer pageSize) {
+        if (null == paymentBaseDTO) {
+            return null;
+        }
+        PaymentBaseDO paymentBaseDO = new PaymentBaseDO();
+        BeanUtils.copyProperties(paymentBaseDTO, paymentBaseDO);
+        Page<PaymentBaseDO> paymentBaseDOPage = paymentBaseDao.queryList(paymentBaseDO);
+        PageInfo<PaymentBaseDTO> paymentBaseDTOPageInfo = new PageInfo<>();
+        if (CollectionUtils.isEmpty(paymentBaseDOPage)) {
+            paymentBaseDTOPageInfo.setTotal(0);
+            return paymentBaseDTOPageInfo;
+        }
+        List<PaymentBaseDTO> paymentBaseDTOList;
+        try {
+            paymentBaseDTOList=BeanUtils.convertList(paymentBaseDOPage, PaymentBaseDTO.class);
+        } catch (Exception e) {
+            String msg = String.format("PaymentBaseServiceImpl.queryPageInfo方法list转换失败：%s",
+                    JSONObject.toJSONString(paymentBaseDOPage));
+            logger.error(msg, e);
+            paymentBaseDTOPageInfo.setTotal(0);
+            return paymentBaseDTOPageInfo;
+        }
+        paymentBaseDTOPageInfo.setList(paymentBaseDTOList);
+        paymentBaseDTOPageInfo.setTotal(paymentBaseDOPage.getTotal());
+        return paymentBaseDTOPageInfo;
     }
 }

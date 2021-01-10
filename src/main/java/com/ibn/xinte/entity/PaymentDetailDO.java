@@ -7,8 +7,8 @@ import java.math.BigDecimal;
 /**
  * @version 1.0
  * @description:
- * @projectName：demo
- * @see: com.ibn.demo.entity
+ * @projectName：xinte
+ * @see: com.ibn.xinte.entity
  * @author： RenBin
  * @createTime：2021年1月5日
  */

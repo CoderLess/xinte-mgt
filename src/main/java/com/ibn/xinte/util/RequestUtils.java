@@ -1,5 +1,6 @@
 package com.ibn.xinte.util;
 
+import com.ibn.xinte.config.security.util.JWTUtils;
 import com.ibn.xinte.constant.TokenConstants;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

@@ -1,6 +1,7 @@
 package com.ibn.xinte.controller;
 
 import com.alibaba.fastjson.JSONObject;
+import com.github.pagehelper.PageInfo;
 import com.google.common.collect.Lists;
 import com.ibn.xinte.common.ResultInfo;
 import com.ibn.xinte.domain.AdminBaseDTO;
@@ -9,7 +10,7 @@ import com.ibn.xinte.exception.IbnException;
 import com.ibn.xinte.service.AdminBaseService;
 import com.ibn.xinte.service.LoginLogService;
 import com.ibn.xinte.util.BeanUtils;
-import com.ibn.xinte.util.JWTUtils;
+import com.ibn.xinte.config.security.util.JWTUtils;
 import com.ibn.xinte.util.MD5Utils;
 import com.ibn.xinte.util.RequestUtils;
 import com.ibn.xinte.vo.AdminBaseVO;
@@ -74,7 +75,11 @@ public class AdminBaseController {
     }
     @ApiOperation("管理员登录")
     @PostMapping("login")
-    public ResultInfo login(@RequestBody AdminBaseVO adminBaseVO,HttpServletRequest request) {
+    public ResultInfo login(AdminBaseVO adminBaseVO,HttpServletRequest request) {
+//    public ResultInfo login(String mobile,String passowrd,HttpServletRequest request) {
+//        AdminBaseVO adminBaseVO = new AdminBaseVO();
+//        adminBaseVO.setMobile(mobile);
+//        adminBaseVO.setPassword(passowrd);
         if (null == adminBaseVO) {
             return new ResultInfo().error("参数不能为空");
         }
@@ -155,8 +160,8 @@ public class AdminBaseController {
         }
         AdminBaseDTO adminBaseDTO = new AdminBaseDTO();
         BeanUtils.copyProperties(adminBaseVO, adminBaseDTO);
-        List<AdminBaseDTO> adminBaseDTOList = adminBaseService.queryList(adminBaseDTO, adminBaseVO.getPageNum(), adminBaseVO.getPageSize());
-        return new ResultInfo().success(adminBaseDTOList);
+        PageInfo<AdminBaseDTO> adminBaseDTOPageInfo = adminBaseService.queryPageInfo(adminBaseDTO, adminBaseVO.getPageNum(), adminBaseVO.getPageSize());
+        return new ResultInfo().success(adminBaseDTOPageInfo);
     }
 
     @ApiOperation("根据名字模糊查询管理员信息")
@@ -167,7 +172,11 @@ public class AdminBaseController {
         }
         AdminBaseDTO adminBaseDTO = new AdminBaseDTO();
         BeanUtils.copyProperties(adminNameQueryVO, adminBaseDTO);
-        List<AdminBaseDTO> adminBaseDTOList = adminBaseService.queryList(adminBaseDTO, adminNameQueryVO.getPageNum(), adminNameQueryVO.getPageSize());
+        PageInfo<AdminBaseDTO> adminBaseDTOPageInfo = adminBaseService.queryPageInfo(adminBaseDTO, adminNameQueryVO.getPageNum(), adminNameQueryVO.getPageSize());
+        if (null == adminBaseDTOPageInfo) {
+            return new ResultInfo().success(Lists.newArrayList());
+        }
+        List<AdminBaseDTO> adminBaseDTOList = adminBaseDTOPageInfo.getList();
         if (CollectionUtils.isEmpty(adminBaseDTOList)) {
             return new ResultInfo().success(Lists.newArrayList());
         }

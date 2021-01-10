@@ -2,6 +2,8 @@ package com.ibn.xinte.entity;
 
 import lombok.Data;
 
+import java.math.BigDecimal;
+
 /**
  * @version 1.0
  * @description:
@@ -51,6 +53,12 @@ public class AdminBaseDO {
      * @createTime：2020年12月28日
      */
     private Long createTime;
+    /**
+     * @description: 提成比例
+     * @author：RenBin
+     * @createTime：2021/1/10 9:01
+     */
+    private BigDecimal commission;
     /**
      * @description: 创建人
      * @author：RenBin

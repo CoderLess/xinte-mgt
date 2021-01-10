@@ -1,6 +1,9 @@
 package com.ibn.xinte.service.impl;
 
 import com.alibaba.fastjson.JSONObject;
+import com.github.pagehelper.Page;
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import com.google.common.collect.Lists;
 import com.ibn.xinte.dao.AuthorityBaseDao;
 import com.ibn.xinte.domain.AuthorityBaseDTO;
@@ -112,5 +115,36 @@ public class AuthorityBaseServiceImpl implements AuthorityBaseService {
             return Lists.newArrayList();
         }
         return authorityBaseDTOList;
+    }
+
+    @Override
+    public PageInfo<AuthorityBaseDTO> queryPageInfo(AuthorityBaseDTO authorityBaseDTO, Integer pageNum, Integer pageSize) {
+        if (null == authorityBaseDTO) {
+            return null;
+        }
+        AuthorityBaseDO authorityBaseDO = new AuthorityBaseDO();
+        BeanUtils.copyProperties(authorityBaseDTO, authorityBaseDO);
+        if (null != pageNum && null != pageSize) {
+            PageHelper.startPage(pageNum, pageSize);
+        }
+        Page<AuthorityBaseDO> authorityBaseDOPage = authorityBaseDao.queryList(authorityBaseDO);
+        PageInfo<AuthorityBaseDTO> authorityBaseDTOPageInfo=new PageInfo<>();
+        if (CollectionUtils.isEmpty(authorityBaseDOPage)) {
+            authorityBaseDTOPageInfo.setTotal(0);
+            return authorityBaseDTOPageInfo;
+        }
+        List<AuthorityBaseDTO> authorityBaseDTOList;
+        try {
+            authorityBaseDTOList=BeanUtils.convertList(authorityBaseDOPage, AuthorityBaseDTO.class);
+        } catch (Exception e) {
+            String msg = String.format("AuthorityBaseServiceImpl.queryPageInfo方法list转换失败：%s",
+                    JSONObject.toJSONString(authorityBaseDOPage));
+            logger.error(msg, e);
+            authorityBaseDTOPageInfo.setTotal(0);
+            return authorityBaseDTOPageInfo;
+        }
+        authorityBaseDTOPageInfo.setList(authorityBaseDTOList);
+        authorityBaseDTOPageInfo.setTotal(authorityBaseDOPage.getTotal());
+        return authorityBaseDTOPageInfo;
     }
 }

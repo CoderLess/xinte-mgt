@@ -1,6 +1,7 @@
 package com.ibn.xinte.controller;
 
 import com.alibaba.fastjson.JSONObject;
+import com.github.pagehelper.PageInfo;
 import com.ibn.xinte.common.ResultInfo;
 import com.ibn.xinte.domain.MedicineBaseDTO;
 import com.ibn.xinte.service.MedicineBaseService;
@@ -45,10 +46,6 @@ public class MedicineBaseController {
         Long adminId = RequestUtils.getUserId(request);
         MedicineBaseDTO medicineBaseDTO = new MedicineBaseDTO();
         BeanUtils.copyProperties(medicineBaseVO, medicineBaseDTO);
-        // 获取药品简称
-        if (null == medicineBaseDTO.getShortName()) {
-            medicineBaseDTO.setShortName(PinYinUtils.getFirstSpell(medicineBaseDTO.getName()));
-        }
         medicineBaseDTO.setCreatorId(adminId);
         medicineBaseDTO.setCreateTime(System.currentTimeMillis());
         // 保存记录
@@ -89,8 +86,8 @@ public class MedicineBaseController {
         }
         MedicineBaseDTO medicineBaseDTO = new MedicineBaseDTO();
         BeanUtils.copyProperties(medicineBaseVO, medicineBaseDTO);
-        List<MedicineBaseDTO> medicineBaseDTOList = medicineBaseService.queryList(medicineBaseDTO, medicineBaseVO.getPageNum(), medicineBaseVO.getPageSize());
-        return new ResultInfo().success(medicineBaseDTOList);
+        PageInfo<MedicineBaseDTO> medicineBaseDTOPageInfo = medicineBaseService.queryPageInfo(medicineBaseDTO, medicineBaseVO.getPageNum(), medicineBaseVO.getPageSize());
+        return new ResultInfo().success(medicineBaseDTOPageInfo);
     }
 
 }

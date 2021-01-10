@@ -1,6 +1,7 @@
 package com.ibn.xinte.controller;
 
 import com.alibaba.fastjson.JSONObject;
+import com.github.pagehelper.PageInfo;
 import com.ibn.xinte.common.ResultInfo;
 import com.ibn.xinte.domain.PrescriptionBaseDTO;
 import com.ibn.xinte.service.PrescriptionBaseService;
@@ -89,8 +90,8 @@ public class PrescriptionBaseController {
         }
         PrescriptionBaseDTO prescriptionBaseDTO = new PrescriptionBaseDTO();
         BeanUtils.copyProperties(prescriptionBaseVO, prescriptionBaseDTO);
-        List<PrescriptionBaseDTO> prescriptionBaseDTOList = prescriptionBaseService.queryListByDTO(prescriptionBaseDTO);
-        return new ResultInfo().success(prescriptionBaseDTOList);
+        PageInfo<PrescriptionBaseDTO> prescriptionBaseDTOPageInfo = prescriptionBaseService.queryPageInfo(prescriptionBaseDTO, prescriptionBaseVO.getPageNum(), prescriptionBaseVO.getPageSize());
+        return new ResultInfo().success(prescriptionBaseDTOPageInfo);
     }
 
 }

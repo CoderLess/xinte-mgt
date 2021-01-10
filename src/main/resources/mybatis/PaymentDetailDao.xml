@@ -21,11 +21,10 @@
     </sql>
 
     <sql id="baseColumn">
-        `amount`
-        ,
-												`id`,
-												`method`,
-												`payment_id`
+		`id`,
+        `amount`,
+		`method`,
+		`payment_id`
     </sql>
 
     <insert id="save" useGeneratedKeys="true" keyProperty="id">
@@ -90,5 +89,6 @@
         <include refid="baseColumn"/>
         from payment_detail
         <include refid="queryColumn"/>
+        order by id desc
     </select>
 </mapper>

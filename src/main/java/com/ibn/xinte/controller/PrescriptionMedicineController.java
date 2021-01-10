@@ -1,6 +1,7 @@
 package com.ibn.xinte.controller;
 
 import com.alibaba.fastjson.JSONObject;
+import com.github.pagehelper.PageInfo;
 import com.ibn.xinte.common.ResultInfo;
 import com.ibn.xinte.domain.PrescriptionMedicineDTO;
 import com.ibn.xinte.service.PrescriptionMedicineService;
@@ -101,8 +102,8 @@ public class PrescriptionMedicineController {
         }
         PrescriptionMedicineDTO prescriptionMedicineDTO = new PrescriptionMedicineDTO();
         BeanUtils.copyProperties(prescriptionMedicineVO, prescriptionMedicineDTO);
-        List<PrescriptionMedicineDTO> prescriptionMedicineDTOList = prescriptionMedicineService.queryList(prescriptionMedicineDTO);
-        return new ResultInfo().success(prescriptionMedicineDTOList);
+        PageInfo<PrescriptionMedicineDTO> prescriptionMedicineDTOPageInfo = prescriptionMedicineService.queryPageInfo(prescriptionMedicineDTO, prescriptionMedicineVO.getPageNum(), prescriptionMedicineVO.getPageSize());
+        return new ResultInfo().success(prescriptionMedicineDTOPageInfo);
     }
 
 }

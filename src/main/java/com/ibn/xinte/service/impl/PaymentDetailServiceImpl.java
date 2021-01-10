@@ -1,6 +1,8 @@
 package com.ibn.xinte.service.impl;
 
 import com.alibaba.fastjson.JSONObject;
+import com.github.pagehelper.Page;
+import com.github.pagehelper.PageInfo;
 import com.google.common.collect.Lists;
 import com.ibn.xinte.dao.PaymentDetailDao;
 import com.ibn.xinte.domain.PaymentDetailDTO;
@@ -18,8 +20,8 @@ import java.util.List;
 /**
  * @version 1.0
  * @description:
- * @projectName：demo
- * @see: com.ibn.demo.service.impl
+ * @projectName：xinte
+ * @see: com.ibn.xinte.service.impl
  * @author： RenBin
  * @createTime：2021年1月5日
  */
@@ -112,5 +114,33 @@ public class PaymentDetailServiceImpl implements PaymentDetailService {
             return Lists.newArrayList();
         }
         return paymentDetailDTOList;
+    }
+
+    @Override
+    public PageInfo<PaymentDetailDTO> queryPageInfo(PaymentDetailDTO paymentDetailDTO, Integer pageNum, Integer pageSize) {
+        if (null == paymentDetailDTO) {
+            return null;
+        }
+        PaymentDetailDO paymentDetailDO = new PaymentDetailDO();
+        BeanUtils.copyProperties(paymentDetailDTO, paymentDetailDO);
+        Page<PaymentDetailDO> paymentDetailDOPage = paymentDetailDao.queryList(paymentDetailDO);
+        PageInfo<PaymentDetailDTO> paymentDetailDTOPageInfo = new PageInfo<>();
+        if (CollectionUtils.isEmpty(paymentDetailDOPage)) {
+            paymentDetailDTOPageInfo.setTotal(0);
+            return paymentDetailDTOPageInfo;
+        }
+        List<PaymentDetailDTO> paymentDetailDTOList;
+        try {
+            paymentDetailDTOList=BeanUtils.convertList(paymentDetailDOPage, PaymentDetailDTO.class);
+        } catch (Exception e) {
+            String msg = String.format("PaymentDetailServiceImpl.queryPageInfo方法list转换失败：%s",
+                    JSONObject.toJSONString(paymentDetailDOPage));
+            logger.error(msg, e);
+            paymentDetailDTOPageInfo.setTotal(0);
+            return paymentDetailDTOPageInfo;
+        }
+        paymentDetailDTOPageInfo.setList(paymentDetailDTOList);
+        paymentDetailDTOPageInfo.setTotal(paymentDetailDOPage.getTotal());
+        return paymentDetailDTOPageInfo;
     }
 }

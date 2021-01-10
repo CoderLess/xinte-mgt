@@ -79,5 +79,6 @@
         <include refid="baseColumn"/>
         from role_base
         <include refid="queryColumn"/>
+        order by id desc
     </select>
 </mapper>

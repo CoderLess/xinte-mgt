@@ -95,6 +95,20 @@ public class PrescriptionBaseVO {
     @ApiModelProperty(value = "创建时间", name = "createTimeEnd")
     private Long createTimeEnd;
     /**
+     * @description: 后台人员姓名
+     * @author：RenBin
+     * @createTime：2021/1/9 12:43
+     */
+    @ApiModelProperty(value = "后台人员姓名", name = "adminName")
+    private String adminName;
+    /**
+     * @description: 会员姓名
+     * @author：RenBin
+     * @createTime：2021/1/9 12:43
+     */
+    @ApiModelProperty(value = "会员姓名", name = "username")
+    private String username;
+    /**
      * @description: 页码
      * @author：RenBin
      * @createTime：2021/1/3 15:58

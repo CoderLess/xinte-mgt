@@ -127,6 +127,7 @@
         <include refid="baseColumn"/>
         from prescription_base
         <include refid="queryColumn"/>
+        order by id desc
     </select>
 
     <select id="queryListByDTO" resultType="com.ibn.xinte.domain.PrescriptionBaseDTO">
@@ -163,6 +164,46 @@
             </if>
             <if test="type != null">
                 and type = #{type}
+            </if>
+        </where>
+    </select>
+    <select id="queryListInfo" resultType="com.ibn.xinte.domain.PrescriptionBaseDTO">
+        select
+        pb.`id`,pb.`admin_id`,pb.`user_id`,pb.`medication_time_start`,pb.`medication_time_end`,pb.`pathogeny`,pb.`remark`,pb.`create_time`,pb.`type`,
+        ub.username,ab.name adminName
+        from prescription_base pb
+        left join user_base ub on pb.user_id= ub.id
+        left join admin_base ab on pb.admin_id= ab.id
+        <where>
+            <if test="id != null">
+                and pb.id = #{id}
+            </if>
+            <if test="adminId != null">
+                and pb.admin_id = #{adminId}
+            </if>
+            <if test="userId != null">
+                and pb.user_id = #{userId}
+            </if>
+            <if test="medicationTimeStart != null">
+                and pb.medication_time_start = #{medicationTimeStart}
+            </if>
+            <if test="medicationTimeEnd != null">
+                and pb.medication_time_end = #{medicationTimeEnd}
+            </if>
+            <if test="pathogeny != null">
+                and pb.pathogeny = #{pathogeny}
+            </if>
+            <if test="remark != null">
+                and pb.remark = #{remark}
+            </if>
+            <if test="createTimeStart != null">
+                and pb.create_time &gt;= #{createTimeStart}
+            </if>
+            <if test="createTimeEnd != null">
+                and pb.create_time &lt;= #{createTimeEnd}
+            </if>
+            <if test="type != null">
+                and pb.type = #{type}
             </if>
         </where>
     </select>

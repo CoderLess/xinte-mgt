@@ -1,5 +1,7 @@
 package com.ibn.xinte.service;
 
+import com.github.pagehelper.PageInfo;
+import com.ibn.xinte.domain.AdminBaseDTO;
 import com.ibn.xinte.domain.PaymentDetailDTO;
 
 import java.util.List;
@@ -7,8 +9,8 @@ import java.util.List;
 /**
  * @version 1.0
  * @description:
- * @projectName：demo
- * @see: com.ibn.demo.service
+ * @projectName：xinte
+ * @see: com.ibn.xinte.service
  * @author： RenBin
  * @createTime：2021年1月5日
  */
@@ -55,4 +57,10 @@ public interface PaymentDetailService {
      * @createTime：2021年1月5日
      */
     List<PaymentDetailDTO> queryList(PaymentDetailDTO paymentDetailDTO);
+    /**
+     * @description: 通过条件查询管理员信息
+     * @author：RenBin
+     * @createTime：2020年12月28日
+     */
+    PageInfo<PaymentDetailDTO> queryPageInfo(PaymentDetailDTO paymentDetailDTO, Integer pageNum, Integer pageSize);
 }

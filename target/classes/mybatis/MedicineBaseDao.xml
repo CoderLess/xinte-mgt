@@ -159,6 +159,7 @@
         <include refid="baseColumn"/>
         from medicine_base
         <include refid="queryColumn"/>
+        order by id desc
     </select>
     
     <update id="drugSales" parameterType="java.lang.Long">

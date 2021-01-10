@@ -5,6 +5,7 @@ import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 
 import java.io.Serializable;
+import java.math.BigDecimal;
 
 /**
  * @version 1.0
@@ -62,6 +63,12 @@ public class AdminBaseVO implements Serializable {
      */
     @ApiModelProperty(value = "创建时间", name = "createTime")
     private Long createTime;
+    /**
+     * @description: 提成比例
+     * @author：RenBin
+     * @createTime：2021/1/10 9:01
+     */
+    private BigDecimal commission;
     /**
      * @description: 创建人
      * @author：RenBin

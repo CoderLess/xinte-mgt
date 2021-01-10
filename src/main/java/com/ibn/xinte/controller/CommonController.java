@@ -1,7 +1,6 @@
 package com.ibn.xinte.controller;
 
 import com.ibn.xinte.common.ResultInfo;
-import com.ibn.xinte.domain.LoginLogDTO;
 import com.ibn.xinte.domain.PayStatisticDTO;
 import com.ibn.xinte.domain.PaymentBaseDTO;
 import com.ibn.xinte.domain.UserBaseDTO;

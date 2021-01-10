@@ -1,5 +1,6 @@
 package com.ibn.xinte.service;
 
+import com.github.pagehelper.PageInfo;
 import com.ibn.xinte.domain.MedicineBaseDTO;
 
 import java.util.List;
@@ -55,4 +56,10 @@ public interface MedicineBaseService {
      * @createTime：2020年12月28日
      */
     List<MedicineBaseDTO> queryList(MedicineBaseDTO medicineBaseDTO, Integer pageNum, Integer pageSize);
+    /**
+     * @description: 通过条件分页查询管理员信息
+     * @author：RenBin
+     * @createTime：2020年12月28日
+     */
+    PageInfo<MedicineBaseDTO> queryPageInfo(MedicineBaseDTO medicineBaseDTO, Integer pageNum, Integer pageSize);
 }

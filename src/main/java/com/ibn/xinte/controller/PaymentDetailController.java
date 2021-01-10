@@ -1,6 +1,7 @@
 package com.ibn.xinte.controller;
 
 import com.alibaba.fastjson.JSONObject;
+import com.github.pagehelper.PageInfo;
 import com.ibn.xinte.common.ResultInfo;
 import com.ibn.xinte.domain.PaymentDetailDTO;
 import com.ibn.xinte.service.PaymentDetailService;
@@ -18,8 +19,8 @@ import java.util.List;
 /**
  * @version 1.0
  * @description:
- * @projectName：demo
- * @see: com.ibn.demo.controller
+ * @projectName：xinte
+ * @see: com.ibn.xinte.controller
  * @author： RenBin
  * @createTime：2021年1月5日
  */
@@ -72,8 +73,8 @@ public class PaymentDetailController {
         }
         PaymentDetailDTO paymentDetailDTO = new PaymentDetailDTO();
         BeanUtils.copyProperties(paymentDetailVO, paymentDetailDTO);
-        List<PaymentDetailDTO> paymentDetailDTOList = paymentDetailService.queryList(paymentDetailDTO);
-        return new ResultInfo().success(paymentDetailDTOList);
+        PageInfo<PaymentDetailDTO> paymentDetailDTOPageInfo = paymentDetailService.queryPageInfo(paymentDetailDTO, paymentDetailVO.getPageNum(), paymentDetailVO.getPageSize());
+        return new ResultInfo().success(paymentDetailDTOPageInfo);
     }
 
 }

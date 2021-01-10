@@ -9,8 +9,8 @@ import java.math.BigDecimal;
 /**
  * @version 1.0
  * @description:
- * @projectName：demo
- * @see: com.ibn.demo.vo
+ * @projectName：xinte
+ * @see: com.ibn.xinte.vo
  * @author： RenBin
  * @createTime：2021年1月5日
  */
@@ -55,4 +55,18 @@ public class PaymentBaseVO {
      */
     @ApiModelProperty(value = "药方id", name = "prescriptionId")
     private Long prescriptionId;
+    /**
+     * @description: 页码
+     * @author：RenBin
+     * @createTime：2021/1/3 15:58
+     */
+    @ApiModelProperty(value = "页码", name = "pageNum")
+    private Integer pageNum;
+    /**
+     * @description: 条数
+     * @author：RenBin
+     * @createTime：2021/1/3 15:58
+     */
+    @ApiModelProperty(value = "条数", name = "pageSize")
+    private Integer pageSize;
 }

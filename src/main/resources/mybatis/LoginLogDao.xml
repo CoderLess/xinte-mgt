@@ -87,5 +87,6 @@
         <include refid="baseColumn"/>
         from login_log
         <include refid="queryColumn"/>
+        order by id desc
     </select>
 </mapper>

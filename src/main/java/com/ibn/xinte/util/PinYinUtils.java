@@ -15,11 +15,13 @@ import net.sourceforge.pinyin4j.format.exception.BadHanyuPinyinOutputFormatCombi
  * @createTime：2021/01/03 18:35
  */
 public class PinYinUtils {
+
     /**
-     * 获取汉字串拼音首字母，英文字符不变
-     *
      * @param chinese 汉字串
      * @return 汉语拼音首字母
+     * @description: 获取汉字串拼音首字母，英文字符不变
+     * @author：RenBin
+     * @createTime：2021/1/8 21:04
      */
     public static String getFirstSpell(String chinese) {
         StringBuffer pybf = new StringBuffer();
@@ -42,31 +44,5 @@ public class PinYinUtils {
             }
         }
         return pybf.toString().replaceAll("\\W", "").trim();
-    }
-
-    /**
-     * 获取汉字串拼音，英文字符不变
-     *
-     * @param chinese 汉字串
-     * @return 汉语拼音
-     */
-    public static String getFullSpell(String chinese) {
-        StringBuffer pybf = new StringBuffer();
-        char[] arr = chinese.toCharArray();
-        HanyuPinyinOutputFormat defaultFormat = new HanyuPinyinOutputFormat();
-        defaultFormat.setCaseType(HanyuPinyinCaseType.LOWERCASE);
-        defaultFormat.setToneType(HanyuPinyinToneType.WITHOUT_TONE);
-        for (int i = 0; i < arr.length; i++) {
-            if (arr[i] > 128) {
-                try {
-                    pybf.append(PinyinHelper.toHanyuPinyinStringArray(arr[i], defaultFormat)[0]);
-                } catch (BadHanyuPinyinOutputFormatCombination e) {
-                    e.printStackTrace();
-                }
-            } else {
-                pybf.append(arr[i]);
-            }
-        }
-        return pybf.toString();
     }
 }

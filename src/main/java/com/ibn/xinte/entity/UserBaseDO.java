@@ -63,4 +63,10 @@ public class UserBaseDO {
      * @createTime：2020年12月28日
      */
     private Long adminId;
+    /**
+     * @description: 会员等级
+     * @author：RenBin
+     * @createTime：2021/1/10 9:08
+     */
+    private Integer level;
 }

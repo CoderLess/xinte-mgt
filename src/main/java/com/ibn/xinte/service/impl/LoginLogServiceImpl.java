@@ -1,6 +1,9 @@
 package com.ibn.xinte.service.impl;
 
 import com.alibaba.fastjson.JSONObject;
+import com.github.pagehelper.Page;
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import com.google.common.collect.Lists;
 import com.ibn.xinte.dao.LoginLogDao;
 import com.ibn.xinte.domain.LoginLogDTO;
@@ -112,5 +115,36 @@ public class LoginLogServiceImpl implements LoginLogService {
             return Lists.newArrayList();
         }
         return loginLogDTOList;
+    }
+
+    @Override
+    public PageInfo<LoginLogDTO> queryPageInfo(LoginLogDTO loginLogDTO, Integer pageNum, Integer pageSize) {
+        if (null == loginLogDTO) {
+            return null;
+        }
+        LoginLogDO loginLogDO = new LoginLogDO();
+        BeanUtils.copyProperties(loginLogDTO, loginLogDO);
+        if (null != pageNum && null != pageSize) {
+            PageHelper.startPage(pageNum, pageSize);
+        }
+        Page<LoginLogDO> loginLogDOPage = loginLogDao.queryList(loginLogDO);
+        PageInfo<LoginLogDTO> loginLogDTOPageInfo=new PageInfo<>();
+        if (CollectionUtils.isEmpty(loginLogDOPage)) {
+            loginLogDTOPageInfo.setTotal(0);
+            return loginLogDTOPageInfo;
+        }
+        List<LoginLogDTO> loginLogDTOList;
+        try {
+            loginLogDTOList=BeanUtils.convertList(loginLogDOPage, LoginLogDTO.class);
+        } catch (Exception e) {
+            String msg = String.format("LoginLogServiceImpl.queryPageInfo方法list转换失败：%s",
+                    JSONObject.toJSONString(loginLogDOPage));
+            logger.error(msg, e);
+            loginLogDTOPageInfo.setTotal(0);
+            return loginLogDTOPageInfo;
+        }
+        loginLogDTOPageInfo.setList(loginLogDTOList);
+        loginLogDTOPageInfo.setTotal(loginLogDOPage.getTotal());
+        return loginLogDTOPageInfo;
     }
 }

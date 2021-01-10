@@ -1,7 +1,9 @@
 package com.ibn.xinte.service.impl;
 
 import com.alibaba.fastjson.JSONObject;
+import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import com.google.common.collect.Lists;
 import com.ibn.xinte.dao.UserBaseDao;
 import com.ibn.xinte.domain.UserBaseDTO;
@@ -126,5 +128,36 @@ public class UserBaseServiceImpl implements UserBaseService {
     @Override
     public Integer total(UserBaseDTO userBaseDTO) {
         return userBaseDao.total(userBaseDTO);
+    }
+
+    @Override
+    public PageInfo<UserBaseDTO> queryPageInfo(UserBaseDTO userBaseDTO, Integer pageNum, Integer pageSize) {
+        if (null == userBaseDTO) {
+            return null;
+        }
+        UserBaseDO userBaseDO = new UserBaseDO();
+        BeanUtils.copyProperties(userBaseDTO, userBaseDO);
+        if (null != pageNum && null != pageSize) {
+            PageHelper.startPage(pageNum, pageSize);
+        }
+        Page<UserBaseDO> userBaseDOPage = userBaseDao.queryListByDTO(userBaseDTO);
+        PageInfo<UserBaseDTO> userBaseDTOPageInfo = new PageInfo<>();
+        if (CollectionUtils.isEmpty(userBaseDOPage)) {
+            userBaseDTOPageInfo.setTotal(0);
+            return userBaseDTOPageInfo;
+        }
+        List<UserBaseDTO> userBaseDTOList;
+        try {
+            userBaseDTOList=BeanUtils.convertList(userBaseDOPage, UserBaseDTO.class);
+        } catch (Exception e) {
+            String msg = String.format("UserBaseServiceImpl.queryPageInfo方法list转换失败：%s",
+                    JSONObject.toJSONString(userBaseDOPage));
+            logger.error(msg, e);
+            userBaseDTOPageInfo.setTotal(0);
+            return userBaseDTOPageInfo;
+        }
+        userBaseDTOPageInfo.setList(userBaseDTOList);
+        userBaseDTOPageInfo.setTotal(userBaseDOPage.getTotal());
+        return userBaseDTOPageInfo;
     }
 }

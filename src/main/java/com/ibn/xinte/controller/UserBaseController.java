@@ -1,9 +1,11 @@
 package com.ibn.xinte.controller;
 
 import com.alibaba.fastjson.JSONObject;
+import com.github.pagehelper.PageInfo;
 import com.google.common.collect.Lists;
 import com.ibn.xinte.common.ResultInfo;
 import com.ibn.xinte.domain.UserBaseDTO;
+import com.ibn.xinte.enumeration.UserBaseLevelEnum;
 import com.ibn.xinte.enumeration.UserBaseSexEnum;
 import com.ibn.xinte.service.UserBaseService;
 import com.ibn.xinte.util.BeanUtils;
@@ -94,8 +96,8 @@ public class UserBaseController {
         }
         UserBaseDTO userBaseDTO = new UserBaseDTO();
         BeanUtils.copyProperties(userBaseVO, userBaseDTO);
-        List<UserBaseDTO> userBaseDTOList = userBaseService.queryList(userBaseDTO, userBaseVO.getPageNum(), userBaseVO.getPageSize());
-        return new ResultInfo().success(userBaseDTOList);
+        PageInfo<UserBaseDTO> userBaseDTOPageInfo = userBaseService.queryPageInfo(userBaseDTO, userBaseVO.getPageNum(), userBaseVO.getPageSize());
+        return new ResultInfo().success(userBaseDTOPageInfo);
     }
 
     @ApiOperation("根据手机号模糊查询用户id、用户手机号")
@@ -151,6 +153,12 @@ public class UserBaseController {
     @GetMapping("sexEnum")
     public ResultInfo sexEnum() {
         return new ResultInfo().success(UserBaseSexEnum.allEnum());
+    }
+
+    @ApiOperation("会员级别枚举")
+    @GetMapping("levelEnum")
+    public ResultInfo levelEnum() {
+        return new ResultInfo().success(UserBaseLevelEnum.allEnum());
     }
 
 }
