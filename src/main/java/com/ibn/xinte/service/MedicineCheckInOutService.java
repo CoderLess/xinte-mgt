@@ -3,6 +3,7 @@ package com.ibn.xinte.service;
 import com.github.pagehelper.PageInfo;
 import com.ibn.xinte.domain.AdminBaseDTO;
 import com.ibn.xinte.domain.MedicineCheckInOutDTO;
+import com.ibn.xinte.exception.IbnException;
 
 import java.util.List;
 
@@ -21,7 +22,7 @@ public interface MedicineCheckInOutService {
      * @author：RenBin
      * @createTime：2020年12月28日
      */
-    Long save(MedicineCheckInOutDTO medicineCheckInOutDTO);
+    Long save(MedicineCheckInOutDTO medicineCheckInOutDTO) throws IbnException;
 
     /**
      * @description: 批量保存药品出入库信息

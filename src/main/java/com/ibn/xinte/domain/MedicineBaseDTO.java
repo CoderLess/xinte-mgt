@@ -37,17 +37,29 @@ public class MedicineBaseDTO {
      */
     private String shortName;
     /**
-     * @description: 编号
-     * @author：RenBin
-     * @createTime：2020年12月28日
-     */
-    private String code;
-    /**
      * @description: 厂家
      * @author：RenBin
      * @createTime：2020年12月28日
      */
     private Long factoryId;
+    /**
+     * @description: 售价
+     * @author：RenBin
+     * @createTime：2021/1/10 16:46
+     */
+    private BigDecimal sellingPrice;
+    /**
+     * @description: 数量
+     * @author：RenBin
+     * @createTime：2021/1/10 15:45
+     */
+    private BigDecimal number;
+    /**
+     * @description: 编号
+     * @author：RenBin
+     * @createTime：2021/1/10 15:46
+     */
+    private String code;
     /**
      * @description: 规格
      * @author：RenBin
@@ -55,23 +67,11 @@ public class MedicineBaseDTO {
      */
     private String spec;
     /**
-     * @description: 数量
-     * @author：RenBin
-     * @createTime：2020年12月28日
-     */
-    private BigDecimal number;
-    /**
      * @description: 进价
      * @author：RenBin
      * @createTime：2020年12月28日
      */
     private BigDecimal purchasePrice;
-    /**
-     * @description: 售价
-     * @author：RenBin
-     * @createTime：2020年12月28日
-     */
-    private BigDecimal sellingPrice;
     /**
      * @description: 创建人
      * @author：RenBin

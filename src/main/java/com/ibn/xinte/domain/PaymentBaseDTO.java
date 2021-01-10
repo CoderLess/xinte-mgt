@@ -1,8 +1,10 @@
 package com.ibn.xinte.domain;
 
+import com.ibn.xinte.vo.PaymentDetailVO;
 import lombok.Data;
 
 import java.math.BigDecimal;
+import java.util.List;
 
 /**
  * @version 1.0
@@ -58,4 +60,10 @@ public class PaymentBaseDTO {
      * @createTime：2021年1月5日
      */
     private Long prescriptionId;
+    /**
+     * @description: 支付方式
+     * @author：RenBin
+     * @createTime：2021/1/10 12:37
+     */
+    private List<PaymentDetailVO> paymentDetailVOList;
 }

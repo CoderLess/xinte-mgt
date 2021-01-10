@@ -5,6 +5,7 @@ import com.github.pagehelper.PageInfo;
 import com.ibn.xinte.common.ResultInfo;
 import com.ibn.xinte.domain.MedicineCheckInOutDTO;
 import com.ibn.xinte.enumeration.MedicineCheckInOutTypeEnum;
+import com.ibn.xinte.exception.IbnException;
 import com.ibn.xinte.service.MedicineCheckInOutService;
 import com.ibn.xinte.util.BeanUtils;
 import com.ibn.xinte.util.RequestUtils;
@@ -47,7 +48,12 @@ public class MedicineCheckInOutController {
         BeanUtils.copyProperties(medicineCheckInOutVO, medicineCheckInOutDTO);
         medicineCheckInOutDTO.setCreateTime(System.currentTimeMillis());
         medicineCheckInOutDTO.setAdminId(adminId);
-        Long id = medicineCheckInOutService.save(medicineCheckInOutDTO);
+        Long id = null;
+        try {
+            id = medicineCheckInOutService.save(medicineCheckInOutDTO);
+        } catch (IbnException e) {
+            return new ResultInfo().error(e.getMessage());
+        }
         return new ResultInfo().success(id);
     }
 

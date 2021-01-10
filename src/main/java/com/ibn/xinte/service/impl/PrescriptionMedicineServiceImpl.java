@@ -4,17 +4,22 @@ import com.alibaba.fastjson.JSONObject;
 import com.github.pagehelper.Page;
 import com.github.pagehelper.PageInfo;
 import com.google.common.collect.Lists;
+import com.ibn.xinte.dao.PrescriptionBaseDao;
 import com.ibn.xinte.dao.PrescriptionMedicineDao;
 import com.ibn.xinte.domain.PrescriptionMedicineDTO;
 import com.ibn.xinte.entity.PrescriptionMedicineDO;
+import com.ibn.xinte.exception.IbnException;
+import com.ibn.xinte.service.PrescriptionBaseService;
 import com.ibn.xinte.service.PrescriptionMedicineService;
 import com.ibn.xinte.util.BeanUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.CollectionUtils;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 /**
@@ -34,7 +39,8 @@ public class PrescriptionMedicineServiceImpl implements PrescriptionMedicineServ
     private PrescriptionMedicineDao prescriptionMedicineDao;
 
     @Override
-    public Long save(PrescriptionMedicineDTO prescriptionMedicineDTO) {
+    @Transactional(rollbackFor = Exception.class)
+    public Long save(PrescriptionMedicineDTO prescriptionMedicineDTO) throws IbnException {
         if (null == prescriptionMedicineDTO) {
             return null;
         }

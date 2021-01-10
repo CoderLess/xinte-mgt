@@ -30,6 +30,12 @@ public class MedicineCheckInOutDO {
      */
     private Long medicineId;
     /**
+     * @description: 药品编号
+     * @author：RenBin
+     * @createTime：2020年12月28日
+     */
+    private String code;
+    /**
      * @description: 入库数量
      * @author：RenBin
      * @createTime：2020年12月28日
@@ -71,4 +77,4 @@ public class MedicineCheckInOutDO {
      * @createTime：2020年12月28日
      */
     private Long createTime;
-    }
+}

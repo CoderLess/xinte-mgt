@@ -56,7 +56,7 @@
             #{ item.number },
             #{ item.sellingPrice },
             #{ item.purchasePrice },
-            #{ item.createTime }
+            #{ item.createTime },
             )
         </foreach>
     </insert>

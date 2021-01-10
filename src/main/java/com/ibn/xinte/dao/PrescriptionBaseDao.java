@@ -4,6 +4,8 @@ import com.github.pagehelper.Page;
 import com.ibn.xinte.domain.PrescriptionBaseDTO;
 import com.ibn.xinte.entity.PrescriptionBaseDO;
 
+import java.math.BigDecimal;
+import java.math.BigInteger;
 import java.util.List;
 
 /**
@@ -28,4 +30,11 @@ public interface PrescriptionBaseDao extends BaseDao<PrescriptionBaseDO> {
      * @createTime：2021/1/9 12:38
      */
     Page<PrescriptionBaseDTO> queryListInfo(PrescriptionBaseDTO prescriptionBaseDTO);
+
+    /**
+     * @description: 根据药方查询管理员的提成比例
+     * @author：RenBin
+     * @createTime：2021/1/10 12:02
+     */
+    BigDecimal queryAdminCommission(Long prescriptionId);
 }

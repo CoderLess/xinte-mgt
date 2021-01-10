@@ -5,10 +5,15 @@ import com.github.pagehelper.Page;
 import com.github.pagehelper.PageInfo;
 import com.google.common.collect.Lists;
 import com.ibn.xinte.dao.MedicineBaseDao;
+import com.ibn.xinte.dao.MedicineCheckInOutDao;
 import com.ibn.xinte.dao.PaymentBaseDao;
+import com.ibn.xinte.dao.PrescriptionMedicineDao;
 import com.ibn.xinte.domain.PayStatisticDTO;
 import com.ibn.xinte.domain.PaymentBaseDTO;
+import com.ibn.xinte.entity.MedicineCheckInOutDO;
 import com.ibn.xinte.entity.PaymentBaseDO;
+import com.ibn.xinte.entity.PrescriptionMedicineDO;
+import com.ibn.xinte.enumeration.MedicineCheckInOutTypeEnum;
 import com.ibn.xinte.service.PaymentBaseService;
 import com.ibn.xinte.util.BeanUtils;
 import org.slf4j.Logger;
@@ -37,6 +42,10 @@ public class PaymentBaseServiceImpl implements PaymentBaseService {
     private PaymentBaseDao paymentBaseDao;
     @Autowired
     private MedicineBaseDao medicineBaseDao;
+    @Autowired
+    private PrescriptionMedicineDao prescriptionMedicineDao;
+    @Autowired
+    private MedicineCheckInOutDao medicineCheckInOutDao;
 
     @Override
     @Transactional(rollbackFor = Exception.class)
@@ -47,7 +56,26 @@ public class PaymentBaseServiceImpl implements PaymentBaseService {
         PaymentBaseDO paymentBaseDO = new PaymentBaseDO();
         BeanUtils.copyProperties(paymentBaseDTO, paymentBaseDO);
         // 药品卖出，减少库存
-        medicineBaseDao.drugSales(paymentBaseDTO.getPrescriptionId());
+        Long prescriptionId = paymentBaseDTO.getPrescriptionId();
+        medicineBaseDao.drugSales(prescriptionId);
+        // 增加出库记录
+        PrescriptionMedicineDO prescriptionMedicineDO = new PrescriptionMedicineDO();
+        prescriptionMedicineDO.setPrescriptionId(prescriptionId);
+        List<PrescriptionMedicineDO> prescriptionMedicineDTOList = prescriptionMedicineDao.queryList(prescriptionMedicineDO);
+        List<MedicineCheckInOutDO> medicineCheckInOutDOList = Lists.newArrayList();
+        Long curTime = System.currentTimeMillis();
+        for (PrescriptionMedicineDO curPrescriptionMedicineDO : prescriptionMedicineDTOList) {
+            MedicineCheckInOutDO medicineCheckInOutDO = new MedicineCheckInOutDO();
+            medicineCheckInOutDO.setMedicineId(curPrescriptionMedicineDO.getPrescriptionId());
+            medicineCheckInOutDO.setNumber(curPrescriptionMedicineDO.getNumber());
+            medicineCheckInOutDO.setPrice(curPrescriptionMedicineDO.getSellingPrice());
+            medicineCheckInOutDO.setPrescriptionId(prescriptionId);
+            medicineCheckInOutDO.setType(MedicineCheckInOutTypeEnum.OUT.getCode());
+            medicineCheckInOutDO.setAdminId(paymentBaseDTO.getCreator());
+            medicineCheckInOutDO.setCreateTime(curTime);
+            medicineCheckInOutDOList.add(medicineCheckInOutDO);
+        }
+        medicineCheckInOutDao.saveBatch(medicineCheckInOutDOList);
         // 保存出售记录
         paymentBaseDao.save(paymentBaseDO);
         return paymentBaseDO.getId();

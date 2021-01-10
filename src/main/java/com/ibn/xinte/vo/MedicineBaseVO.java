@@ -35,20 +35,18 @@ public class MedicineBaseVO {
     @ApiModelProperty(value = "药品名称", name = "name")
     private String name;
     /**
+     * @description: 售价
+     * @author：RenBin
+     * @createTime：2021/1/10 16:46
+     */
+    private BigDecimal sellingPrice;
+    /**
      * @description: 药品名简称
      * @author：RenBin
      * @createTime：2020年12月28日
      */
     @ApiModelProperty(value = "药品名称", name = "shortName")
     private String shortName;
-
-    /**
-     * @description: 编号
-     * @author：RenBin
-     * @createTime：2020年12月28日
-     */
-    @ApiModelProperty(value = "编号", name = "code")
-    private String code;
     /**
      * @description: 厂家
      * @author：RenBin
@@ -57,6 +55,20 @@ public class MedicineBaseVO {
     @ApiModelProperty(value = "厂家", name = "factoryId")
     private Long factoryId;
     /**
+     * @description: 数量
+     * @author：RenBin
+     * @createTime：2021/1/10 15:45
+     */
+    @ApiModelProperty(value = "数量", name = "number")
+    private BigDecimal number;
+    /**
+     * @description: 编号
+     * @author：RenBin
+     * @createTime：2021/1/10 15:46
+     */
+    @ApiModelProperty(value = "编号", name = "code")
+    private String code;
+    /**
      * @description: 规格
      * @author：RenBin
      * @createTime：2020年12月28日
@@ -64,26 +76,12 @@ public class MedicineBaseVO {
     @ApiModelProperty(value = "规格", name = "spec")
     private String spec;
     /**
-     * @description: 数量
-     * @author：RenBin
-     * @createTime：2020年12月28日
-     */
-    @ApiModelProperty(value = "数量", name = "number")
-    private BigDecimal number;
-    /**
      * @description: 进价
      * @author：RenBin
      * @createTime：2020年12月28日
      */
     @ApiModelProperty(value = "进价", name = "purchasePrice")
     private BigDecimal purchasePrice;
-    /**
-     * @description: 售价
-     * @author：RenBin
-     * @createTime：2020年12月28日
-     */
-    @ApiModelProperty(value = "售价", name = "sellingPrice")
-    private BigDecimal sellingPrice;
     /**
      * @description: 创建人
      * @author：RenBin

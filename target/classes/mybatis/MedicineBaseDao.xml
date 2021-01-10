@@ -7,10 +7,8 @@
             <if test="id != null">id,</if>
             <if test="name != null">name,</if>
             <if test="shortName != null">short_name,</if>
-            <if test="code != null">code,</if>
             <if test="factoryId != null">factory_id,</if>
             <if test="spec != null">spec,</if>
-            <if test="number != null">number,</if>
             <if test="purchasePrice != null">purchase_price,</if>
             <if test="sellingPrice != null">selling_price,</if>
             <if test="creatorId != null">creator_id,</if>
@@ -25,12 +23,10 @@
             <if test="id != null">#{ id },</if>
             <if test="name != null">#{name},</if>
             <if test="shortName != null">#{shortName},</if>
-            <if test="code != null">#{ code },</if>
             <if test="factoryId != null">#{ factoryId },</if>
             <if test="spec != null">#{ spec },</if>
-            <if test="number != null">#{ number },</if>
             <if test="purchasePrice != null">#{ purchasePrice },</if>
-            <if test="sellingPrice != null">#{ sellingPrice },</if>
+            <if test="sellingPrice != null">#{sellingPrice},</if>
             <if test="creatorId != null">#{ creatorId },</if>
             <if test="createTime != null">#{ createTime },</if>
             <if test="updateId != null">#{ updateId },</if>
@@ -42,10 +38,8 @@
 		`id`,
 		`name`,
 		`short_name`,
-		`code`,
 		`factory_id`,
 		`spec`,
-		`number`,
 		`purchase_price`,
 		`selling_price`,
 		`creator_id`,
@@ -67,12 +61,10 @@
             #{ item.id },
             #{ item.name },
             #{ item.shortName },
-            #{ item.code },
             #{ item.factoryId },
             #{ item.spec },
-            #{ item.number },
             #{ item.purchasePrice },
-            #{ item.sellingPrice },
+            #{ item.selling_price },
             #{ item.creatorId },
             #{ item.createTime },
             #{ item.updateId },
@@ -86,10 +78,8 @@
             <if test="id != null">`id` = #{id},</if>
             <if test="name != null">`name` = #{name},</if>
             <if test="shortName != null">`short_name` = #{shortName},</if>
-            <if test="code != null">`code` = #{code},</if>
             <if test="factoryId != null">`factory_id` = #{factoryId},</if>
             <if test="spec != null">`spec` = #{spec},</if>
-            <if test="number != null">`number` = #{number},</if>
             <if test="purchasePrice != null">`purchase_price` = #{purchasePrice},</if>
             <if test="sellingPrice != null">`selling_price` = #{sellingPrice},</if>
             <if test="creatorId != null">`creator_id` = #{creatorId},</if>
@@ -121,17 +111,11 @@
             <if test="shortName != null">
                 and short_name like concat('%', #{shortName}, '%')
             </if>
-            <if test="code != null">
-                and code = #{code}
-            </if>
             <if test="factoryId != null">
                 and factory_id = #{factoryId}
             </if>
             <if test="spec != null">
                 and spec = #{spec}
-            </if>
-            <if test="number != null">
-                and number = #{number}
             </if>
             <if test="purchasePrice != null">
                 and purchase_price = #{purchasePrice}
@@ -166,6 +150,6 @@
         update medicine_base mb
         left join prescription_medicine pm on mb.id=pm.prescription_id
         set mb.number=(mb.number-pm.number)
-        where pm.prescription_id=1 and sold=1
+        where pm.prescription_id=#{id} and sold=1
     </update>
 </mapper>

@@ -207,4 +207,10 @@
             </if>
         </where>
     </select>
+    <select id="queryAdminCommission" resultType="com.ibn.xinte.domain.PrescriptionBaseDTO">
+        select ab.commission
+        from prescription_base pb
+        left join admin_base ab on pb.admin_id= ab.id
+        where pb.id= #{prescriptionId}
+    </select>
 </mapper>

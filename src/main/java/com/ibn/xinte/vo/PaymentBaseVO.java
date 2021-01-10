@@ -5,6 +5,7 @@ import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 
 import java.math.BigDecimal;
+import java.util.List;
 
 /**
  * @version 1.0
@@ -55,6 +56,9 @@ public class PaymentBaseVO {
      */
     @ApiModelProperty(value = "药方id", name = "prescriptionId")
     private Long prescriptionId;
+
+    @ApiModelProperty(value="收款详情", name="paymentDetailVOList")
+    private List<PaymentDetailVO> paymentDetailVOList;
     /**
      * @description: 页码
      * @author：RenBin

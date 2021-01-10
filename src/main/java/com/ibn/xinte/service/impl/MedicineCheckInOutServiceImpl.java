@@ -11,7 +11,6 @@ import com.ibn.xinte.domain.MedicineCheckInOutDTO;
 import com.ibn.xinte.entity.MedicineBaseDO;
 import com.ibn.xinte.entity.MedicineCheckInOutDO;
 import com.ibn.xinte.enumeration.MedicineCheckInOutTypeEnum;
-import com.ibn.xinte.service.MedicineBaseService;
 import com.ibn.xinte.service.MedicineCheckInOutService;
 import com.ibn.xinte.util.BeanUtils;
 import org.slf4j.Logger;

@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.ibn.xinte.dao.AdminCommissionDao">
+    <sql id="AdminCommissionDO_Columns">
+        <trim suffixOverrides=",">
+            <if test="adminId != null">admin_id,</if>
+            <if test="commissionAmount != null">commission_amount,</if>
+            <if test="createTime != null">create_time,</if>
+            <if test="id != null">id,</if>
+            <if test="prescriptionId != null">prescription_id,</if>
+        </trim>
+    </sql>
+
+    <sql id="AdminCommissionDO_Values">
+        <trim suffixOverrides=",">
+            <if test="adminId != null">#{ adminId },</if>
+            <if test="commissionAmount != null">#{ commissionAmount },</if>
+            <if test="createTime != null">#{ createTime },</if>
+            <if test="id != null">#{ id },</if>
+            <if test="prescriptionId != null">#{ prescriptionId },</if>
+        </trim>
+    </sql>
+
+    <sql id="baseColumn">
+        `admin_id`,
+		`commission_amount`,
+		`create_time`,
+		`id`,
+		`prescription_id`
+    </sql>
+
+    <insert id="save" useGeneratedKeys="true" keyProperty="id">
+        insert into admin_commission (<include refid="AdminCommissionDO_Columns"/>)
+        values(<include refid="AdminCommissionDO_Values"/>)
+    </insert>
+
+    <insert id="saveBatch" parameterType="java.util.List">
+        insert into admin_commission (<include refid="baseColumn"/>)
+        values
+        <foreach collection="list" index="index" item="item" separator=",">
+            (
+            #{ item.adminId },
+            #{ item.commissionAmount },
+            #{ item.createTime },
+            #{ item.id },
+            #{ item.prescriptionId }
+            )
+        </foreach>
+    </insert>
+    <update id="updateById">
+        update admin_commission
+        <set>
+            <if test="adminId != null">`admin_id` = #{adminId},</if>
+            <if test="commissionAmount != null">`commission_amount` = #{commissionAmount},</if>
+            <if test="createTime != null">`create_time` = #{createTime},</if>
+            <if test="id != null">`id` = #{id},</if>
+            <if test="prescriptionId != null">`prescription_id` = #{prescriptionId},</if>
+        </set>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteById">
+        delete
+        from admin_commission
+        where id = #{id}
+    </delete>
+
+    <select id="queryById" resultType="com.ibn.xinte.entity.AdminCommissionDO">
+        select
+        <include refid="baseColumn"/>
+        from admin_commission where id = #{id}
+    </select>
+
+    <sql id="queryColumn">
+        <where>
+            <if test="adminId != null">
+                and admin_id = #{adminId}
+            </if>
+            <if test="commissionAmount != null">
+                and commission_amount = #{commissionAmount}
+            </if>
+            <if test="createTime != null">
+                and create_time = #{createTime}
+            </if>
+            <if test="id != null">
+                and id = #{id}
+            </if>
+            <if test="prescriptionId != null">
+                and prescription_id = #{prescriptionId}
+            </if>
+        </where>
+    </sql>
+
+    <select id="queryList" resultType="com.ibn.xinte.entity.AdminCommissionDO">
+        select
+        <include refid="baseColumn"/>
+        from admin_commission
+        <include refid="queryColumn"/>
+    </select>
+</mapper>
