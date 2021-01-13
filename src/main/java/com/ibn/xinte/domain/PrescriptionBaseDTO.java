@@ -3,6 +3,8 @@ package com.ibn.xinte.domain;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 
+import java.util.List;
+
 /**
  * @version 1.0
  * @description:
@@ -83,6 +85,12 @@ public class PrescriptionBaseDTO {
      */
     private Long createTimeEnd;
     /**
+     * @description: 是否已经付款 0：否 1：是
+     * @author：RenBin
+     * @createTime：2021/1/6 21:19
+     */
+    private Integer payment;
+    /**
      * @description: 后台人员姓名
      * @author：RenBin
      * @createTime：2021/1/9 12:43
@@ -94,4 +102,11 @@ public class PrescriptionBaseDTO {
      * @createTime：2021/1/9 12:43
      */
     private String username;
+
+    /**
+     * @description: 药方中的明细信息
+     * @author：RenBin
+     * @createTime：2021/1/11 22:48
+     */
+    private List<PrescriptionMedicineDTO> prescriptionMedicineDTOList;
 }

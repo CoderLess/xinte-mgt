@@ -13,6 +13,7 @@
             <if test="remark != null">remark,</if>
             <if test="createTime != null">create_time,</if>
             <if test="type != null">type,</if>
+            <if test="payment != null">payment,</if>
         </trim>
     </sql>
 
@@ -27,6 +28,7 @@
             <if test="remark != null">#{ remark },</if>
             <if test="createTime != null">#{ createTime },</if>
             <if test="type != null">#{type},</if>
+            <if test="payment != null">#{payment},</if>
         </trim>
     </sql>
 
@@ -39,7 +41,8 @@
 		`pathogeny`,
 		`remark`,
 		`create_time`,
-		`type`
+		`type`,
+		`payment`
 	</sql>
 
     <insert id="save" useGeneratedKeys="true" keyProperty="id">
@@ -61,6 +64,7 @@
             #{ item.remark },
             #{ item.createTime },
             #{ item.type },
+            #{payment}
             )
         </foreach>
     </insert>
@@ -76,6 +80,7 @@
             <if test="remark != null">`remark` = #{remark},</if>
             <if test="createTime != null">`create_time` = #{createTime},</if>
             <if test="type != null">`type` = #{type},</if>
+            <if test="payment != null">`payment` = #{payment}</if>
         </set>
         where id = #{id}
     </update>
@@ -118,6 +123,9 @@
             </if>
             <if test="type != null">
                 and type = #{type}
+            </if>
+            <if test="payment != null">
+                and payment = #{payment}
             </if>
         </where>
     </sql>
@@ -165,6 +173,9 @@
             <if test="type != null">
                 and type = #{type}
             </if>
+            <if test="payment != null">
+                and payment = #{payment}
+            </if>
         </where>
     </select>
     <select id="queryListInfo" resultType="com.ibn.xinte.domain.PrescriptionBaseDTO">
@@ -204,6 +215,9 @@
             </if>
             <if test="type != null">
                 and pb.type = #{type}
+            </if>
+            <if test="payment != null">
+                and pb.payment = #{payment}
             </if>
         </where>
     </select>

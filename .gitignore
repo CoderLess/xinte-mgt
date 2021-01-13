@@ -2,6 +2,7 @@
 *.iml
 *.ipr
 *.iws
+*.class
 out
 gen
 /.apt_generated/

@@ -4,7 +4,9 @@ import com.alibaba.fastjson.JSONObject;
 import com.github.pagehelper.PageInfo;
 import com.ibn.xinte.common.ResultInfo;
 import com.ibn.xinte.domain.PrescriptionBaseDTO;
+import com.ibn.xinte.domain.PrescriptionMedicineDTO;
 import com.ibn.xinte.service.PrescriptionBaseService;
+import com.ibn.xinte.service.PrescriptionMedicineService;
 import com.ibn.xinte.util.BeanUtils;
 import com.ibn.xinte.util.RequestUtils;
 import com.ibn.xinte.vo.PrescriptionBaseVO;
@@ -34,6 +36,8 @@ public class PrescriptionBaseController {
 
     @Autowired
     private PrescriptionBaseService prescriptionBaseService;
+    @Autowired
+    private PrescriptionMedicineService prescriptionMedicineService;
 
     @ApiOperation("保存药方信息")
     @PostMapping("save")
@@ -79,6 +83,21 @@ public class PrescriptionBaseController {
             return new ResultInfo().error("参数不能为空");
         }
         PrescriptionBaseDTO prescriptionBaseDTO = prescriptionBaseService.queryById(id);
+        return new ResultInfo().success(prescriptionBaseDTO);
+    }
+
+    @ApiOperation("根据id查询药方及药品信息")
+    @GetMapping("queryInfoById")
+    public ResultInfo queryInfoById(Long id) {
+        if (null == id) {
+            return new ResultInfo().error("参数不能为空");
+        }
+        PrescriptionBaseDTO prescriptionBaseDTO = prescriptionBaseService.queryById(id);
+        // 获取药方明细信息
+        PrescriptionMedicineDTO prescriptionMedicineDTO = new PrescriptionMedicineDTO();
+        prescriptionMedicineDTO.setPrescriptionId(id);
+        List<PrescriptionMedicineDTO> prescriptionMedicineDTOList = prescriptionMedicineService.queryInfoList(prescriptionMedicineDTO);
+        prescriptionBaseDTO.setPrescriptionMedicineDTOList(prescriptionMedicineDTOList);
         return new ResultInfo().success(prescriptionBaseDTO);
     }
 

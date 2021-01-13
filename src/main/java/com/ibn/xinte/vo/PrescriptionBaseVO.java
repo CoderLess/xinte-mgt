@@ -79,7 +79,15 @@ public class PrescriptionBaseVO {
      * @author：RenBin
      * @createTime：2021/1/6 21:19
      */
+    @ApiModelProperty(value = "类型 0：诊断药单 1：临时药单", name = "type")
     private Integer type;
+    /**
+     * @description: 是否已经付款 0：否 1：是
+     * @author：RenBin
+     * @createTime：2021/1/6 21:19
+     */
+    @ApiModelProperty(value = "是否已经付款 0：否 1：是", name = "payment")
+    private Integer payment;
     /**
      * @description: 创建时间开始
      * @author：RenBin

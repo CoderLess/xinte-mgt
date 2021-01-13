@@ -8,6 +8,7 @@
             <if test="name != null">name,</if>
             <if test="shortName != null">short_name,</if>
             <if test="factoryId != null">factory_id,</if>
+            <if test="number != null">number,</if>
             <if test="spec != null">spec,</if>
             <if test="purchasePrice != null">purchase_price,</if>
             <if test="sellingPrice != null">selling_price,</if>
@@ -24,6 +25,7 @@
             <if test="name != null">#{name},</if>
             <if test="shortName != null">#{shortName},</if>
             <if test="factoryId != null">#{ factoryId },</if>
+            <if test="number != null">#{number},</if>
             <if test="spec != null">#{ spec },</if>
             <if test="purchasePrice != null">#{ purchasePrice },</if>
             <if test="sellingPrice != null">#{sellingPrice},</if>
@@ -39,6 +41,7 @@
 		`name`,
 		`short_name`,
 		`factory_id`,
+		`number`,
 		`spec`,
 		`purchase_price`,
 		`selling_price`,
@@ -62,6 +65,7 @@
             #{ item.name },
             #{ item.shortName },
             #{ item.factoryId },
+            #{ item.number },
             #{ item.spec },
             #{ item.purchasePrice },
             #{ item.selling_price },
@@ -79,6 +83,7 @@
             <if test="name != null">`name` = #{name},</if>
             <if test="shortName != null">`short_name` = #{shortName},</if>
             <if test="factoryId != null">`factory_id` = #{factoryId},</if>
+            <if test="number != null">`number` = #{number},</if>
             <if test="spec != null">`spec` = #{spec},</if>
             <if test="purchasePrice != null">`purchase_price` = #{purchasePrice},</if>
             <if test="sellingPrice != null">`selling_price` = #{sellingPrice},</if>
@@ -113,6 +118,9 @@
             </if>
             <if test="factoryId != null">
                 and factory_id = #{factoryId}
+            </if>
+            <if test="number != null">
+                and number = #{number}
             </if>
             <if test="spec != null">
                 and spec = #{spec}

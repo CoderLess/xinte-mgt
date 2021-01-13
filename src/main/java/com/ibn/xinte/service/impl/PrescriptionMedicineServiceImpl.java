@@ -123,6 +123,11 @@ public class PrescriptionMedicineServiceImpl implements PrescriptionMedicineServ
     }
 
     @Override
+    public List<PrescriptionMedicineDTO> queryInfoList(PrescriptionMedicineDTO prescriptionMedicineDTO) {
+        return prescriptionMedicineDao.queryInfoList(prescriptionMedicineDTO);
+    }
+
+    @Override
     public PageInfo<PrescriptionMedicineDTO> queryPageInfo(PrescriptionMedicineDTO prescriptionMedicineDTO, Integer pageNum, Integer pageSize) {
         if (null == prescriptionMedicineDTO) {
             return null;

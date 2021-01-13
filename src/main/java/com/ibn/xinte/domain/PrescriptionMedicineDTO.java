@@ -3,6 +3,7 @@ package com.ibn.xinte.domain;
 import lombok.Data;
 
 import java.math.BigDecimal;
+import java.util.List;
 
 /**
  * @version 1.0
@@ -23,6 +24,12 @@ public class PrescriptionMedicineDTO {
      * @createTime：2020年12月28日
      */
     private Long id;
+    /**
+     * @description: 药品名称
+     * @author：RenBin
+     * @createTime：2021/1/11 23:03
+     */
+    private String name;
     /**
      * @description: 药方id
      * @author：RenBin

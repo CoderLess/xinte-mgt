@@ -69,4 +69,10 @@ public class PrescriptionBaseDO {
      * @createTime：2021/1/6 21:19
      */
     private Integer type;
+    /**
+     * @description: 是否已经付款 0：否 1：是
+     * @author：RenBin
+     * @createTime：2021/1/6 21:19
+     */
+    private Integer payment;
 }

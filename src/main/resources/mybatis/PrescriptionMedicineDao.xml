@@ -121,4 +121,45 @@
         <include refid="queryColumn"/>
         order by id desc
     </select>
+
+    <select id="queryInfoList" resultType="com.ibn.xinte.domain.PrescriptionMedicineDTO">
+        select
+        pm.`id`,
+        pm.`prescription_id`,
+        pm.`medicinal_id`,
+        mb.`name`,
+        pm.`sold`,
+        pm.`number`,
+        pm.`selling_price`,
+        pm.`purchase_price`,
+        pm.`create_time`
+        from prescription_medicine pm
+        left join medicine_base mb on mb.id=pm.medicinal_id
+        <where>
+            <if test="id != null">
+                and pm.id = #{id}
+            </if>
+            <if test="prescriptionId != null">
+                and pm.prescription_id = #{prescriptionId}
+            </if>
+            <if test="medicinalId != null">
+                and pm.medicinal_id = #{medicinalId}
+            </if>
+            <if test="sold != null">
+                and pm.sold = #{sold}
+            </if>
+            <if test="number != null">
+                and pm.number = #{number}
+            </if>
+            <if test="sellingPrice != null">
+                and pm.selling_price = #{sellingPrice}
+            </if>
+            <if test="purchasePrice != null">
+                and pm.purchase_price = #{purchasePrice}
+            </if>
+            <if test="createTime != null">
+                and pm.create_time = #{createTime}
+            </if>
+        </where>
+    </select>
 </mapper>

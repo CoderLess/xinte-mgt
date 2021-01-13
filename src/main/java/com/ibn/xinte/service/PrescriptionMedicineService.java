@@ -58,6 +58,12 @@ public interface PrescriptionMedicineService {
      */
     List<PrescriptionMedicineDTO> queryList(PrescriptionMedicineDTO prescriptionMedicineDTO);
     /**
+     * @description: 查询根据条件查询药品相关信息
+     * @author：RenBin
+     * @createTime：2021/1/11 23:02
+     */
+    List<PrescriptionMedicineDTO> queryInfoList(PrescriptionMedicineDTO prescriptionMedicineDTO);
+    /**
      * @description: 通过条件查询管理员信息
      * @author：RenBin
      * @createTime：2020年12月28日

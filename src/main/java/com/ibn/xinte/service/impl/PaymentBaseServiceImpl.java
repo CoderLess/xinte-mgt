@@ -10,11 +10,14 @@ import com.ibn.xinte.dao.PaymentBaseDao;
 import com.ibn.xinte.dao.PrescriptionMedicineDao;
 import com.ibn.xinte.domain.PayStatisticDTO;
 import com.ibn.xinte.domain.PaymentBaseDTO;
+import com.ibn.xinte.domain.PrescriptionBaseDTO;
 import com.ibn.xinte.entity.MedicineCheckInOutDO;
 import com.ibn.xinte.entity.PaymentBaseDO;
 import com.ibn.xinte.entity.PrescriptionMedicineDO;
 import com.ibn.xinte.enumeration.MedicineCheckInOutTypeEnum;
+import com.ibn.xinte.enumeration.YesOrNoEnum;
 import com.ibn.xinte.service.PaymentBaseService;
+import com.ibn.xinte.service.PrescriptionBaseService;
 import com.ibn.xinte.util.BeanUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -46,6 +49,8 @@ public class PaymentBaseServiceImpl implements PaymentBaseService {
     private PrescriptionMedicineDao prescriptionMedicineDao;
     @Autowired
     private MedicineCheckInOutDao medicineCheckInOutDao;
+    @Autowired
+    private PrescriptionBaseService prescriptionBaseService;
 
     @Override
     @Transactional(rollbackFor = Exception.class)
@@ -76,6 +81,11 @@ public class PaymentBaseServiceImpl implements PaymentBaseService {
             medicineCheckInOutDOList.add(medicineCheckInOutDO);
         }
         medicineCheckInOutDao.saveBatch(medicineCheckInOutDOList);
+        // 修改药单状态为已付款
+        PrescriptionBaseDTO prescriptionBaseDTO = new PrescriptionBaseDTO();
+        prescriptionBaseDTO.setId(paymentBaseDTO.getPrescriptionId());
+        prescriptionBaseDTO.setPayment(YesOrNoEnum.YES.getCode());
+        prescriptionBaseService.updateById(prescriptionBaseDTO);
         // 保存出售记录
         paymentBaseDao.save(paymentBaseDO);
         return paymentBaseDO.getId();
