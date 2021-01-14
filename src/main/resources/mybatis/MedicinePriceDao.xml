@@ -98,4 +98,11 @@
         where medicine_id = #{id} and user_level &lt;= #{level}
         order by user_level desc limit 1
     </select>
+    <select id="queryMedicinePriceInfo" resultType="java.math.BigDecimal">
+        SELECT mp.selling_price
+        FROM prescription_base pb
+        left join user_base ub on ub.id = pb.user_id
+        LEFT JOIN medicine_price mp ON mp.medicine_id = #{medicineId} and ub.`level` = mp.user_level
+        WHERE pb.id = #{prescriptionId}
+    </select>
 </mapper>

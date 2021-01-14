@@ -2,6 +2,7 @@ package com.ibn.xinte.service;
 
 import com.ibn.xinte.domain.MedicinePriceDTO;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 /**
@@ -62,4 +63,10 @@ public interface MedicinePriceService {
      * @createTime：2021年1月10日
      */
     MedicinePriceDTO queryByIdLevel(Long id, Integer level);
+    /**
+     * @description: 通过会员id和药品id查询药品售价
+     * @author：RenBin
+     * @createTime：2021/1/14 21:21
+     */
+    BigDecimal queryMedicineInfo(Long prescriptionId, Long medicineId);
 }

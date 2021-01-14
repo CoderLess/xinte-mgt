@@ -72,4 +72,16 @@ public class PrescriptionMedicineDTO {
      * @createTime：2020年12月28日
      */
     private Long createTime;
+    /**
+     * @description: 厂家
+     * @author：RenBin
+     * @createTime：2020年12月28日
+     */
+    private String factory;
+    /**
+     * @description: 编码
+     * @author：RenBin
+     * @createTime：2020年12月28日
+     */
+    private String code;
 }

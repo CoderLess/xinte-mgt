@@ -5,11 +5,16 @@ import com.github.pagehelper.PageInfo;
 import com.ibn.xinte.common.ResultInfo;
 import com.ibn.xinte.domain.PrescriptionBaseDTO;
 import com.ibn.xinte.domain.PrescriptionMedicineDTO;
+import com.ibn.xinte.domain.UserBaseDTO;
 import com.ibn.xinte.service.PrescriptionBaseService;
 import com.ibn.xinte.service.PrescriptionMedicineService;
+import com.ibn.xinte.service.UserBaseService;
 import com.ibn.xinte.util.BeanUtils;
+import com.ibn.xinte.util.DateUtils;
 import com.ibn.xinte.util.RequestUtils;
+import com.ibn.xinte.vo.PrescriptionBaseInfoVO;
 import com.ibn.xinte.vo.PrescriptionBaseVO;
+import com.ibn.xinte.vo.UserInfoVO;
 import io.swagger.annotations.ApiOperation;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -38,6 +43,8 @@ public class PrescriptionBaseController {
     private PrescriptionBaseService prescriptionBaseService;
     @Autowired
     private PrescriptionMedicineService prescriptionMedicineService;
+    @Autowired
+    private UserBaseService userBaseService;
 
     @ApiOperation("保存药方信息")
     @PostMapping("save")
@@ -82,8 +89,30 @@ public class PrescriptionBaseController {
         if (null == id) {
             return new ResultInfo().error("参数不能为空");
         }
+        PrescriptionBaseInfoVO prescriptionBaseInfoVO = new PrescriptionBaseInfoVO();
+        // 药方信息
         PrescriptionBaseDTO prescriptionBaseDTO = prescriptionBaseService.queryById(id);
-        return new ResultInfo().success(prescriptionBaseDTO);
+        if (null == prescriptionBaseDTO) {
+            return new ResultInfo().success(prescriptionBaseInfoVO);
+        }
+        BeanUtils.copyProperties(prescriptionBaseDTO, prescriptionBaseInfoVO);
+        // 查询用户基本信息
+        if (prescriptionBaseDTO.getUserId() > 0) {
+            UserBaseDTO userBaseDTO = userBaseService.queryById(prescriptionBaseDTO.getUserId());
+            if (null != userBaseDTO) {
+                UserInfoVO userInfoVO = new UserInfoVO();
+                BeanUtils.copyProperties(userBaseDTO, userInfoVO);
+                // 设置年龄
+                userInfoVO.setAge(DateUtils.getAge(userBaseDTO.getBirthday()));
+                prescriptionBaseInfoVO.setUserInfoVO(userInfoVO);
+            }
+        }
+        // 药品信息
+        PrescriptionMedicineDTO prescriptionMedicineDTO = new PrescriptionMedicineDTO();
+        prescriptionMedicineDTO.setPrescriptionId(id);
+        List<PrescriptionMedicineDTO> prescriptionMedicineDTOList = prescriptionMedicineService.queryInfoList(prescriptionMedicineDTO);
+        prescriptionBaseInfoVO.setPrescriptionMedicineDTOList(prescriptionMedicineDTOList);
+        return new ResultInfo().success(prescriptionBaseInfoVO);
     }
 
     @ApiOperation("根据id查询药方及药品信息")

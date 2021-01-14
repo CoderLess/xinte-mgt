@@ -4,6 +4,7 @@ import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 
 import java.math.BigDecimal;
+import java.util.List;
 
 /**
  * @version 1.0
@@ -41,7 +42,7 @@ public class MedicineBaseDTO {
      * @author：RenBin
      * @createTime：2020年12月28日
      */
-    private Long factoryId;
+    private String factory;
     /**
      * @description: 售价
      * @author：RenBin
@@ -96,4 +97,10 @@ public class MedicineBaseDTO {
      * @createTime：2020年12月28日
      */
     private Long updateTime;
-    }
+    /**
+     * @description: 会员价格
+     * @author：RenBin
+     * @createTime：2020年12月28日
+     */
+    private List<BigDecimal> priceList;
+}

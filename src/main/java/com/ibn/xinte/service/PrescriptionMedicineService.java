@@ -4,6 +4,7 @@ import com.github.pagehelper.PageInfo;
 import com.ibn.xinte.domain.PrescriptionMedicineDTO;
 import com.ibn.xinte.exception.IbnException;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 /**
@@ -69,4 +70,10 @@ public interface PrescriptionMedicineService {
      * @createTime：2020年12月28日
      */
     PageInfo<PrescriptionMedicineDTO> queryPageInfo(PrescriptionMedicineDTO prescriptionMedicineDTO, Integer pageNum, Integer pageSize);
+    /**
+     * @description: 计算并更新总价格
+     * @author：RenBin
+     * @createTime：2021/1/14 22:11
+     */
+    BigDecimal calculatePrice(Long prescriptionId);
 }

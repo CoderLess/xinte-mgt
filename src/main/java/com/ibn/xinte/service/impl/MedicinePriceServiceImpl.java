@@ -13,6 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.CollectionUtils;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 /**
@@ -103,6 +104,14 @@ public class MedicinePriceServiceImpl implements MedicinePriceService {
         MedicinePriceDTO medicinePriceDTO = new MedicinePriceDTO();
         BeanUtils.copyProperties(medicinePriceDO, medicinePriceDTO);
         return medicinePriceDTO;
+    }
+
+    @Override
+    public BigDecimal queryMedicineInfo(Long prescriptionId, Long medicineId) {
+        if (null == prescriptionId || null == medicineId) {
+            return null;
+        }
+        return medicinePriceDao.queryMedicinePriceInfo(prescriptionId, medicineId);
     }
 
     @Override

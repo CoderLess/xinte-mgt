@@ -40,7 +40,7 @@ public class MedicineBaseDO {
      * @author：RenBin
      * @createTime：2020年12月28日
      */
-    private Long factoryId;
+    private String factory;
     /**
      * @description: 规格
      * @author：RenBin

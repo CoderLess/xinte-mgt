@@ -128,6 +128,8 @@
         pm.`prescription_id`,
         pm.`medicinal_id`,
         mb.`name`,
+        mb.`factory`,
+        mb.`code`,
         pm.`sold`,
         pm.`number`,
         pm.`selling_price`,

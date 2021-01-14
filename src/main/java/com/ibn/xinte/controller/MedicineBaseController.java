@@ -51,11 +51,15 @@ public class MedicineBaseController {
         if (null == medicineBaseVO) {
             return new ResultInfo().error("参数不能为空");
         }
+        if (!CollectionUtils.isEmpty(medicineBaseVO.getPriceList()) && medicineBaseVO.getPriceList().size() != 5) {
+            return new ResultInfo().error("请设置5级会员的药品价格");
+        }
         Long adminId = RequestUtils.getUserId(request);
         MedicineBaseDTO medicineBaseDTO = new MedicineBaseDTO();
         BeanUtils.copyProperties(medicineBaseVO, medicineBaseDTO);
         medicineBaseDTO.setCreatorId(adminId);
         medicineBaseDTO.setCreateTime(System.currentTimeMillis());
+        medicineBaseDTO.setPriceList(medicineBaseVO.getPriceList());
         // 保存记录
         Long id = medicineBaseService.save(medicineBaseDTO);
         return new ResultInfo().success(id);
@@ -128,7 +132,7 @@ public class MedicineBaseController {
             return new ResultInfo().success(Lists.newArrayList());
         }
         try {
-            return new ResultInfo().success(BeanUtils.convertList(medicineBaseDTOPageInfo.getList(), MedicineNameVO.class));
+            return new ResultInfo().success(medicineBaseDTOPageInfo.getList());
         } catch (Exception e) {
             String msg = String.format("MedicineBaseController.queryListByName：%s",
                     JSONObject.toJSONString(medicineBaseDTOPageInfo.getList()));

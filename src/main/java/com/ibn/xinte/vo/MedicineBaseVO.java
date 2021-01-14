@@ -5,6 +5,7 @@ import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 
 import java.math.BigDecimal;
+import java.util.List;
 
 /**
  * @version 1.0
@@ -53,7 +54,7 @@ public class MedicineBaseVO {
      * @createTime：2020年12月28日
      */
     @ApiModelProperty(value = "厂家", name = "factoryId")
-    private Long factoryId;
+    private String factory;
     /**
      * @description: 数量
      * @author：RenBin
@@ -110,6 +111,13 @@ public class MedicineBaseVO {
      */
     @ApiModelProperty(value = "更新时间", name = "updateTime")
     private Long updateTime;
+    /**
+     * @description: 会员价格
+     * @author：RenBin
+     * @createTime：2020年12月28日
+     */
+    @ApiModelProperty(value = "会员价格", name = "priceList")
+    private List<BigDecimal> priceList;
     /**
      * @description: 页码
      * @author：RenBin

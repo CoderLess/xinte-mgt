@@ -48,4 +48,11 @@ public class MedicinePriceVO {
      */
     @ApiModelProperty(value = "用户等级", name = "userLevel")
     private Integer userLevel;
+    /**
+     * @description: 总价格
+     * @author：RenBin
+     * @createTime：2021年1月10日
+     */
+    @ApiModelProperty(value = "总价格", name = "totalAmount")
+    private BigDecimal totalAmount;
 }

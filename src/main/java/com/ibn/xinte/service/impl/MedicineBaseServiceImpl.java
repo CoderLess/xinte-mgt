@@ -8,15 +8,18 @@ import com.google.common.collect.Lists;
 import com.ibn.xinte.dao.MedicineBaseDao;
 import com.ibn.xinte.domain.MedicineBaseDTO;
 import com.ibn.xinte.domain.MedicineModifyLogDTO;
+import com.ibn.xinte.domain.MedicinePriceDTO;
 import com.ibn.xinte.entity.MedicineBaseDO;
 import com.ibn.xinte.service.MedicineBaseService;
 import com.ibn.xinte.service.MedicineModifyLogService;
+import com.ibn.xinte.service.MedicinePriceService;
 import com.ibn.xinte.util.BeanUtils;
 import com.ibn.xinte.util.PinYinUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.CollectionUtils;
 
 import java.util.List;
@@ -38,8 +41,11 @@ public class MedicineBaseServiceImpl implements MedicineBaseService {
     private MedicineBaseDao medicineBaseDao;
     @Autowired
     private MedicineModifyLogService medicineModifyLogService;
+    @Autowired
+    private MedicinePriceService medicinePriceService;
 
     @Override
+    @Transactional(rollbackFor = Exception.class)
     public Long save(MedicineBaseDTO medicineBaseDTO) {
         if (null == medicineBaseDTO) {
             return null;
@@ -47,10 +53,21 @@ public class MedicineBaseServiceImpl implements MedicineBaseService {
         MedicineBaseDO medicineBaseDO = new MedicineBaseDO();
         BeanUtils.copyProperties(medicineBaseDTO, medicineBaseDO);
         // 获取药品简称
-        if (null == medicineBaseDO.getShortName()) {
-            medicineBaseDO.setShortName(PinYinUtils.getFirstSpell(medicineBaseDTO.getName()));
-        }
+//        if (null == medicineBaseDO.getShortName()) {
+//            medicineBaseDO.setShortName(PinYinUtils.getFirstSpell(medicineBaseDTO.getName()));
+//        }
         medicineBaseDao.save(medicineBaseDO);
+        if (!CollectionUtils.isEmpty(medicineBaseDTO.getPriceList())) {
+            List<MedicinePriceDTO> medicinePriceDTOList = Lists.newArrayList();
+            for (int i = 0; i < medicineBaseDTO.getPriceList().size(); i++) {
+                MedicinePriceDTO medicinePriceDTO = new MedicinePriceDTO();
+                medicinePriceDTO.setMedicineId(medicineBaseDO.getId());
+                medicinePriceDTO.setUserLevel(i+1);
+                medicinePriceDTO.setSellingPrice(medicineBaseDTO.getPriceList().get(i));
+                medicinePriceDTOList.add(medicinePriceDTO);
+            }
+            medicinePriceService.saveBatch(medicinePriceDTOList);
+        }
         return medicineBaseDO.getId();
     }
 

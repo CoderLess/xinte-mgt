@@ -154,4 +154,20 @@ public class PrescriptionMedicineServiceImpl implements PrescriptionMedicineServ
         prescriptionMedicineDTOPageInfo.setTotal(prescriptionMedicineDOPage.getTotal());
         return prescriptionMedicineDTOPageInfo;
     }
+
+    @Override
+    public BigDecimal calculatePrice(Long prescriptionId) {
+        PrescriptionMedicineDO prescriptionMedicineDO = new PrescriptionMedicineDO();
+        prescriptionMedicineDO.setPrescriptionId(prescriptionId);
+        Page<PrescriptionMedicineDO> prescriptionMedicineDOPage = prescriptionMedicineDao.queryList(prescriptionMedicineDO);
+        if (CollectionUtils.isEmpty(prescriptionMedicineDOPage)) {
+            return new BigDecimal(0);
+        }
+        // 计算总价格
+        BigDecimal totalAmount = new BigDecimal("0");
+        for (PrescriptionMedicineDO curPrescriptionMedicineDO : prescriptionMedicineDOPage) {
+            totalAmount = totalAmount.add(curPrescriptionMedicineDO.getSellingPrice().multiply(curPrescriptionMedicineDO.getNumber()));
+        }
+        return totalAmount.setScale(2);
+    }
 }

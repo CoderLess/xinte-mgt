@@ -7,7 +7,7 @@
             <if test="id != null">id,</if>
             <if test="name != null">name,</if>
             <if test="shortName != null">short_name,</if>
-            <if test="factoryId != null">factory_id,</if>
+            <if test="factory != null">factory,</if>
             <if test="number != null">number,</if>
             <if test="spec != null">spec,</if>
             <if test="purchasePrice != null">purchase_price,</if>
@@ -24,7 +24,7 @@
             <if test="id != null">#{ id },</if>
             <if test="name != null">#{name},</if>
             <if test="shortName != null">#{shortName},</if>
-            <if test="factoryId != null">#{ factoryId },</if>
+            <if test="factory != null">#{ factory },</if>
             <if test="number != null">#{number},</if>
             <if test="spec != null">#{ spec },</if>
             <if test="purchasePrice != null">#{ purchasePrice },</if>
@@ -40,7 +40,7 @@
 		`id`,
 		`name`,
 		`short_name`,
-		`factory_id`,
+		`factory`,
 		`number`,
 		`spec`,
 		`purchase_price`,
@@ -64,7 +64,7 @@
             #{ item.id },
             #{ item.name },
             #{ item.shortName },
-            #{ item.factoryId },
+            #{ item.factory },
             #{ item.number },
             #{ item.spec },
             #{ item.purchasePrice },
@@ -82,7 +82,7 @@
             <if test="id != null">`id` = #{id},</if>
             <if test="name != null">`name` = #{name},</if>
             <if test="shortName != null">`short_name` = #{shortName},</if>
-            <if test="factoryId != null">`factory_id` = #{factoryId},</if>
+            <if test="factory != null">`factory` = #{factory},</if>
             <if test="number != null">`number` = #{number},</if>
             <if test="spec != null">`spec` = #{spec},</if>
             <if test="purchasePrice != null">`purchase_price` = #{purchasePrice},</if>
@@ -116,8 +116,8 @@
             <if test="shortName != null">
                 and short_name like concat('%', #{shortName}, '%')
             </if>
-            <if test="factoryId != null">
-                and factory_id = #{factoryId}
+            <if test="factory != null">
+                and factory = #{factory}
             </if>
             <if test="number != null">
                 and number = #{number}
