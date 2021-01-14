@@ -6,6 +6,7 @@
         <trim suffixOverrides=",">
             <if test="id != null">id,</if>
             <if test="name != null">name,</if>
+            <if test="code != null">code,</if>
             <if test="shortName != null">short_name,</if>
             <if test="factory != null">factory,</if>
             <if test="number != null">number,</if>
@@ -23,6 +24,7 @@
         <trim suffixOverrides=",">
             <if test="id != null">#{ id },</if>
             <if test="name != null">#{name},</if>
+            <if test="code != null">#{code},</if>
             <if test="shortName != null">#{shortName},</if>
             <if test="factory != null">#{ factory },</if>
             <if test="number != null">#{number},</if>
@@ -39,6 +41,7 @@
     <sql id="baseColumn">
 		`id`,
 		`name`,
+		`code`,
 		`short_name`,
 		`factory`,
 		`number`,
@@ -63,6 +66,7 @@
             (
             #{ item.id },
             #{ item.name },
+            #{ item.code },
             #{ item.shortName },
             #{ item.factory },
             #{ item.number },
@@ -81,6 +85,7 @@
         <set>
             <if test="id != null">`id` = #{id},</if>
             <if test="name != null">`name` = #{name},</if>
+            <if test="code != null">`code` = #{code},</if>
             <if test="shortName != null">`short_name` = #{shortName},</if>
             <if test="factory != null">`factory` = #{factory},</if>
             <if test="number != null">`number` = #{number},</if>
@@ -112,6 +117,9 @@
             </if>
             <if test="name != null">
                 and name like concat('%', #{name}, '%')
+            </if>
+            <if test="code != null">
+                and code = #{code}
             </if>
             <if test="shortName != null">
                 and short_name like concat('%', #{shortName}, '%')
