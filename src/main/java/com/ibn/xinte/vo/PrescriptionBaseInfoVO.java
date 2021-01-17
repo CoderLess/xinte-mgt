@@ -3,6 +3,7 @@ package com.ibn.xinte.vo;
 import com.ibn.xinte.domain.PrescriptionMedicineDTO;
 import lombok.Data;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 /**
@@ -99,6 +100,13 @@ public class PrescriptionBaseInfoVO {
      * @createTime：2021/1/9 12:43
      */
     private String username;
+
+    /**
+     * @description: 药单总价格
+     * @author：RenBin
+     * @createTime：2021/1/6 21:19
+     */
+    private BigDecimal amount;
 
     /**
      * @description: 用户基本信息
