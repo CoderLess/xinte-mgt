@@ -31,33 +31,6 @@ public class AdminCommissionController {
     @Autowired
     private AdminCommissionService adminCommissionService;
 
-    @PostMapping("save")
-    public ResultInfo save(@RequestBody AdminCommissionVO adminCommissionVO) {
-        if (null == adminCommissionVO) {
-            return new ResultInfo().error("参数不能为空");
-        }
-        AdminCommissionDTO adminCommissionDTO = new AdminCommissionDTO();
-        BeanUtils.copyProperties(adminCommissionVO, adminCommissionDTO);
-        Long id = adminCommissionService.save(adminCommissionDTO);
-        return new ResultInfo().success(id);
-    }
-
-    @PostMapping("saveBatch")
-    public ResultInfo save(@RequestBody List<AdminCommissionVO> adminCommissionVOList) {
-        if (CollectionUtils.isEmpty(adminCommissionVOList)) {
-            return new ResultInfo().error("参数不能为空");
-        }
-        List<AdminCommissionDTO> adminCommissionDTOList = null;
-        try {
-            adminCommissionDTOList = BeanUtils.convertList(adminCommissionVOList, AdminCommissionDTO.class);
-        } catch (Exception e) {
-            String msg = String.format("AdminCommissionController.save中list转换失败：%s", JSONObject.toJSONString(adminCommissionDTOList));
-            logger.error(msg, e);
-        }
-        adminCommissionService.saveBatch(adminCommissionDTOList);
-        return new ResultInfo().success();
-    }
-
     @PostMapping("updateById")
     public ResultInfo updateById(@RequestBody AdminCommissionVO adminCommissionVO) {
         if (null == adminCommissionVO) {

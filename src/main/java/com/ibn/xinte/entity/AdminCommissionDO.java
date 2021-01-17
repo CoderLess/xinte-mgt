@@ -30,6 +30,18 @@ public class AdminCommissionDO {
      */
     private BigDecimal commissionAmount;
     /**
+     * @description: 提成比例
+     * @author：RenBin
+     * @createTime：2021年1月10日
+     */
+    private BigDecimal commission;
+    /**
+     * @description: 总价格
+     * @author：RenBin
+     * @createTime：2021年1月10日
+     */
+    private BigDecimal amount;
+    /**
      * @description: 创建时间
      * @author：RenBin
      * @createTime：2021年1月10日
@@ -47,4 +59,17 @@ public class AdminCommissionDO {
      * @createTime：2021年1月10日
      */
     private Long prescriptionId;
+    /**
+     * @description: 挂号费
+     * @author：RenBin
+     * @createTime：2021/1/17 21:00
+     */
+    private BigDecimal registrationFee;
+    /**
+     * @description: 挂号费提成
+     * @author：RenBin
+     * @createTime：2021/1/17 21:00
+     */
+    private BigDecimal registrationFeeAmount;
+
 }

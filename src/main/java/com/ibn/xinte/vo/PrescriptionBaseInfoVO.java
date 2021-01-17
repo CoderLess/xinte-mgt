@@ -108,6 +108,13 @@ public class PrescriptionBaseInfoVO {
     private UserInfoVO userInfoVO;
 
     /**
+     * @description: 管理员基本信息
+     * @author：RenBin
+     * @createTime：2021/1/17 21:52
+     */
+    private AdminInfoVO adminInfoVO;
+
+    /**
      * @description: 药方中的明细信息
      * @author：RenBin
      * @createTime：2021/1/11 22:48

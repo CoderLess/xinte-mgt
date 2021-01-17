@@ -14,6 +14,9 @@
             <if test="createTime != null">create_time,</if>
             <if test="type != null">type,</if>
             <if test="payment != null">payment,</if>
+            <if test="amount != null">amount,</if>
+            <if test="commissionAmount != null">commission_amount,</if>
+            <if test="registrationFee != null">registration_fee,</if>
         </trim>
     </sql>
 
@@ -29,6 +32,9 @@
             <if test="createTime != null">#{ createTime },</if>
             <if test="type != null">#{type},</if>
             <if test="payment != null">#{payment},</if>
+            <if test="amount != null">#{amount},</if>
+            <if test="commissionAmount != null">#{commissionAmount},</if>
+            <if test="registrationFee != null">#{registrationFee},</if>
         </trim>
     </sql>
 
@@ -42,7 +48,10 @@
 		`remark`,
 		`create_time`,
 		`type`,
-		`payment`
+		`payment`,
+		`amount`,
+		`commission_amount`,
+		`registration_fee`
 	</sql>
 
     <insert id="save" useGeneratedKeys="true" keyProperty="id">
@@ -64,23 +73,31 @@
             #{ item.remark },
             #{ item.createTime },
             #{ item.type },
-            #{payment}
+            #{ item.payment},
+            #{ item.amount },
+            #{ item.commissionAmount },
+            #{ item.registrationFee }
             )
         </foreach>
     </insert>
     <update id="updateById">
         update prescription_base
         <set>
-            <if test="id != null">`id` = #{id},</if>
-            <if test="adminId != null">`admin_id` = #{adminId},</if>
-            <if test="userId != null">`user_id` = #{userId},</if>
-            <if test="medicationTimeStart != null">`medication_time_start` = #{medicationTimeStart},</if>
-            <if test="medicationTimeEnd != null">`medication_time_end` = #{medicationTimeEnd},</if>
-            <if test="pathogeny != null">`pathogeny` = #{pathogeny},</if>
-            <if test="remark != null">`remark` = #{remark},</if>
-            <if test="createTime != null">`create_time` = #{createTime},</if>
-            <if test="type != null">`type` = #{type},</if>
-            <if test="payment != null">`payment` = #{payment}</if>
+            <trim suffixOverrides=",">
+                <if test="id != null">`id` = #{id},</if>
+                <if test="adminId != null">`admin_id` = #{adminId},</if>
+                <if test="userId != null">`user_id` = #{userId},</if>
+                <if test="medicationTimeStart != null">`medication_time_start` = #{medicationTimeStart},</if>
+                <if test="medicationTimeEnd != null">`medication_time_end` = #{medicationTimeEnd},</if>
+                <if test="pathogeny != null">`pathogeny` = #{pathogeny},</if>
+                <if test="remark != null">`remark` = #{remark},</if>
+                <if test="createTime != null">`create_time` = #{createTime},</if>
+                <if test="type != null">`type` = #{type},</if>
+                <if test="payment != null">`payment` = #{payment},</if>
+                <if test="amount != null">`amount` = #{amount},</if>
+                <if test="commissionAmount != null">`commission_amount` = #{commissionAmount},</if>
+                <if test="registrationFee != null">`registration_fee` = #{registrationFee},</if>
+            </trim>
         </set>
         where id = #{id}
     </update>
@@ -126,6 +143,15 @@
             </if>
             <if test="payment != null">
                 and payment = #{payment}
+            </if>
+            <if test="amount != null">
+                and amount = #{amount}
+            </if>
+            <if test="commissionAmount != null">
+                and commission_amount = #{commissionAmount}
+            </if>
+            <if test="registrationFee != null">
+                and registration_fee = #{registrationFee}
             </if>
         </where>
     </sql>
@@ -176,11 +202,20 @@
             <if test="payment != null">
                 and payment = #{payment}
             </if>
+            <if test="amount != null">
+                and amount = #{amount}
+            </if>
+            <if test="commissionAmount != null">
+                and commission_amount = #{commissionAmount}
+            </if>
+            <if test="registrationFee != null">
+                and registration_fee = #{registrationFee}
+            </if>
         </where>
     </select>
     <select id="queryListInfo" resultType="com.ibn.xinte.domain.PrescriptionBaseDTO">
         select
-        pb.`id`,pb.`admin_id`,pb.`user_id`,pb.`medication_time_start`,pb.`medication_time_end`,pb.`pathogeny`,pb.`remark`,pb.`create_time`,pb.`type`,
+        pb.`id`,pb.`admin_id`,pb.`user_id`,pb.`medication_time_start`,pb.`medication_time_end`,pb.`pathogeny`,pb.`remark`,pb.`create_time`,pb.`type`,pb.`amount`,
         ub.username,ab.name adminName
         from prescription_base pb
         left join user_base ub on pb.user_id= ub.id

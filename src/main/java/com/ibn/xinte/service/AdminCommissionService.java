@@ -1,6 +1,7 @@
 package com.ibn.xinte.service;
 
 import com.ibn.xinte.domain.AdminCommissionDTO;
+import com.ibn.xinte.exception.IbnException;
 
 import java.util.List;
 
@@ -20,6 +21,13 @@ public interface AdminCommissionService {
      * @createTime：2021年1月10日
      */
     Long save(AdminCommissionDTO adminCommissionDTO);
+
+    /**
+     * @description: 计算提成保存提成
+     * @author：RenBin
+     * @createTime：2021/1/15 22:12
+     */
+    void calculationSave(AdminCommissionDTO adminCommissionDTO) throws IbnException;
 
     /**
      * @description: 批量保存管理员提成信息

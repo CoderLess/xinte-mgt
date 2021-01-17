@@ -9,6 +9,10 @@
             <if test="createTime != null">create_time,</if>
             <if test="id != null">id,</if>
             <if test="prescriptionId != null">prescription_id,</if>
+            <if test="commission != null">commission,</if>
+            <if test="amount != null">amount,</if>
+            <if test="registrationFee != null">registration_fee,</if>
+            <if test="registrationFeeAmount != null">registration_fee_amount,</if>
         </trim>
     </sql>
 
@@ -19,6 +23,10 @@
             <if test="createTime != null">#{ createTime },</if>
             <if test="id != null">#{ id },</if>
             <if test="prescriptionId != null">#{ prescriptionId },</if>
+            <if test="commission != null">#{commission},</if>
+            <if test="amount != null">#{amount},</if>
+            <if test="registrationFee != null">#{registrationFee},</if>
+            <if test="registrationFeeAmount != null">#{registrationFeeAmount},</if>
         </trim>
     </sql>
 
@@ -27,7 +35,11 @@
 		`commission_amount`,
 		`create_time`,
 		`id`,
-		`prescription_id`
+		`prescription_id`,
+		`commission`,
+		`amount`,
+		`registration_fee`,
+		`registration_fee_amount`
     </sql>
 
     <insert id="save" useGeneratedKeys="true" keyProperty="id">
@@ -44,18 +56,28 @@
             #{ item.commissionAmount },
             #{ item.createTime },
             #{ item.id },
-            #{ item.prescriptionId }
+            #{ item.prescriptionId },
+            #{ item.commission },
+            #{ item.amount },
+            #{ item.registrationFee },
+            #{ item.registrationFeeAmount }
             )
         </foreach>
     </insert>
     <update id="updateById">
         update admin_commission
         <set>
-            <if test="adminId != null">`admin_id` = #{adminId},</if>
-            <if test="commissionAmount != null">`commission_amount` = #{commissionAmount},</if>
-            <if test="createTime != null">`create_time` = #{createTime},</if>
-            <if test="id != null">`id` = #{id},</if>
-            <if test="prescriptionId != null">`prescription_id` = #{prescriptionId},</if>
+            <trim suffixOverrides=",">
+                <if test="adminId != null">`admin_id` = #{adminId},</if>
+                <if test="commissionAmount != null">`commission_amount` = #{commissionAmount},</if>
+                <if test="createTime != null">`create_time` = #{createTime},</if>
+                <if test="id != null">`id` = #{id},</if>
+                <if test="prescriptionId != null">`prescription_id` = #{prescriptionId},</if>
+                <if test="commission != null">`commission` = #{commission},</if>
+                <if test="amount != null">`amount` = #{amount},</if>
+                <if test="registrationFee != null">`registration_fee` = #{registrationFee},</if>
+                <if test="registrationFeeAmount != null">`registration_fee_amount` = #{registrationFeeAmount},</if>
+            </trim>
         </set>
         where id = #{id}
     </update>
@@ -88,6 +110,18 @@
             </if>
             <if test="prescriptionId != null">
                 and prescription_id = #{prescriptionId}
+            </if>
+            <if test="commission != null">
+                and commission = #{commission}
+            </if>
+            <if test="amount != null">
+                and amount = #{amount}
+            </if>
+            <if test="registrationFee != null">
+                and registration_fee = #{registrationFee}
+            </if>
+            <if test="registrationFeeAmount != null">
+                and registration_fee_amount = #{registrationFeeAmount}
             </if>
         </where>
     </sql>

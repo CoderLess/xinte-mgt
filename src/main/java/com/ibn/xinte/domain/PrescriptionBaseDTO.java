@@ -3,6 +3,7 @@ package com.ibn.xinte.domain;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 /**
@@ -102,6 +103,24 @@ public class PrescriptionBaseDTO {
      * @createTime：2021/1/9 12:43
      */
     private String username;
+    /**
+     * @description: 药单总价格
+     * @author：RenBin
+     * @createTime：2021/1/6 21:19
+     */
+    private BigDecimal amount;
+    /**
+     * @description: 挂号费
+     * @author：RenBin
+     * @createTime：2021/1/6 21:19
+     */
+    private BigDecimal registrationFee;
+    /**
+     * @description: 药品提成总额
+     * @author：RenBin
+     * @createTime：2020年12月28日
+     */
+    private BigDecimal commissionAmount;
 
     /**
      * @description: 药方中的明细信息

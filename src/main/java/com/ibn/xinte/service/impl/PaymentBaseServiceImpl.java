@@ -8,6 +8,7 @@ import com.ibn.xinte.dao.MedicineBaseDao;
 import com.ibn.xinte.dao.MedicineCheckInOutDao;
 import com.ibn.xinte.dao.PaymentBaseDao;
 import com.ibn.xinte.dao.PrescriptionMedicineDao;
+import com.ibn.xinte.domain.AdminCommissionDTO;
 import com.ibn.xinte.domain.PayStatisticDTO;
 import com.ibn.xinte.domain.PaymentBaseDTO;
 import com.ibn.xinte.domain.PrescriptionBaseDTO;
@@ -16,6 +17,8 @@ import com.ibn.xinte.entity.PaymentBaseDO;
 import com.ibn.xinte.entity.PrescriptionMedicineDO;
 import com.ibn.xinte.enumeration.MedicineCheckInOutTypeEnum;
 import com.ibn.xinte.enumeration.YesOrNoEnum;
+import com.ibn.xinte.exception.IbnException;
+import com.ibn.xinte.service.AdminCommissionService;
 import com.ibn.xinte.service.PaymentBaseService;
 import com.ibn.xinte.service.PrescriptionBaseService;
 import com.ibn.xinte.util.BeanUtils;
@@ -51,13 +54,37 @@ public class PaymentBaseServiceImpl implements PaymentBaseService {
     private MedicineCheckInOutDao medicineCheckInOutDao;
     @Autowired
     private PrescriptionBaseService prescriptionBaseService;
+    @Autowired
+    private AdminCommissionService adminCommissionService;
 
     @Override
     @Transactional(rollbackFor = Exception.class)
-    public Long save(PaymentBaseDTO paymentBaseDTO) {
+    public Long save(PaymentBaseDTO paymentBaseDTO) throws IbnException {
         if (null == paymentBaseDTO) {
             return null;
         }
+        PrescriptionBaseDTO srcPrescriptionBaseDTO = prescriptionBaseService.queryById(paymentBaseDTO.getPrescriptionId());
+        if (YesOrNoEnum.YES.getCode().equals(srcPrescriptionBaseDTO.getPayment())) {
+            throw new IbnException("药方已付款，请勿重复付款");
+        }
+        // 修改药单状态为已付款
+        PrescriptionBaseDTO prescriptionBaseDTO = new PrescriptionBaseDTO();
+        prescriptionBaseDTO.setId(paymentBaseDTO.getPrescriptionId());
+        prescriptionBaseDTO.setPayment(YesOrNoEnum.YES.getCode());
+        if (null != paymentBaseDTO.getRegistrationFee()) {
+            prescriptionBaseDTO.setRegistrationFee(paymentBaseDTO.getRegistrationFee());
+        }
+        prescriptionBaseService.updateById(prescriptionBaseDTO);
+        // 分配提成
+        if (!Long.valueOf(0L).equals(srcPrescriptionBaseDTO.getAdminId())) {
+            AdminCommissionDTO adminCommissionDTO = new AdminCommissionDTO();
+            adminCommissionDTO.setAdminId(srcPrescriptionBaseDTO.getAdminId());
+            adminCommissionDTO.setPrescriptionId(srcPrescriptionBaseDTO.getId());
+            adminCommissionDTO.setCommissionAmount(srcPrescriptionBaseDTO.getCommissionAmount());
+            adminCommissionDTO.setRegistrationFee(paymentBaseDTO.getRegistrationFee());
+            adminCommissionService.calculationSave(adminCommissionDTO);
+        }
+        // 支付信息
         PaymentBaseDO paymentBaseDO = new PaymentBaseDO();
         BeanUtils.copyProperties(paymentBaseDTO, paymentBaseDO);
         // 药品卖出，减少库存
@@ -71,21 +98,20 @@ public class PaymentBaseServiceImpl implements PaymentBaseService {
         Long curTime = System.currentTimeMillis();
         for (PrescriptionMedicineDO curPrescriptionMedicineDO : prescriptionMedicineDTOList) {
             MedicineCheckInOutDO medicineCheckInOutDO = new MedicineCheckInOutDO();
-            medicineCheckInOutDO.setMedicineId(curPrescriptionMedicineDO.getPrescriptionId());
+            medicineCheckInOutDO.setMedicineId(curPrescriptionMedicineDO.getMedicinalId());
             medicineCheckInOutDO.setNumber(curPrescriptionMedicineDO.getNumber());
             medicineCheckInOutDO.setPrice(curPrescriptionMedicineDO.getSellingPrice());
             medicineCheckInOutDO.setPrescriptionId(prescriptionId);
             medicineCheckInOutDO.setType(MedicineCheckInOutTypeEnum.OUT.getCode());
-            medicineCheckInOutDO.setAdminId(paymentBaseDTO.getCreator());
+            if (null == paymentBaseDTO.getCreator()) {
+                medicineCheckInOutDO.setAdminId(0L);
+            } else {
+                medicineCheckInOutDO.setAdminId(paymentBaseDTO.getCreator());
+            }
             medicineCheckInOutDO.setCreateTime(curTime);
             medicineCheckInOutDOList.add(medicineCheckInOutDO);
         }
         medicineCheckInOutDao.saveBatch(medicineCheckInOutDOList);
-        // 修改药单状态为已付款
-        PrescriptionBaseDTO prescriptionBaseDTO = new PrescriptionBaseDTO();
-        prescriptionBaseDTO.setId(paymentBaseDTO.getPrescriptionId());
-        prescriptionBaseDTO.setPayment(YesOrNoEnum.YES.getCode());
-        prescriptionBaseService.updateById(prescriptionBaseDTO);
         // 保存出售记录
         paymentBaseDao.save(paymentBaseDO);
         return paymentBaseDO.getId();

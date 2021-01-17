@@ -57,8 +57,22 @@ public class PaymentBaseVO {
     @ApiModelProperty(value = "药方id", name = "prescriptionId")
     private Long prescriptionId;
 
+    /**
+     * @description: 挂号费
+     * @author：RenBin
+     * @createTime：2021年1月5日
+     */
+    @ApiModelProperty(value = "挂号费", name = "registrationFee")
+    private BigDecimal registrationFee;
+
+    /**
+     * @description: 收款详情
+     * @author：RenBin
+     * @createTime：2021/1/17 20:33
+     */
     @ApiModelProperty(value="收款详情", name="paymentDetailVOList")
     private List<PaymentDetailVO> paymentDetailVOList;
+
     /**
      * @description: 页码
      * @author：RenBin

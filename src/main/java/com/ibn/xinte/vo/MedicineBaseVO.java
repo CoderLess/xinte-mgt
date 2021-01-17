@@ -112,6 +112,13 @@ public class MedicineBaseVO {
     @ApiModelProperty(value = "更新时间", name = "updateTime")
     private Long updateTime;
     /**
+     * @description: 药品是否有提成 0:否 1：是
+     * @author：RenBin
+     * @createTime：2020年12月28日
+     */
+    @ApiModelProperty(value = "药品是否有提成 0:否 1：是", name = "haveCommission")
+    private Integer haveCommission;
+    /**
      * @description: 会员价格
      * @author：RenBin
      * @createTime：2020年12月28日

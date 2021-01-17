@@ -7,7 +7,9 @@ import com.google.common.collect.Lists;
 import com.ibn.xinte.dao.PrescriptionBaseDao;
 import com.ibn.xinte.dao.PrescriptionMedicineDao;
 import com.ibn.xinte.domain.PrescriptionMedicineDTO;
+import com.ibn.xinte.entity.PrescriptionBaseDO;
 import com.ibn.xinte.entity.PrescriptionMedicineDO;
+import com.ibn.xinte.enumeration.YesOrNoEnum;
 import com.ibn.xinte.exception.IbnException;
 import com.ibn.xinte.service.PrescriptionBaseService;
 import com.ibn.xinte.service.PrescriptionMedicineService;
@@ -37,6 +39,8 @@ public class PrescriptionMedicineServiceImpl implements PrescriptionMedicineServ
 
     @Autowired
     private PrescriptionMedicineDao prescriptionMedicineDao;
+    @Autowired
+    private PrescriptionBaseDao prescriptionBaseDao;
 
     @Override
     @Transactional(rollbackFor = Exception.class)
@@ -165,9 +169,20 @@ public class PrescriptionMedicineServiceImpl implements PrescriptionMedicineServ
         }
         // 计算总价格
         BigDecimal totalAmount = new BigDecimal("0");
+        BigDecimal totalAmountCommissionAmount = new BigDecimal("0");
         for (PrescriptionMedicineDO curPrescriptionMedicineDO : prescriptionMedicineDOPage) {
             totalAmount = totalAmount.add(curPrescriptionMedicineDO.getSellingPrice().multiply(curPrescriptionMedicineDO.getNumber()));
+            // 计算提成
+            if (YesOrNoEnum.YES.getCode().equals(curPrescriptionMedicineDO.getHaveCommission())) {
+                totalAmountCommissionAmount = totalAmountCommissionAmount.add(curPrescriptionMedicineDO.getSellingPrice().multiply(curPrescriptionMedicineDO.getNumber()));
+            }
         }
-        return totalAmount.setScale(2);
+        BigDecimal amount = totalAmount.setScale(2);
+        PrescriptionBaseDO prescriptionBaseDO = new PrescriptionBaseDO();
+        prescriptionBaseDO.setId(prescriptionId);
+        prescriptionBaseDO.setAmount(amount);
+        prescriptionBaseDO.setCommissionAmount(totalAmountCommissionAmount);
+        prescriptionBaseDao.updateById(prescriptionBaseDO);
+        return amount;
     }
 }

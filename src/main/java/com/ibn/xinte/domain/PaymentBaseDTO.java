@@ -60,6 +60,14 @@ public class PaymentBaseDTO {
      * @createTime：2021年1月5日
      */
     private Long prescriptionId;
+
+    /**
+     * @description: 挂号费
+     * @author：RenBin
+     * @createTime：2021年1月5日
+     */
+    private BigDecimal registrationFee;
+
     /**
      * @description: 支付方式
      * @author：RenBin

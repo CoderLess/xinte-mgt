@@ -4,6 +4,8 @@ import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 
+import java.math.BigDecimal;
+
 /**
  * @version 1.0
  * @description:
@@ -116,6 +118,27 @@ public class PrescriptionBaseVO {
      */
     @ApiModelProperty(value = "会员姓名", name = "username")
     private String username;
+    /**
+     * @description: 药单总价格
+     * @author：RenBin
+     * @createTime：2021/1/6 21:19
+     */
+    @ApiModelProperty(value = "药单总价格", name = "amount")
+    private BigDecimal amount;
+    /**
+     * @description: 挂号费
+     * @author：RenBin
+     * @createTime：2021/1/6 21:19
+     */
+    @ApiModelProperty(value = "挂号费", name = "registrationFee")
+    private BigDecimal registrationFee;
+    /**
+     * @description: 药品提成总额
+     * @author：RenBin
+     * @createTime：2020年12月28日
+     */
+    @ApiModelProperty(value = "药品提成总额", name = "commissionAmount")
+    private BigDecimal commissionAmount;
     /**
      * @description: 页码
      * @author：RenBin

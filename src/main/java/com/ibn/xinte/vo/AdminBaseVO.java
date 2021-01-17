@@ -68,6 +68,7 @@ public class AdminBaseVO implements Serializable {
      * @author：RenBin
      * @createTime：2021/1/10 9:01
      */
+    @ApiModelProperty(value = "提成比例", name = "commission")
     private BigDecimal commission;
     /**
      * @description: 创建人
@@ -90,6 +91,13 @@ public class AdminBaseVO implements Serializable {
      */
     @ApiModelProperty(value = "姓名", name = "name")
     private String name;
+    /**
+     * @description: 挂号费提成
+     * @author：RenBin
+     * @createTime：2020年12月28日
+     */
+    @ApiModelProperty(value = "挂号费提成", name = "registrationFeeCommission")
+    private BigDecimal registrationFeeCommission;
 
     /**
      * @description: 页码

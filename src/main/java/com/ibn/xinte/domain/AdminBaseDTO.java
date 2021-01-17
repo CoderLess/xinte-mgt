@@ -77,4 +77,10 @@ public class AdminBaseDTO {
      * @createTime：2020年12月28日
      */
     private String name;
+    /**
+     * @description: 挂号费提成
+     * @author：RenBin
+     * @createTime：2020年12月28日
+     */
+    private BigDecimal registrationFeeCommission;
 }

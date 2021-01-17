@@ -2,9 +2,12 @@ package com.ibn.xinte.service.impl;
 
 import com.alibaba.fastjson.JSONObject;
 import com.google.common.collect.Lists;
+import com.ibn.xinte.dao.AdminBaseDao;
 import com.ibn.xinte.dao.AdminCommissionDao;
 import com.ibn.xinte.domain.AdminCommissionDTO;
+import com.ibn.xinte.entity.AdminBaseDO;
 import com.ibn.xinte.entity.AdminCommissionDO;
+import com.ibn.xinte.exception.IbnException;
 import com.ibn.xinte.service.AdminCommissionService;
 import com.ibn.xinte.util.BeanUtils;
 import org.slf4j.Logger;
@@ -13,6 +16,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.CollectionUtils;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 /**
@@ -30,6 +34,8 @@ public class AdminCommissionServiceImpl implements AdminCommissionService {
 
     @Autowired
     private AdminCommissionDao adminCommissionDao;
+    @Autowired
+    private AdminBaseDao adminBaseDao;
 
     @Override
     public Long save(AdminCommissionDTO adminCommissionDTO) {
@@ -40,6 +46,37 @@ public class AdminCommissionServiceImpl implements AdminCommissionService {
         BeanUtils.copyProperties(adminCommissionDTO, adminCommissionDO);
         adminCommissionDao.save(adminCommissionDO);
         return adminCommissionDO.getId();
+    }
+
+    @Override
+    public void calculationSave(AdminCommissionDTO adminCommissionDTO) throws IbnException {
+        Long adminId = adminCommissionDTO.getAdminId();
+        if (Long.valueOf(0).equals(adminId)) {
+            return;
+        }
+        AdminBaseDO adminBaseDO = adminBaseDao.queryById(adminId);
+        if (null == adminBaseDO) {
+            throw new IbnException("获取管理员信息失败");
+        }
+        AdminCommissionDO adminCommissionSaveDO = new AdminCommissionDO();
+        adminCommissionSaveDO.setPrescriptionId(adminCommissionDTO.getPrescriptionId());
+        adminCommissionSaveDO.setAdminId(adminId);
+        adminCommissionSaveDO.setCreateTime(System.currentTimeMillis());
+        BigDecimal amount = adminBaseDO.getCommission().multiply(adminCommissionDTO.getCommissionAmount()).setScale(2);
+        // 药品提成比例
+        adminCommissionSaveDO.setCommission(adminBaseDO.getCommission());
+        // 药品提成金额
+        adminCommissionSaveDO.setCommissionAmount(adminCommissionDTO.getCommissionAmount());
+
+        // 挂号费
+        if (null != adminCommissionDTO.getRegistrationFee()) {
+            adminCommissionSaveDO.setRegistrationFee(adminCommissionDTO.getRegistrationFee());
+            adminCommissionSaveDO.setRegistrationFee(adminCommissionDTO.getRegistrationFee());
+            amount = amount.add(adminCommissionDTO.getRegistrationFee().multiply(adminBaseDO.getRegistrationFeeCommission()).setScale(2));
+        }
+        adminCommissionSaveDO.setAmount(amount);
+
+        adminCommissionDao.save(adminCommissionSaveDO);
     }
 
     @Override

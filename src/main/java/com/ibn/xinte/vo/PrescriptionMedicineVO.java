@@ -77,6 +77,12 @@ public class PrescriptionMedicineVO {
     @ApiModelProperty(value = "创建时间", name = "createTime")
     private Long createTime;
     /**
+     * @description: 药品是否有提成 0:否 1：是
+     * @author：RenBin
+     * @createTime：2020年12月28日
+     */
+    private Integer haveCommission;
+    /**
      * @description: 页码
      * @author：RenBin
      * @createTime：2021/1/3 15:58

@@ -3,6 +3,7 @@ package com.ibn.xinte.service;
 import com.github.pagehelper.PageInfo;
 import com.ibn.xinte.domain.PayStatisticDTO;
 import com.ibn.xinte.domain.PaymentBaseDTO;
+import com.ibn.xinte.exception.IbnException;
 
 import java.util.List;
 
@@ -21,7 +22,7 @@ public interface PaymentBaseService {
      * @author：RenBin
      * @createTime：2021年1月5日
      */
-    Long save(PaymentBaseDTO paymentBaseDTO);
+    Long save(PaymentBaseDTO paymentBaseDTO) throws IbnException;
 
     /**
      * @description: 批量保存支付信息

@@ -13,7 +13,8 @@
             <if test="creatorId != null">creator_id,</if>
             <if test="lastAccess != null">last_access,</if>
             <if test="name != null">name,</if>
-            <if test="name != null">commission,</if>
+            <if test="commission != null">commission,</if>
+            <if test="registrationFeeCommission != null">registration_fee_commission,</if>
         </trim>
     </sql>
 
@@ -29,6 +30,7 @@
             <if test="lastAccess != null">#{ lastAccess },</if>
             <if test="name != null">#{ name },</if>
             <if test="commission != null">#{commission},</if>
+            <if test="registrationFeeCommission != null">#{registrationFeeCommission},</if>
         </trim>
     </sql>
 
@@ -43,7 +45,8 @@
 		`creator_id`,
 		`last_access`,
 		`name`,
-		`commission`
+		`commission`,
+		`registration_fee_commission`
     </sql>
 
     <insert id="save" useGeneratedKeys="true" keyProperty="id">
@@ -66,6 +69,7 @@
             #{ item.lastAccess },
             #{ item.name },
             #{ item.commission },
+            #{ item.registrationFeeCommission }
             )
         </foreach>
     </insert>
@@ -82,6 +86,7 @@
             <if test="lastAccess != null">`last_access` = #{lastAccess},</if>
             <if test="name != null">`name` = #{name},</if>
             <if test="commission != null">`commission` = #{commission},</if>
+            <if test="registrationFeeCommission != null">`registration_fee_commission` = #{registrationFeeCommission},</if>
         </set>
         where id = #{id}
     </update>
@@ -128,12 +133,15 @@
             <if test="commission != null">
                 and commission = #{commission}
             </if>
+            <if test="registrationFeeCommission != null">
+                and registration_fee_commission = #{registrationFeeCommission}
+            </if>
         </where>
     </sql>
 
     <select id="queryList" resultType="com.ibn.xinte.entity.AdminBaseDO">
         select
-        `id`,`name`,`mobile`,`role_id`,`disable`,`create_time`,`creator_id`,`last_access`,`commission`
+        `id`,`name`,`mobile`,`role_id`,`disable`,`create_time`,`creator_id`,`last_access`,`commission`,`registration_fee_commission`
         from admin_base
         <include refid="queryColumn"/>
         order by id desc

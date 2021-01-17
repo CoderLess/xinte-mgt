@@ -12,6 +12,7 @@
             <if test="sellingPrice != null">selling_price,</if>
             <if test="purchasePrice != null">purchase_price,</if>
             <if test="createTime != null">create_time,</if>
+            <if test="haveCommission != null">have_commission,</if>
         </trim>
     </sql>
 
@@ -25,6 +26,7 @@
             <if test="sellingPrice != null">#{ sellingPrice },</if>
             <if test="purchasePrice != null">#{ purchasePrice },</if>
             <if test="createTime != null">#{ createTime },</if>
+            <if test="haveCommission != null">#{haveCommission},</if>
         </trim>
     </sql>
 
@@ -36,7 +38,8 @@
 		`number`,
 		`selling_price`,
 		`purchase_price`,
-		`create_time`
+		`create_time`,
+		`have_commission`
 	</sql>
 
     <insert id="save" useGeneratedKeys="true" keyProperty="id">
@@ -57,6 +60,7 @@
             #{ item.sellingPrice },
             #{ item.purchasePrice },
             #{ item.createTime },
+            #{ item.haveCommission }
             )
         </foreach>
     </insert>
@@ -71,6 +75,7 @@
             <if test="sellingPrice != null">`selling_price` = #{sellingPrice},</if>
             <if test="purchasePrice != null">`purchase_price` = #{purchasePrice},</if>
             <if test="createTime != null">`create_time` = #{createTime},</if>
+            <if test="haveCommission != null">`have_commission` = #{haveCommission},</if>
         </set>
         where id = #{id}
     </update>
@@ -110,6 +115,9 @@
             </if>
             <if test="createTime != null">
                 and create_time = #{createTime}
+            </if>
+            <if test="haveCommission != null">
+                and have_commission = #{haveCommission}
             </if>
         </where>
     </sql>

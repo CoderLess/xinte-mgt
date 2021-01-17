@@ -4,6 +4,7 @@ import com.github.pagehelper.PageInfo;
 import com.ibn.xinte.common.ResultInfo;
 import com.ibn.xinte.domain.MedicineBaseDTO;
 import com.ibn.xinte.domain.PrescriptionMedicineDTO;
+import com.ibn.xinte.enumeration.YesOrNoEnum;
 import com.ibn.xinte.exception.IbnException;
 import com.ibn.xinte.service.MedicineBaseService;
 import com.ibn.xinte.service.MedicinePriceService;
@@ -78,6 +79,10 @@ public class PrescriptionMedicineController {
         PrescriptionMedicineDTO prescriptionMedicineDTO = new PrescriptionMedicineDTO();
         BeanUtils.copyProperties(prescriptionMedicineVO, prescriptionMedicineDTO);
         prescriptionMedicineDTO.setCreateTime(System.currentTimeMillis());
+        // 计算总提成
+        if (YesOrNoEnum.YES.getCode().equals(medicineBaseDTO.getHaveCommission())) {
+            prescriptionMedicineDTO.setHaveCommission(YesOrNoEnum.YES.getCode());
+        }
         Long id;
         try {
             id = prescriptionMedicineService.save(prescriptionMedicineDTO);
@@ -126,8 +131,15 @@ public class PrescriptionMedicineController {
         if (null == id) {
             return new ResultInfo().error("参数不能为空");
         }
+        // 查询药方中的药品信息
+        PrescriptionMedicineDTO prescriptionMedicineDTO = prescriptionMedicineService.queryById(id);
+        if (null == prescriptionMedicineDTO) {
+            return new ResultInfo().error("药品已删除请勿重复删除");
+        }
+        // 删除药品
         prescriptionMedicineService.deleteById(id);
-        BigDecimal totalAmount = prescriptionMedicineService.calculatePrice(id);
+        // 获取药方价格
+        BigDecimal totalAmount = prescriptionMedicineService.calculatePrice(prescriptionMedicineDTO.getPrescriptionId());
         MedicinePriceVO medicinePriceVO = new MedicinePriceVO();
         medicinePriceVO.setId(id);
         medicinePriceVO.setTotalAmount(totalAmount);

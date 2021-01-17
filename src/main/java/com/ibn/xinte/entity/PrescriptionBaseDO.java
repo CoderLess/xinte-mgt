@@ -2,6 +2,8 @@ package com.ibn.xinte.entity;
 
 import lombok.Data;
 
+import java.math.BigDecimal;
+
 /**
  * @version 1.0
  * @description:
@@ -75,4 +77,22 @@ public class PrescriptionBaseDO {
      * @createTime：2021/1/6 21:19
      */
     private Integer payment;
+    /**
+     * @description: 药单总价格
+     * @author：RenBin
+     * @createTime：2021/1/6 21:19
+     */
+    private BigDecimal amount;
+    /**
+     * @description: 挂号费
+     * @author：RenBin
+     * @createTime：2021/1/6 21:19
+     */
+    private BigDecimal registrationFee;
+    /**
+     * @description: 药品提成总额
+     * @author：RenBin
+     * @createTime：2020年12月28日
+     */
+    private BigDecimal commissionAmount;
 }

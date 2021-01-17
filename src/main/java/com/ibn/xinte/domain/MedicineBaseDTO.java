@@ -98,6 +98,12 @@ public class MedicineBaseDTO {
      */
     private Long updateTime;
     /**
+     * @description: 药品是否有提成 0:否 1：是
+     * @author：RenBin
+     * @createTime：2020年12月28日
+     */
+    private Integer haveCommission;
+    /**
      * @description: 会员价格
      * @author：RenBin
      * @createTime：2020年12月28日

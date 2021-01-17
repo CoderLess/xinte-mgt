@@ -84,4 +84,10 @@ public class PrescriptionMedicineDTO {
      * @createTime：2020年12月28日
      */
     private String code;
+    /**
+     * @description: 药品是否有提成 0:否 1：是
+     * @author：RenBin
+     * @createTime：2020年12月28日
+     */
+    private Integer haveCommission;
 }

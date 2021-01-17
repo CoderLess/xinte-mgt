@@ -5,6 +5,7 @@ import com.ibn.xinte.common.ResultInfo;
 import com.ibn.xinte.domain.PaymentBaseDTO;
 import com.ibn.xinte.enumeration.PrescriptionBaseTypeEnum;
 import com.ibn.xinte.enumeration.UserBaseSexEnum;
+import com.ibn.xinte.exception.IbnException;
 import com.ibn.xinte.service.PaymentBaseService;
 import com.ibn.xinte.util.BeanUtils;
 import com.ibn.xinte.util.RequestUtils;
@@ -49,7 +50,12 @@ public class PaymentBaseController {
         BeanUtils.copyProperties(paymentBaseVO, paymentBaseDTO);
         paymentBaseDTO.setCreator(adminId);
         paymentBaseDTO.setCreateTime(System.currentTimeMillis());
-        Long id = paymentBaseService.save(paymentBaseDTO);
+        Long id;
+        try {
+            id = paymentBaseService.save(paymentBaseDTO);
+        } catch (IbnException e) {
+            return new ResultInfo().error(e.getMessage());
+        }
         return new ResultInfo().success(id);
     }
 
