@@ -93,7 +93,15 @@ public class UserBaseVO {
      * @author：RenBin
      * @createTime：2021/1/10 9:08
      */
+    @ApiModelProperty(value = "会员等级", name = "level")
     private Integer level;
+    /**
+     * @description: 是否查询统计数据（就诊次数，消费金额） 1:是 0:否
+     * @author：RenBin
+     * @createTime：2021/1/10 9:08
+     */
+    @ApiModelProperty(value = "是否查询统计数据（就诊次数，消费金额） 1:是 0:否", name = "queryStatic")
+    private Integer queryStatic;
     /**
      * @description: 页码
      * @author：RenBin

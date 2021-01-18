@@ -161,4 +161,24 @@ public class MedicineCheckInOutServiceImpl implements MedicineCheckInOutService 
         medicineCheckInOutDTOPageInfo.setTotal(medicineCheckInOutDOPage.getTotal());
         return medicineCheckInOutDTOPageInfo;
     }
+    @Override
+    public PageInfo<MedicineCheckInOutDTO> queryDetailPageInfo(MedicineCheckInOutDTO medicineCheckInOutDTO, Integer pageNum, Integer pageSize) {
+        if (null == medicineCheckInOutDTO) {
+            return null;
+        }
+        MedicineCheckInOutDO medicineCheckInOutDO = new MedicineCheckInOutDO();
+        BeanUtils.copyProperties(medicineCheckInOutDTO, medicineCheckInOutDO);
+        if (null != pageNum && null != pageSize) {
+            PageHelper.startPage(pageNum, pageSize);
+        }
+        Page<MedicineCheckInOutDTO> medicineCheckInOutDTOPage = medicineCheckInOutDao.queryInfoList(medicineCheckInOutDO);
+        PageInfo<MedicineCheckInOutDTO> medicineCheckInOutDTOPageInfo = new PageInfo<>();
+        if (CollectionUtils.isEmpty(medicineCheckInOutDTOPage)) {
+            medicineCheckInOutDTOPageInfo.setTotal(0);
+            return medicineCheckInOutDTOPageInfo;
+        }
+        medicineCheckInOutDTOPageInfo.setList(medicineCheckInOutDTOPage);
+        medicineCheckInOutDTOPageInfo.setTotal(medicineCheckInOutDTOPage.getTotal());
+        return medicineCheckInOutDTOPageInfo;
+    }
 }

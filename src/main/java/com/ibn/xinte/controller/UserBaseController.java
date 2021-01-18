@@ -3,10 +3,14 @@ package com.ibn.xinte.controller;
 import com.alibaba.fastjson.JSONObject;
 import com.github.pagehelper.PageInfo;
 import com.google.common.collect.Lists;
+import com.google.common.collect.Maps;
 import com.ibn.xinte.common.ResultInfo;
+import com.ibn.xinte.domain.PrescriptionBaseDTO;
 import com.ibn.xinte.domain.UserBaseDTO;
 import com.ibn.xinte.enumeration.UserBaseLevelEnum;
 import com.ibn.xinte.enumeration.UserBaseSexEnum;
+import com.ibn.xinte.enumeration.YesOrNoEnum;
+import com.ibn.xinte.service.PrescriptionBaseService;
 import com.ibn.xinte.service.UserBaseService;
 import com.ibn.xinte.util.BeanUtils;
 import com.ibn.xinte.vo.*;
@@ -18,7 +22,10 @@ import org.springframework.util.CollectionUtils;
 import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.*;
 
+import java.math.BigDecimal;
 import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
 
 /**
  * @version 1.0
@@ -36,6 +43,8 @@ public class UserBaseController {
 
     @Autowired
     private UserBaseService userBaseService;
+    @Autowired
+    private PrescriptionBaseService prescriptionBaseService;
 
     @ApiOperation("保存用户基本信息")
     @PostMapping("save")
@@ -97,6 +106,26 @@ public class UserBaseController {
         UserBaseDTO userBaseDTO = new UserBaseDTO();
         BeanUtils.copyProperties(userBaseVO, userBaseDTO);
         PageInfo<UserBaseDTO> userBaseDTOPageInfo = userBaseService.queryPageInfo(userBaseDTO, userBaseVO.getPageNum(), userBaseVO.getPageSize());
+        if (YesOrNoEnum.YES.getCode().equals(userBaseVO.getQueryStatic()) && !CollectionUtils.isEmpty(userBaseDTOPageInfo.getList())) {
+            List<Long> userIdList = userBaseDTOPageInfo.getList().stream().map(curUserBaseDTO -> curUserBaseDTO.getId()).collect(Collectors.toList());
+            List<PrescriptionBaseDTO> prescriptionBaseDTOList = prescriptionBaseService.queryStaticByUserId(userIdList);
+            if (!CollectionUtils.isEmpty(prescriptionBaseDTOList)) {
+                Map<Long, PrescriptionBaseDTO> userIdStaticsMap = Maps.newHashMap();
+                for (PrescriptionBaseDTO prescriptionBaseDTO : prescriptionBaseDTOList) {
+                    userIdStaticsMap.put(prescriptionBaseDTO.getUserId(), prescriptionBaseDTO);
+                }
+                for (UserBaseDTO curUserBaseDTO : userBaseDTOPageInfo.getList()) {
+                    PrescriptionBaseDTO prescriptionBaseDTO = userIdStaticsMap.get(curUserBaseDTO.getId());
+                    curUserBaseDTO.setNumber(0);
+                    curUserBaseDTO.setAmount(new BigDecimal(0));
+                    if (null != prescriptionBaseDTO) {
+                        curUserBaseDTO.setNumber(prescriptionBaseDTO.getNumber());
+                        curUserBaseDTO.setAmount(prescriptionBaseDTO.getAmount());
+                    }
+
+                }
+            }
+        }
         return new ResultInfo().success(userBaseDTOPageInfo);
     }
 

@@ -2,6 +2,8 @@ package com.ibn.xinte.domain;
 
 import lombok.Data;
 
+import java.math.BigDecimal;
+
 /**
  * @version 1.0
  * @description:
@@ -87,4 +89,16 @@ public class UserBaseDTO {
      * @createTime：2021/1/10 9:08
      */
     private Integer level;
+    /**
+     * @description: 就诊次数
+     * @author：RenBin
+     * @createTime：2021/1/10 9:08
+     */
+    private Integer number;
+    /**
+     * @description: 总金额
+     * @author：RenBin
+     * @createTime：2021/1/10 9:08
+     */
+    private BigDecimal amount;
 }

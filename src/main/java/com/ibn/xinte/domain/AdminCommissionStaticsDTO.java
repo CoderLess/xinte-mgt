@@ -13,7 +13,7 @@ import java.math.BigDecimal;
  * @createTime：2021年1月10日
  */
 @Data
-public class AdminCommissionDTO {
+public class AdminCommissionStaticsDTO {
 
     private static final long serialVersionUID = 1L;
 
@@ -24,17 +24,17 @@ public class AdminCommissionDTO {
      */
     private Long adminId;
     /**
-     * @description: 提成
+     * @description: 管理员姓名
+     * @author：RenBin
+     * @createTime：2021年1月10日
+     */
+    private String adminName;
+    /**
+     * @description: 药品提成总金额
      * @author：RenBin
      * @createTime：2021年1月10日
      */
     private BigDecimal commissionAmount;
-    /**
-     * @description: 提成比例
-     * @author：RenBin
-     * @createTime：2021年1月10日
-     */
-    private BigDecimal commission;
     /**
      * @description: 总价格
      * @author：RenBin
@@ -42,45 +42,15 @@ public class AdminCommissionDTO {
      */
     private BigDecimal amount;
     /**
-     * @description: 创建时间
+     * @description: 药方数量
      * @author：RenBin
      * @createTime：2021年1月10日
      */
-    private Long createTime;
-    /**
-     * @description: 主键
-     * @author：RenBin
-     * @createTime：2021年1月10日
-     */
-    private Long id;
-    /**
-     * @description: 药方id
-     * @author：RenBin
-     * @createTime：2021年1月10日
-     */
-    private Long prescriptionId;
-    /**
-     * @description: 挂号费
-     * @author：RenBin
-     * @createTime：2021/1/17 21:00
-     */
-    private BigDecimal registrationFee;
+    private Long prescriptionNum;
     /**
      * @description: 挂号费提成
      * @author：RenBin
      * @createTime：2021/1/17 21:00
      */
     private BigDecimal registrationFeeAmount;
-    /**
-     * @description: 创建时间开始
-     * @author：RenBin
-     * @createTime：2021年1月10日
-     */
-    private Long createTimeStart;
-    /**
-     * @description: 创建时间结束
-     * @author：RenBin
-     * @createTime：2021年1月10日
-     */
-    private Long createTimeEnd;
 }

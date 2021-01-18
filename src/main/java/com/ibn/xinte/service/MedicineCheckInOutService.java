@@ -64,4 +64,10 @@ public interface MedicineCheckInOutService {
      * @createTime：2020年12月28日
      */
     PageInfo<MedicineCheckInOutDTO> queryPageInfo(MedicineCheckInOutDTO medicineCheckInOutDTO, Integer pageNum, Integer pageSize);
+    /**
+     * @description: 获取详细信息
+     * @author：RenBin
+     * @createTime：2021/1/18 21:10
+     */
+    PageInfo<MedicineCheckInOutDTO> queryDetailPageInfo(MedicineCheckInOutDTO medicineCheckInOutDTO, Integer pageNum, Integer pageSize);
 }

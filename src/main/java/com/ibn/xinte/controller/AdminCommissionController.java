@@ -1,8 +1,10 @@
 package com.ibn.xinte.controller;
 
 import com.alibaba.fastjson.JSONObject;
+import com.github.pagehelper.PageInfo;
 import com.ibn.xinte.common.ResultInfo;
 import com.ibn.xinte.domain.AdminCommissionDTO;
+import com.ibn.xinte.domain.AdminCommissionStaticsDTO;
 import com.ibn.xinte.service.AdminCommissionService;
 import com.ibn.xinte.util.BeanUtils;
 import com.ibn.xinte.vo.AdminCommissionVO;
@@ -69,6 +71,17 @@ public class AdminCommissionController {
         BeanUtils.copyProperties(adminCommissionVO, adminCommissionDTO);
         List<AdminCommissionDTO> adminCommissionDTOList = adminCommissionService.queryList(adminCommissionDTO);
         return new ResultInfo().success(adminCommissionDTOList);
+    }
+
+    @GetMapping("queryStatisticsList")
+    public ResultInfo queryStatisticsList(@ModelAttribute AdminCommissionVO adminCommissionVO) {
+        if (null == adminCommissionVO) {
+            return new ResultInfo().error("参数不能为空");
+        }
+        AdminCommissionDTO adminCommissionDTO = new AdminCommissionDTO();
+        BeanUtils.copyProperties(adminCommissionVO, adminCommissionDTO);
+        PageInfo<AdminCommissionStaticsDTO> adminCommissionStaticsDTOPageInfo = adminCommissionService.queryPageInfo(adminCommissionDTO, adminCommissionVO.getPageNum(), adminCommissionVO.getPageSize());
+        return new ResultInfo().success(adminCommissionStaticsDTOPageInfo);
     }
 
 }

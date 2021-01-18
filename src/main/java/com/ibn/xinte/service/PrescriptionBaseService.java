@@ -69,4 +69,11 @@ public interface PrescriptionBaseService {
      * @createTime：2020年12月28日
      */
     PageInfo<PrescriptionBaseDTO> queryPageInfo(PrescriptionBaseDTO prescriptionBaseDTO, Integer pageNum, Integer pageSize);
+
+    /**
+     * @description: 根据用户id获取就诊次数和金额
+     * @author：RenBin
+     * @createTime：2021/1/18 22:02
+     */
+    List<PrescriptionBaseDTO> queryStaticByUserId(List<Long> userIdList);
 }

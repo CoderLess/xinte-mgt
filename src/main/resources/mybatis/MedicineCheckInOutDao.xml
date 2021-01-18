@@ -137,4 +137,49 @@
         <include refid="queryColumn"/>
         order by id desc
     </select>
+    <select id="queryInfoList" resultType="com.ibn.xinte.domain.MedicineCheckInOutDTO">
+        select
+        mcio.`id`,
+        mcio.`medicine_id`,
+        mcio.`number`,
+        mcio.`price`,
+        mcio.`prescription_id`,
+        mcio.`type`,
+        mcio.`admin_id`,
+        mcio.`mark`,
+        mcio.`create_time`,
+        ab.`name` as adminName
+        from medicine_check_in_out mcio
+        left join admin_base ab on mcio.admin_id = ab.id
+        <where>
+            <if test="id != null">
+                and mcio.id = #{id}
+            </if>
+            <if test="medicineId != null">
+                and mcio.medicine_id = #{medicineId}
+            </if>
+            <if test="number != null">
+                and mcio.number = #{number}
+            </if>
+            <if test="price != null">
+                and mcio.price = #{price}
+            </if>
+            <if test="prescriptionId != null">
+                and mcio.prescription_id = #{prescriptionId}
+            </if>
+            <if test="type != null">
+                and mcio.type = #{type}
+            </if>
+            <if test="adminId != null">
+                and mcio.admin_id = #{adminId}
+            </if>
+            <if test="mark != null">
+                and mcio.mark = #{mark}
+            </if>
+            <if test="createTime != null">
+                and mcio.create_time = #{createTime}
+            </if>
+        </where>
+        order by mcio.id desc
+    </select>
 </mapper>

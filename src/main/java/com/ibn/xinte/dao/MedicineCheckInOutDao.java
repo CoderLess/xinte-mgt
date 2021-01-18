@@ -1,5 +1,7 @@
 package com.ibn.xinte.dao;
 
+import com.github.pagehelper.Page;
+import com.ibn.xinte.domain.MedicineCheckInOutDTO;
 import com.ibn.xinte.entity.MedicineCheckInOutDO;
 
 /**
@@ -11,4 +13,5 @@ import com.ibn.xinte.entity.MedicineCheckInOutDO;
  * @createTime：2020年12月28日
  */
 public interface MedicineCheckInOutDao extends BaseDao<MedicineCheckInOutDO> {
+    Page<MedicineCheckInOutDTO> queryInfoList(MedicineCheckInOutDO medicineCheckInOutDO);
 }

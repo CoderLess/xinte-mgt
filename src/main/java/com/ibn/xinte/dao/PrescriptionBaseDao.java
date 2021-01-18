@@ -37,4 +37,10 @@ public interface PrescriptionBaseDao extends BaseDao<PrescriptionBaseDO> {
      * @createTime：2021/1/10 12:02
      */
     BigDecimal queryAdminCommission(Long prescriptionId);
+    /**
+     * @description: 根据用户id统计就诊次数和金额
+     * @author：RenBin
+     * @createTime：2021/1/18 22:04
+     */
+    List<PrescriptionBaseDTO> queryStaticByUserId(List<Long> userIdList);
 }

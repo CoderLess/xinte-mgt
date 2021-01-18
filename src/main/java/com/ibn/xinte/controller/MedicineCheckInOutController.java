@@ -97,7 +97,7 @@ public class MedicineCheckInOutController {
         }
         MedicineCheckInOutDTO medicineCheckInOutDTO = new MedicineCheckInOutDTO();
         BeanUtils.copyProperties(medicineCheckInOutVO, medicineCheckInOutDTO);
-        PageInfo<MedicineCheckInOutDTO> medicineCheckInOutDTOPageInfo = medicineCheckInOutService.queryPageInfo(medicineCheckInOutDTO, medicineCheckInOutVO.getPageNum(), medicineCheckInOutVO.getPageSize());
+        PageInfo<MedicineCheckInOutDTO> medicineCheckInOutDTOPageInfo = medicineCheckInOutService.queryDetailPageInfo(medicineCheckInOutDTO, medicineCheckInOutVO.getPageNum(), medicineCheckInOutVO.getPageSize());
         return new ResultInfo().success(medicineCheckInOutDTOPageInfo);
     }
 

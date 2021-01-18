@@ -132,4 +132,23 @@
         from admin_commission
         <include refid="queryColumn"/>
     </select>
+
+    <select id="queryPage" resultType="com.ibn.xinte.domain.AdminCommissionStaticsDTO" parameterType="com.ibn.xinte.domain.AdminCommissionDTO">
+        select
+        ac.admin_id,ab.name adminName,sum(ac.commission_amount) commission_amount,sum(ac.registration_fee_amount) registration_fee_amount,count(*) prescriptionNum, sum(amount) amount
+        from admin_commission ac
+        left join admin_base ab on ab.id=ac.admin_id
+        <where>
+            <if test="adminId != null">
+                and admin_id = #{adminId}
+            </if>
+            <if test="createTimeStart != null">
+                and create_time &gt;= #{createTimeStart}
+            </if>
+            <if test="createTimeEnd != null">
+                and create_time &lt;= #{createTimeEnd}
+            </if>
+        </where>
+        group by ac.admin_id
+    </select>
 </mapper>

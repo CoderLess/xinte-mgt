@@ -1,6 +1,9 @@
 package com.ibn.xinte.service;
 
+import com.github.pagehelper.PageInfo;
+import com.ibn.xinte.domain.AdminBaseDTO;
 import com.ibn.xinte.domain.AdminCommissionDTO;
+import com.ibn.xinte.domain.AdminCommissionStaticsDTO;
 import com.ibn.xinte.exception.IbnException;
 
 import java.util.List;
@@ -63,4 +66,11 @@ public interface AdminCommissionService {
      * @createTime：2021年1月10日
      */
     List<AdminCommissionDTO> queryList(AdminCommissionDTO adminCommissionDTO);
+    /**
+     * @description: 通过条件查询管理员提成信息
+     * @author：RenBin
+     * @createTime：2021年1月10日
+     * @return
+     */
+    PageInfo<AdminCommissionStaticsDTO> queryPageInfo(AdminCommissionDTO adminCommissionDTO, Integer pageNum, Integer pageSize);
 }

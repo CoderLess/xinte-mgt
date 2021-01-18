@@ -155,4 +155,9 @@ public class PrescriptionBaseServiceImpl implements PrescriptionBaseService {
         prescriptionBaseDTOPageInfo.setTotal(prescriptionBaseDTOPage.getTotal());
         return prescriptionBaseDTOPageInfo;
     }
+
+    @Override
+    public List<PrescriptionBaseDTO> queryStaticByUserId(List<Long> userIdList) {
+        return prescriptionBaseDao.queryStaticByUserId(userIdList);
+    }
 }

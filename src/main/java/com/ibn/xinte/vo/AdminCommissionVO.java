@@ -56,6 +56,20 @@ public class AdminCommissionVO {
     @ApiModelProperty(value = "创建时间", name = "createTime")
     private Long createTime;
     /**
+     * @description: 创建时间开始
+     * @author：RenBin
+     * @createTime：2021年1月10日
+     */
+    @ApiModelProperty(value = "创建时间开始", name = "createTimeStart")
+    private Long createTimeStart;
+    /**
+     * @description: 创建时间结束
+     * @author：RenBin
+     * @createTime：2021年1月10日
+     */
+    @ApiModelProperty(value = "创建时间结束", name = "createTimeEnd")
+    private Long createTimeEnd;
+    /**
      * @description: 主键
      * @author：RenBin
      * @createTime：2021年1月10日
@@ -81,4 +95,18 @@ public class AdminCommissionVO {
      * @createTime：2021/1/17 21:00
      */
     private BigDecimal registrationFeeAmount;
+    /**
+     * @description: 页码
+     * @author：RenBin
+     * @createTime：2021/1/3 15:58
+     */
+    @ApiModelProperty(value = "页码", name = "pageNum")
+    private Integer pageNum;
+    /**
+     * @description: 条数
+     * @author：RenBin
+     * @createTime：2021/1/3 15:58
+     */
+    @ApiModelProperty(value = "条数", name = "pageSize")
+    private Integer pageSize;
 }

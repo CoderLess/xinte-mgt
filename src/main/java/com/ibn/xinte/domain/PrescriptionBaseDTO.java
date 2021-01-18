@@ -121,6 +121,12 @@ public class PrescriptionBaseDTO {
      * @createTime：2020年12月28日
      */
     private BigDecimal commissionAmount;
+    /**
+     * @description: 就诊次数
+     * @author：RenBin
+     * @createTime：2020年12月28日
+     */
+    private Integer number;
 
     /**
      * @description: 药方中的明细信息

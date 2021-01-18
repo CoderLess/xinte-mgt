@@ -60,6 +60,12 @@ public class MedicineCheckInOutDTO {
      */
     private Long adminId;
     /**
+     * @description: 操作人
+     * @author：RenBin
+     * @createTime：2020年12月28日
+     */
+    private String adminName;
+    /**
      * @description: 备注
      * @author：RenBin
      * @createTime：2020年12月28日

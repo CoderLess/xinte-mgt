@@ -1,10 +1,15 @@
 package com.ibn.xinte.service.impl;
 
 import com.alibaba.fastjson.JSONObject;
+import com.github.pagehelper.Page;
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import com.google.common.collect.Lists;
 import com.ibn.xinte.dao.AdminBaseDao;
 import com.ibn.xinte.dao.AdminCommissionDao;
+import com.ibn.xinte.domain.AdminBaseDTO;
 import com.ibn.xinte.domain.AdminCommissionDTO;
+import com.ibn.xinte.domain.AdminCommissionStaticsDTO;
 import com.ibn.xinte.entity.AdminBaseDO;
 import com.ibn.xinte.entity.AdminCommissionDO;
 import com.ibn.xinte.exception.IbnException;
@@ -149,5 +154,23 @@ public class AdminCommissionServiceImpl implements AdminCommissionService {
             return Lists.newArrayList();
         }
         return adminCommissionDTOList;
+    }
+
+    @Override
+    public PageInfo<AdminCommissionStaticsDTO> queryPageInfo(AdminCommissionDTO adminCommissionDTO, Integer pageNum, Integer pageSize) {
+        if (null == adminCommissionDTO) {
+            return null;
+        }
+        if (null != pageNum && null != pageSize) {
+            PageHelper.startPage(pageNum, pageSize);
+        }
+        Page<AdminCommissionStaticsDTO> adminCommissionStaticsDTOPage = adminCommissionDao.queryPage(adminCommissionDTO);
+        PageInfo<AdminCommissionStaticsDTO> adminCommissionStaticsDTOPageInfo=new PageInfo<>();
+        if (CollectionUtils.isEmpty(adminCommissionStaticsDTOPage)) {
+            return adminCommissionStaticsDTOPageInfo;
+        }
+        adminCommissionStaticsDTOPageInfo.setList(adminCommissionStaticsDTOPage);
+        adminCommissionStaticsDTOPageInfo.setTotal(adminCommissionStaticsDTOPage.getTotal());
+        return adminCommissionStaticsDTOPageInfo;
     }
 }
